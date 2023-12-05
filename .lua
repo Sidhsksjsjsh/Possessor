@@ -75,7 +75,7 @@ T3:AddDropdown({
 })
 
 T3:AddToggle({
-  Name = "This is a toggle!",
+  Name = "Vote Game mode",
   Default = false,
   Callback = function(Value)
     _G.Voted = Value
