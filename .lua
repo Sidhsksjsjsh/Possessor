@@ -29,7 +29,7 @@ Icon = "rbxassetid://",
 PremiumOnly = false
 })
 
-T1:AddDropdown({
+local excHandler = T1:AddDropdown({
   Name = "Select player to Exorcist",
   Default = ExcorcistHandler[1],
   Options = ExcorcistHandler,
@@ -45,7 +45,7 @@ Callback = function()
   end    
 })
 
-T2:AddDropdown({
+local posHandler = T2:AddDropdown({
   Name = "Select player to Possessor",
   Default = ExcorcistHandler[1],
   Options = ExcorcistHandler,
@@ -86,10 +86,27 @@ T3:AddToggle({
   end    
 })
 
+local function resetHandler()
+      ExcorcistHandler = {}
+      PossessorHandler = {}
+      excHandler:Refresh({"Refreshing.."},true)
+      posHandler:Refresh({"Refreshing.."},true)
+      excHandler:Set("Refreshing..")
+      posHandler:Set("Refreshing..")
+      wait(0.1)
+      OrionLib:AddTable(game.Players,ExcorcistHandler)
+      OrionLib:AddTable(game.Players,PossessorHandler)
+      wait(0.1)
+      excHandler:Refresh(ExcorcistHandler,true)
+      excHandler:Set(ExcorcistHandler[1])
+      posHandler:Refresh(PossessorHandler,true)
+      posHandler:Set(PossessorHandler[1])
+end
+
 game.Players.PlayerAdded:Connect(function(player)
-	k
+	resetHandler()
 end)
 
 game.Players.PlayerRemoving:Connect(function(player)
-	k
+	resetHandler()
 end)
