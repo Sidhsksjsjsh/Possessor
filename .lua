@@ -29,6 +29,8 @@ Icon = "rbxassetid://",
 PremiumOnly = false
 })
 
+local Psps = T1:AddParagraph("Possessed","PLAYER is possessed!")
+
 local excHandler = T1:AddDropdown({
   Name = "Select player to Exorcist",
   Default = ExcorcistHandler[1],
@@ -86,6 +88,16 @@ T3:AddToggle({
   end    
 })
 
+local function getPossessor(str)
+str.Character.Humanoid:GetPropertyChangedSignal("Health"):Connect(function()
+	Psps:Set(tostring(str.DisplayName) .. " is possessed!","")
+end)
+end
+
+for _,v in pairs(game.Players:GetPlayers()) do
+	getPossessor(v)
+end
+
 local function resetHandler()
       ExcorcistHandler = {}
       PossessorHandler = {}
@@ -104,6 +116,7 @@ local function resetHandler()
 end
 
 game.Players.PlayerAdded:Connect(function(player)
+	getPossessor(player)
 	resetHandler()
 end)
 
