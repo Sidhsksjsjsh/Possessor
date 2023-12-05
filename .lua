@@ -85,3 +85,11 @@ T3:AddToggle({
       end
   end    
 })
+
+game.Players.PlayerAdded:Connect(function(player)
+	k
+end)
+
+game.Players.PlayerRemoving:Connect(function(player)
+	k
+end)
