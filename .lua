@@ -89,13 +89,13 @@ T3:AddToggle({
 })
 
 local function getPossessor(str)
-str:GetPropertyChangedSignal("Health"):Connect(function()
-	Psps:Set(tostring(str.DisplayName) .. " is possessed!","")
+str.CharacterAdded:Connect(function(character)
+     Psps:Set(tostring(str.DisplayName) .. " is possessed!","")
 end)
 end
 
 for _,v in pairs(game.Players:GetPlayers()) do
-	getPossessor(v.Character.Humanoid)
+	getPossessor(v)
 end
 
 local function resetHandler()
@@ -116,7 +116,7 @@ local function resetHandler()
 end
 
 game.Players.PlayerAdded:Connect(function(player)
-	getPossessor(player.Character.Humanoid)
+	getPossessor(player)
 	resetHandler()
 end)
 
