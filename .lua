@@ -29,7 +29,16 @@ Icon = "rbxassetid://",
 PremiumOnly = false
 })
 
-local Psps = T1:AddParagraph("Possessed","No one is possessed!")
+local T4 = Window:MakeTab({
+Name = "NOTE",
+Icon = "rbxassetid://13040484705",
+PremiumOnly = false
+})
+
+T4:AddParagraph("Possessor Label","The labels are not 100% accurate, because this depends on those who have respawned or reset their character.")
+--T4:AddParagraph("","The labels are not 100% accurate, because this depends on those who have respawned or reset their character.")
+
+local Psps = T1:AddParagraph("👿 Possessor 👿","No one is possessed!")
 
 local excHandler = T1:AddDropdown({
   Name = "Select player to Exorcist",
