@@ -32,8 +32,8 @@ PremiumOnly = false
 })
 
 local T4 = Window:MakeTab({
-Name = "NOTE",
-Icon = "rbxassetid://13040484705",
+Name = "Code",
+Icon = "rbxassetid://",
 PremiumOnly = false
 })
 
