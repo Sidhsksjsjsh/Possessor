@@ -35,7 +35,13 @@ Icon = "rbxassetid://13040484705",
 PremiumOnly = false
 })
 
-T4:AddParagraph("Possessor Label","The labels are not 100% accurate, because this depends on those who have respawned or reset their character.")
+local T5 = Window:MakeTab({
+Name = "NOTE",
+Icon = "rbxassetid://13040484705",
+PremiumOnly = false
+})
+
+T5:AddParagraph("Possessor Label","The labels are not 100% accurate, because this depends on those who have respawned or reset their character.")
 --T4:AddParagraph("","The labels are not 100% accurate, because this depends on those who have respawned or reset their character.")
 
 local Psps = T1:AddParagraph("👿 Possessor 👿","No one is possessed!")
@@ -94,6 +100,32 @@ T3:AddToggle({
         if _G.Voted == false then break end
         game:GetService("ReplicatedStorage")["Remotes"]["VoteRemote"]:FireServer(tonumber(_G.gamemode))
       end
+  end    
+})
+
+--HttpService:GenerateGUID(GUIDtoggle)
+
+T4:AddTextbox({
+  Name = "Use ur own code",
+  Default = "input ur code",
+  TextDisappear = false,
+  Callback = function(Value)
+     _G.OwnCode = Value
+  end  
+})
+
+T4:AddToggle({
+  Name = "Use GUID",
+  Default = false,
+  Callback = function(Value)
+    _G.GUID = Value
+  end    
+})
+
+T4:AddButton({
+Name = "Sent Ur Code",
+Callback = function()
+      game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(_G.Possessed)
   end    
 })
 
