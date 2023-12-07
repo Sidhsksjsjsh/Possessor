@@ -4,6 +4,8 @@ soon ill added Possessor label!
 
 local OrionLib = loadstring(game:HttpGet("https://pastebin.com/raw/NMEHkVTb"))()
 local Window = OrionLib:MakeWindow({Name = "VIP Turtle Hub V3", HidePremium = false, SaveConfig = false, ConfigFolder = "TurtleFi"})
+local TextChatService = game:GetService("TextChatService")
+local HttpService = game:GetService("HttpService")
 
 local ExcorcistHandler = {}
 local PossessorHandler = {}
@@ -122,10 +124,22 @@ T4:AddToggle({
   end    
 })
 
+T4:AddToggle({
+  Name = "Use {} Symbols",
+  Default = false,
+  Callback = function(Value)
+    _G.sym = Value
+  end    
+})
+
 T4:AddButton({
 Name = "Sent Ur Code",
 Callback = function()
-      game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(_G.Possessed)
+   if _G.GUID == true then
+	TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is " .. tostring(HttpService:GenerateGUID(_G.sym)))
+   else
+	TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is " .. tostring(_G.OwnCode))
+    end
   end    
 })
 
