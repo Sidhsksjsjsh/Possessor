@@ -60,7 +60,21 @@ local excHandler = T1:AddDropdown({
 T1:AddButton({
 Name = "Exorcist",
 Callback = function()
-      game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(_G.Exorcist,true)
+      game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players")[_G.Exorcist],true)
+  end    
+})
+
+T1:AddButton({
+Name = "Vote Exorcist [Ritual Mode]",
+Callback = function()
+      game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players")[_G.Exorcist])
+  end    
+})
+
+T1:AddButton({
+Name = "Skip Vote",
+Callback = function()
+      game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer("ConfirmSkip",true)
   end    
 })
 
@@ -76,18 +90,18 @@ local posHandler = T2:AddDropdown({
 T2:AddButton({
 Name = "Possessed",
 Callback = function()
-      game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(_G.Possessed)
+      game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players")[_G.Possessed])
   end    
 })
 
 local function mode(str)
-  return str:gsub("Classic","1"):gsub("Roles","2")
+  return str:gsub("Classic","1"):gsub("Roles","2"):gsub("Ritual","3")
 end
 
 T3:AddDropdown({
   Name = "Select game mode",
   Default = "Classic",
-  Options = {"Classic","Roles"},
+  Options = {"Classic","Roles","Ritual"},
   Callback = function(Value)
      _G.gamemode = mode(Value)
   end    
