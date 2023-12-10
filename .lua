@@ -15,7 +15,7 @@ OrionLib:AddTable(game.Players,PossessorHandler)
 
 local function addPARTESP(path,name)
 for i,v in pairs(game.Workspace:GetDescendants()) do
-    if v.Name:lower() == path then
+    if v.Name:lower() == path and v:IsA("BasePart") then
         local BillboardGui = Instance.new('BillboardGui')
         local TextLabel = Instance.new('TextLabel')
         
@@ -67,9 +67,17 @@ PremiumOnly = false
 
 local T5 = Window:MakeTab({
 Name = "NOTE",
+Icon = "rbxassetid://13030062874",
+PremiumOnly = false
+})
+
+local T7 = Window:MakeTab({
+Name = "Whats new?",
 Icon = "rbxassetid://13040484705",
 PremiumOnly = false
 })
+
+T7:AddParagraph("Whats New?","<!----- Exorcist Tab ----->\n[ + ] Vote Exorcist\n[ + ] Skip Vote \n<!----- Possessor Tab ----->\n[ ? ] nil\n<!----- game mode voting ----->\n[ + ] 'Ritual' Auto Voting\n<!----- Part/Item ESP ----->\n[ + ] Candle ESP\n[ + ] Mirror ESP\n[ + ] Key ESP")
 
 T5:AddParagraph("Possessor Label","The labels are not 100% accurate, because this depends on those who have respawned or reset their character.")
 --T4:AddParagraph("","The labels are not 100% accurate, because this depends on those who have respawned or reset their character.")
@@ -196,6 +204,13 @@ T6:AddButton({
 Name = "ESP Candle",
 Callback = function()
       addPARTESP("candle","> Candle <")
+  end    
+})
+
+T6:AddButton({
+Name = "ESP Key",
+Callback = function()
+      addPARTESP("key","> Candle <")
   end    
 })
 
