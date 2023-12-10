@@ -13,6 +13,28 @@ local PossessorHandler = {}
 OrionLib:AddTable(game.Players,ExcorcistHandler)
 OrionLib:AddTable(game.Players,PossessorHandler)
 
+local function addPARTESP(path,name)
+for i,v in pairs(game.Workspace:GetDescendants()) do
+    if v.Name:lower() == path then
+        local BillboardGui = Instance.new('BillboardGui')
+        local TextLabel = Instance.new('TextLabel')
+        
+        BillboardGui.Parent = v.Parent
+        BillboardGui.AlwaysOnTop = true
+        BillboardGui.Size = UDim2.new(0, 50, 0, 50)
+        BillboardGui.StudsOffset = Vector3.new(0,2,0)
+        
+        TextLabel.Parent = BillboardGui
+        TextLabel.BackgroundColor3 = Color3.new(1,1,1)
+        TextLabel.BackgroundTransparency = 1
+        TextLabel.Size = UDim2.new(1, 0, 1, 0)
+        TextLabel.Text = name
+        TextLabel.TextColor3 = Color3.new(1, 0, 0)
+        TextLabel.TextScaled = false
+    end
+end
+end
+
 local T1 = Window:MakeTab({
 Name = "Exorcist",
 Icon = "rbxassetid://",
@@ -33,6 +55,12 @@ PremiumOnly = false
 
 local T4 = Window:MakeTab({
 Name = "Code",
+Icon = "rbxassetid://",
+PremiumOnly = false
+})
+
+local T6 = Window:MakeTab({
+Name = "Ritual Mode",
 Icon = "rbxassetid://",
 PremiumOnly = false
 })
@@ -154,6 +182,20 @@ Callback = function()
    else
 	TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is " .. tostring(_G.OwnCode))
     end
+  end    
+})
+
+T6:AddButton({
+Name = "ESP Mirrors",
+Callback = function()
+      addPARTESP("mirrors","> Mirror <")
+  end    
+})
+
+T6:AddButton({
+Name = "ESP Candle",
+Callback = function()
+      addPARTESP("candle","> Candle <")
   end    
 })
 
