@@ -218,11 +218,11 @@ Name = "Sent Ur Code",
 Callback = function()
 if GUIDsaver ~= "" or GUIDsaver ~= nil then
    if _G.GUID == true then
-	TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is " .. tostring(GUIDsaver))
+	TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � | " .. tostring(GUIDsaver) .. " | �")
    elseif _G.GUID == true and _G.sym_strip == true then
-	TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is " .. tostring(GUIDsaver:gsub("-","")))
+	TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � |" .. tostring(GUIDsaver:gsub("-","")) .. " | �")
    else
-	TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is " .. tostring(_G.OwnCode))
+	TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � | " .. tostring(_G.OwnCode) .. " | �")
     end
 else
 	OrionLib:MakeNotification({Name = "Cannot Find GUID",Content = "Press 'Generate Random GUID'.",Image = "rbxassetid://",Time = 5})
