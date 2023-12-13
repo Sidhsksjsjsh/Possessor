@@ -60,7 +60,7 @@ PremiumOnly = false
 })
 
 local T6 = Window:MakeTab({
-Name = "Ritual Mode",
+Name = "[ Tab Deleted ]",
 Icon = "rbxassetid://",
 PremiumOnly = false
 })
@@ -77,10 +77,18 @@ Icon = "rbxassetid://13040484705",
 PremiumOnly = false
 })
 
-T7:AddParagraph("Whats New?","<!----- Exorcist Tab ----->\n[ + ] Vote Exorcist\n[ + ] Skip Vote \n<!----- Possessor Tab ----->\n[ ? ] nil\n<!----- game mode voting ----->\n[ + ] 'Ritual' Auto Voting\n<!----- Part/Item ESP ----->\n[ + ] Candle ESP\n[ + ] Mirror ESP\n[ + ] Key ESP")
+local T8 = Window:MakeTab({
+Name = "Credit",
+Icon = "rbxassetid://13040484705",
+PremiumOnly = false
+})
+
+T7:AddParagraph("Whats New? [ 13/12/2023 ]","Removed 'Ritual Mode' Tab")
+T7:AddParagraph("Whats New? [ 11/12/2023 ]","<!----- Exorcist Tab ----->\n[ + ] Vote Exorcist\n[ + ] Skip Vote\n<!----- Possessor Tab ----->\n[ ? ] nil\n<!----- game mode voting ----->\n[ + ] 'Ritual' Auto Voting\n<!----- Part/Item ESP ----->\n[ + ] Candle ESP\n[ + ] Mirror ESP\n[ + ] Key ESP")
+
+T8:AddParagraph("Developer","Fahri -> Toggle System, Trigger function, game system, Code System generator\nAkbar -> Possessor Label\nFirman -> ESP Item in ritual mode (sadly i remove it)")
 
 T5:AddParagraph("Possessor Label","The labels are not 100% accurate, because this depends on those who have respawned or reset their character.")
---T4:AddParagraph("","The labels are not 100% accurate, because this depends on those who have respawned or reset their character.")
 
 local Psps = T1:AddParagraph("👿 Possessor 👿","No one is possessed!")
 
@@ -157,6 +165,9 @@ T3:AddToggle({
 
 --HttpService:GenerateGUID(GUIDtoggle)
 
+local RandomSaveGUID = T4:AddParagraph("Random Code using GUID","You haven't pressed 'Generate Random GUID', press it to generate a random number.")
+local GUIDsaver = ""
+
 T4:AddTextbox({
   Name = "Use ur own code",
   Default = "input ur code",
@@ -175,25 +186,51 @@ T4:AddToggle({
 })
 
 T4:AddToggle({
-  Name = "Use {} Symbols",
+  Name = "Use {} Symbol",
   Default = false,
   Callback = function(Value)
     _G.sym = Value
   end    
 })
 
-T4:AddButton({
-Name = "Sent Ur Code",
-Callback = function()
-   if _G.GUID == true then
-	TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is " .. tostring(HttpService:GenerateGUID(_G.sym)))
-   else
-	TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is " .. tostring(_G.OwnCode))
-    end
+T4:AddToggle({
+  Name = "Remove '-' Symbol",
+  Default = false,
+  Callback = function(Value)
+    _G.sym_strip = Value
   end    
 })
 
-T6:AddButton({
+T4:AddButton({
+Name = "Generate Random GUID",
+Callback = function()
+      GUIDsaver = HttpService:GenerateGUID(_G.sym)
+      if _G.sym_strip == true then
+           RandomSaveGUID:Set("Your Current GUID: " .. tostring(GUIDsaver),"")
+	else
+	   RandomSaveGUID:Set("Your Current GUID: " .. tostring(GUIDsaver:gsub("-","")),"")
+      end
+  end    
+})
+
+T4:AddButton({
+Name = "Sent Ur Code",
+Callback = function()
+if GUIDsaver ~= "" or GUIDsaver ~= nil then
+   if _G.GUID == true then
+	TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is " .. tostring(GUIDsaver))
+   elseif _G.GUID == true and _G.sym_strip == true then
+	TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is " .. tostring(GUIDsaver:gsub("-","")))
+   else
+	TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is " .. tostring(_G.OwnCode))
+    end
+else
+	OrionLib:MakeNotification({Name = "Cannot Find GUID",Content = "Press 'Generate Random GUID'.",Image = "rbxassetid://",Time = 5})
+end
+  end    
+})
+
+--[[T6:AddButton({
 Name = "ESP Mirrors",
 Callback = function()
       addPARTESP("mirrors","> Mirror <")
@@ -213,6 +250,7 @@ Callback = function()
       addPARTESP("key","> Candle <")
   end    
 })
+]]
 
 local function getPossessor(str)
 str.CharacterAdded:Connect(function(character)
