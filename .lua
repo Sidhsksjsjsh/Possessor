@@ -280,28 +280,28 @@ Callback = function()
 })
 
 T6:AddButton({
-Name = "Reminder: u always use bad grammar",
+Name = "Reminder: u always use bad grammar ( chance of getting possessed: 50% )",
 Callback = function()
       TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Remember: The real " .. client.DisplayName .. " Always using bad grammar.")
   end    
 })
 
 T6:AddButton({
-Name = "Reminder: u can fly?",
+Name = "Reminder: u can fly? ( chance of getting possessed: 5% )",
 Callback = function()
       TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Remember: The real " .. client.DisplayName .. " can fly.")
   end    
 })
 
 T6:AddButton({
-Name = "Reminder: u toxic?",
+Name = "Reminder: u toxic? ( chance of getting possessed: 50/75% )",
 Callback = function()
       TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Remember: The real " .. client.DisplayName .. " is toxic.")
   end    
 })
 
 T6:AddButton({
-Name = "Reminder: u always afk?",
+Name = "Reminder: u always afk? ( chance of getting possessed: 90% )",
 Callback = function()
       TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Remember: The real " .. client.DisplayName .. " is always afk.")
   end    
