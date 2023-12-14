@@ -95,7 +95,7 @@ T7:AddParagraph("Whats New? [ 11/12/2023 ]","<!----- Exorcist Tab ----->\n[ + ] 
 T8:AddParagraph("Developer","Fahri -> Toggle System, Trigger function, game system, Code System generator\nAkbar -> Possessor Label\nFirman -> Item ESP in ritual mode & Dropdown reset (sadly i remove 'Ritual Mode')")
 
 T5:AddParagraph("Possessor Label","The labels are not 100% accurate, because this depends on those who have respawned or reset their character.")
-T5:AddParagraph("Reminder Tab","")
+T5:AddParagraph("Reminder Tab","The reminder tab is a tab where they can know which one is real and which one is possessed, for example: the real one can fly, and the fake one can't, they will know who is fake.")
 
 local Psps = T1:AddParagraph("👿 Possessor 👿","No one is possessed!")
 
