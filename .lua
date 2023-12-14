@@ -94,7 +94,7 @@ local function getRoundTimer()
 	return client["PlayerGui"]["MainUi"]["Frame"]["TimeLeft"].Text
 end
 
-T7:AddParagraph("Whats New? [ 14/12/2023 ]","[ + ] Added 'Auto sent code every round'!\n[ + ] Added 'Reminder' Tab\n[ + ] Added 'Ability' Tab - Beta")
+T7:AddParagraph("Whats New? [ 14/12/2023 ]","[ + ] Added 'Auto sent code every round'!\n[ + ] Added 'Reminder' Tab\n[ + ] Added 'Ability' Tab - Beta\n[ +/- ] Fixed Ability Dropdown bugging when u use ur ability.\n[ +/- ] Fixed Not teleported to the area ( UserInput Bugging )\n[ + ] The possessor label is now only detected when the player resets or respawns their character. ( with Possessor MousePointer )")
 T7:AddParagraph("Whats New? [ 13/12/2023 ]","[ - ] Removed 'Ritual Mode' Tab")
 T7:AddParagraph("Whats New? [ 11/12/2023 ]","<!----- Exorcist Tab ----->\n[ + ] Vote Exorcist\n[ + ] Skip Vote\n<!----- Possessor Tab ----->\n[ ? ] nil\n<!----- game mode voting ----->\n[ + ] 'Ritual' Auto Voting\n<!----- Part/Item ESP ----->\n[ + ] Candle ESP\n[ + ] Mirror ESP\n[ + ] Key ESP")
 
@@ -308,9 +308,9 @@ Callback = function()
 })
 
 local AbilityHandleS = {
-	A = "",
-	B = "",
-	C = ""
+	A = client["PlayerGui"]["StickUi"]["AbilityFrame"]["S1"]["TextLabel"].Text,
+	B = client["PlayerGui"]["StickUi"]["AbilityFrame"]["S2"]["TextLabel"].Text,
+	C = client["PlayerGui"]["StickUi"]["AbilityFrame"]["S3"]["TextLabel"].Text
 }
 
 local abilityHandler = T9:AddDropdown({
@@ -360,6 +360,10 @@ client["PlayerGui"]["StickUi"]["AbilityFrame"]["S3"]["TextLabel"]:GetPropertyCha
 	AbilityChanged()
 end)
 
+client["PlayerGui"]["MainUi"]["Frame"]["State"]:GetPropertyChangedSignal("Text"):Connect(function()
+	print(client["PlayerGui"]["MainUi"]["Frame"]["State"].Text)
+end)
+
 local function getPossessor(str)
 str.CharacterAdded:Connect(function(character)
      Psps:Set(tostring(str.DisplayName) .. " is possessed!","")
@@ -396,4 +400,8 @@ game.Players.PlayerRemoving:Connect(function(player)
 	resetHandler()
 end)
 
-game:GetService("ReplicatedStorage")["Remotes"]["LobbyRemote"]:Destroy()
+local args = {"Input"}
+
+--game:GetService("ReplicatedStorage")["Remotes"]["LobbyRemote"]:FireServer(unpack(args))
+
+--game:GetService("ReplicatedStorage")["Remotes"]["LobbyRemote"]:Destroy()
