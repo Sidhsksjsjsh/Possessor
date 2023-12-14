@@ -6,6 +6,7 @@ local OrionLib = loadstring(game:HttpGet("https://pastebin.com/raw/NMEHkVTb"))()
 local Window = OrionLib:MakeWindow({Name = "VIP Turtle Hub V3", HidePremium = false, SaveConfig = false, ConfigFolder = "TurtleFi"})
 local TextChatService = game:GetService("TextChatService")
 local HttpService = game:GetService("HttpService")
+local client = game.Players.LocalPlayer
 
 local ExcorcistHandler = {}
 local PossessorHandler = {}
@@ -60,7 +61,7 @@ PremiumOnly = false
 })
 
 local T6 = Window:MakeTab({
-Name = "[ Tab Deleted ]",
+Name = "Reminder!",
 Icon = "rbxassetid://",
 PremiumOnly = false
 })
@@ -83,12 +84,18 @@ Icon = "rbxassetid://13040484705",
 PremiumOnly = false
 })
 
-T7:AddParagraph("Whats New? [ 13/12/2023 ]","Removed 'Ritual Mode' Tab")
+local function getRoundTimer()
+	return client["PlayerGui"]["MainUi"]["Frame"]["TimeLeft"].Text
+end
+
+T7:AddParagraph("Whats New? [ 14/12/2023 ]","[ + ] Added 'Auto sent code every round'!\n[ + ] Added 'Reminder' Tab")
+T7:AddParagraph("Whats New? [ 13/12/2023 ]","[ - ] Removed 'Ritual Mode' Tab")
 T7:AddParagraph("Whats New? [ 11/12/2023 ]","<!----- Exorcist Tab ----->\n[ + ] Vote Exorcist\n[ + ] Skip Vote\n<!----- Possessor Tab ----->\n[ ? ] nil\n<!----- game mode voting ----->\n[ + ] 'Ritual' Auto Voting\n<!----- Part/Item ESP ----->\n[ + ] Candle ESP\n[ + ] Mirror ESP\n[ + ] Key ESP")
 
 T8:AddParagraph("Developer","Fahri -> Toggle System, Trigger function, game system, Code System generator\nAkbar -> Possessor Label\nFirman -> Item ESP in ritual mode & Dropdown reset (sadly i remove 'Ritual Mode')")
 
 T5:AddParagraph("Possessor Label","The labels are not 100% accurate, because this depends on those who have respawned or reset their character.")
+T5:AddParagraph("Reminder Tab","")
 
 local Psps = T1:AddParagraph("👿 Possessor 👿","No one is possessed!")
 
@@ -227,6 +234,70 @@ if GUIDsaver ~= "" or GUIDsaver ~= nil then
 else
 	OrionLib:MakeNotification({Name = "Cannot Find GUID",Content = "Press 'Generate Random GUID'.",Image = "rbxassetid://",Time = 5})
 end
+  end    
+})
+
+T4:AddToggle({
+  Name = "Auto Sent ur code every round",
+  Default = false,
+  Callback = function(Value)
+    _G.auth_sent_code_sys = Value
+	while wait(3) do
+	   if _G.auth_sent_code_sys == false then break end
+		if getRoundTimer() == "0s" then
+                   if _G.GUID == true then
+	              TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � | " .. tostring(GUIDsaver) .. " | �")
+                   elseif _G.GUID == true and _G.sym_strip == true then
+	              TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � |" .. tostring(GUIDsaver:gsub("-","")) .. " | �")
+                   else
+	              TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � | " .. tostring(_G.OwnCode) .. " | �")
+                   end
+              end
+	end
+  end    
+})
+
+T6:AddTextbox({
+  Name = "Your own reminder",
+  Default = "input ur reminder",
+  TextDisappear = false,
+  Callback = function(Value)
+     _G.OwnReminder = Value
+  end  
+})
+
+T6:AddButton({
+Name = "Reminder: custom",
+Callback = function()
+      TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Remember: " .. tostring(_G.OwnReminder))
+  end    
+})
+
+T6:AddButton({
+Name = "Reminder: u always use bad grammar",
+Callback = function()
+      TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Remember: The real " .. client.DisplayName .. " Always using bad grammar.")
+  end    
+})
+
+T6:AddButton({
+Name = "Reminder: u can fly?",
+Callback = function()
+      TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Remember: The real " .. client.DisplayName .. " can fly.")
+  end    
+})
+
+T6:AddButton({
+Name = "Reminder: u toxic?",
+Callback = function()
+      TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Remember: The real " .. client.DisplayName .. " is toxic.")
+  end    
+})
+
+T6:AddButton({
+Name = "Reminder: u always afk?",
+Callback = function()
+      TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Remember: The real " .. client.DisplayName .. " is always afk.")
   end    
 })
 
