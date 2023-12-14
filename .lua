@@ -330,6 +330,36 @@ Callback = function()
   end    
 })
 
+local function AbilityChanged()
+	AbilityHandleS.A = ""
+	AbilityHandleS.B = ""
+	AbilityHandleS.C = ""
+	abilityHandler:Refresh({"Refreshing.."},true)
+        abilityHandler:Set("Refreshing..")
+	wait(0.1)
+	AbilityHandleS.A = client["PlayerGui"]["StickUi"]["AbilityFrame"]["S1"]["TextLabel"].Text
+	AbilityHandleS.B = client["PlayerGui"]["StickUi"]["AbilityFrame"]["S2"]["TextLabel"].Text
+	AbilityHandleS.C = client["PlayerGui"]["StickUi"]["AbilityFrame"]["S3"]["TextLabel"].Text
+	wait(0.1)
+	excHandler:Refresh({AbilityHandleS.A,AbilityHandleS.B,AbilityHandleS.C},true)
+        excHandler:Set(AbilityHandleS.A)
+end
+
+client["PlayerGui"]["StickUi"]["AbilityFrame"]["S1"]["TextLabel"]:GetPropertyChangedSignal("Text"):Connect(function()
+	AbilityHandleS.A = client["PlayerGui"]["StickUi"]["AbilityFrame"]["S1"]["TextLabel"].Text
+	AbilityChanged()
+end)
+
+client["PlayerGui"]["StickUi"]["AbilityFrame"]["S2"]["TextLabel"]:GetPropertyChangedSignal("Text"):Connect(function()
+	AbilityHandleS.B = client["PlayerGui"]["StickUi"]["AbilityFrame"]["S2"]["TextLabel"].Text
+	AbilityChanged()
+end)
+
+client["PlayerGui"]["StickUi"]["AbilityFrame"]["S3"]["TextLabel"]:GetPropertyChangedSignal("Text"):Connect(function()
+	AbilityHandleS.C = client["PlayerGui"]["StickUi"]["AbilityFrame"]["S3"]["TextLabel"].Text
+	AbilityChanged()
+end)
+
 local function getPossessor(str)
 str.CharacterAdded:Connect(function(character)
      Psps:Set(tostring(str.DisplayName) .. " is possessed!","")
