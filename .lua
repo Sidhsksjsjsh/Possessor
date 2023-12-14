@@ -395,3 +395,5 @@ end)
 game.Players.PlayerRemoving:Connect(function(player)
 	resetHandler()
 end)
+
+game:GetService("ReplicatedStorage")["Remotes"]["LobbyRemote"]:Destroy()
