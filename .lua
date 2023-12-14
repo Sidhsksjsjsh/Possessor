@@ -66,6 +66,12 @@ Icon = "rbxassetid://",
 PremiumOnly = false
 })
 
+local T9 = Window:MakeTab({
+Name = "Ability",
+Icon = "rbxassetid://",
+PremiumOnly = false
+})
+
 local T5 = Window:MakeTab({
 Name = "NOTE",
 Icon = "rbxassetid://13030062874",
@@ -301,27 +307,28 @@ Callback = function()
   end    
 })
 
---[[T6:AddButton({
-Name = "ESP Mirrors",
-Callback = function()
-      addPARTESP("mirrors","> Mirror <")
+local AbilityHandleS = {
+	A = "",
+	B = "",
+	C = ""
+}
+
+local abilityHandler = T9:AddDropdown({
+  Name = "Select Ability",
+  Default = AbilityHandleS.A,
+  Options = {AbilityHandleS.A,AbilityHandleS.B,AbilityHandleS.C},
+  Callback = function(Value)
+     _G.AbilitySystem = Value
   end    
 })
 
-T6:AddButton({
-Name = "ESP Candle",
+T9:AddButton({
+Name = "Use Ability ( random player )",
 Callback = function()
-      addPARTESP("candle","> Candle <")
+      game:GetService("ReplicatedStorage")["Remotes"]["AbilityRemote"]:FireServer(_G.AbilitySystem:gsub(AbilityHandleS.A,1):gsub(AbilityHandleS.B,2):gsub(AbilityHandleS.C,3))
+      game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players"):GetChildren()[math.random(1,#game:GetService("Players"):GetChildren())])
   end    
 })
-
-T6:AddButton({
-Name = "ESP Key",
-Callback = function()
-      addPARTESP("key","> Candle <")
-  end    
-})
-]]
 
 local function getPossessor(str)
 str.CharacterAdded:Connect(function(character)
