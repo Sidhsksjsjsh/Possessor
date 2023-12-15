@@ -240,7 +240,7 @@ T3:AddToggle({
 
 --HttpService:GenerateGUID(GUIDtoggle)
 
-local RandomSaveGUID = T4:AddParagraph("Random Code using GUID","You haven't pressed 'Generate Random GUID', press it to generate a random number.")
+--local RandomSaveGUID = T4:AddParagraph("Random Code using GUID","You haven't pressed 'Generate Random GUID', press it to generate a random number.")
 local GUIDsaver = ""
 
 T4:AddTextbox({
