@@ -36,6 +36,67 @@ for i,v in pairs(game.Workspace:GetDescendants()) do
 end
 end
 
+local GlitchText = {
+    A = "Ä̸̦̣́̾",
+    B = "B̴͈̯̆̔",
+    C = "C̵̭̘̆̏",
+    D = "D̷͔́̑",
+    E = "E̶̖͒̕",
+    F = "F̶̗̓̀͜",
+    G = "G̵͉͑",
+    H = "H̶̠͂",
+    I = "I̶̗̳͛",
+    J = "J̴̤̈",
+    K = "K̴͇̪̿",
+    L = "L̸̨̗̂",
+    M = "M̸̛̰͘",
+    N = "N̴̖͆",
+    O = "O̷̥͛",
+    P = "P̸͉̀͠",
+    Q = "Q̴͉̬̊",
+    R = "R̶̺̀̄",
+    S = "S̴̬̏͝",
+    T = "T̶̙̻͘",
+    U = "Ü̴̺",
+    V = "V̶̭͑",
+    W = "W̷̯̽ͅ",
+    X = "X̶̯͐́",
+    Y = "Ẏ̵̠̹̚",
+    Z = "Z̴͕̻̏̿",
+    a = "ä̸̦̣́̾",
+    b = "b̴͈̯̆̔",
+    c = "c̵̭̘̆̏",
+    d = "d̷͔́̑",
+    e = "e̶̖͒̕",
+    f = "f̶̗̓̀͜",
+    g = "g̵͉͑",
+    h = "h̶̠͂",
+    i = "i̶̗̳͛",
+    j = "j̴̤̈",
+    k = "k̴͇̪̿",
+    l = "l̸̨̗̂",
+    m = "m̸̛̰͘",
+    n = "n̴̖͆",
+    o = "o̷̥͛",
+    p = "p̸͉̀͠",
+    q = "q̴͉̬̊",
+    r = "r̶̺̀̄",
+    s = "s̴̬̏͝",
+    t = "t̶̙̻͘",
+    u = "ü̴̺",
+    v = "v̶̭͑",
+    w = "w̷̯̽ͅ",
+    x = "x̶̯͐́",
+    y = "ẏ̵̠̹̚",
+    z = "z̴͕̻̏̿"
+}
+
+local function Convert(str)
+    return str:gsub(".",function(ArrayMeta) 
+	return tostring(GlitchText[ArrayMeta]) or tostring(ArrayMeta)
+    end)
+end
+
 local T1 = Window:MakeTab({
 Name = "Exorcist",
 Icon = "rbxassetid://",
@@ -94,11 +155,12 @@ local function getRoundTimer()
 	return client["PlayerGui"]["MainUi"]["Frame"]["TimeLeft"].Text
 end
 
+T7:AddParagraph("Whats New? [ 15/12/2023 ]","[ + ] Replaced GUID with Glitch Text\n[ + ] Added 2 new reminder\n[ + ] Your code can now be sent automatically when the player says 'code' - Beta")
 T7:AddParagraph("Whats New? [ 14/12/2023 ]","[ + ] Added 'Auto sent code every round'!\n[ + ] Added 'Reminder' Tab\n[ + ] Added 'Ability' Tab - Beta\n[ +/- ] Fixed Ability Dropdown bugging when u use ur ability.\n[ +/- ] Fixed Not teleported to the area ( UserInput Bugging )\n[ + ] The possessor label is now only detected when the player resets or respawns their character. ( with Possessor MousePointer )")
 T7:AddParagraph("Whats New? [ 13/12/2023 ]","[ - ] Removed 'Ritual Mode' Tab")
 T7:AddParagraph("Whats New? [ 11/12/2023 ]","<!----- Exorcist Tab ----->\n[ + ] Vote Exorcist\n[ + ] Skip Vote\n<!----- Possessor Tab ----->\n[ ? ] nil\n<!----- game mode voting ----->\n[ + ] 'Ritual' Auto Voting\n<!----- Part/Item ESP ----->\n[ + ] Candle ESP\n[ + ] Mirror ESP\n[ + ] Key ESP")
 
-T8:AddParagraph("Developer","Fahri -> Toggle System, Trigger function, game system, Code System generator\nAkbar -> Possessor Label\nFirman -> Item ESP in ritual mode & Dropdown reset (sadly i remove 'Ritual Mode')")
+T8:AddParagraph("Developer","Fahri -> Toggle System, Trigger function, game system, Code System generator\nAkbar -> Possessor Label\nFirman -> Item ESP in ritual mode & Dropdown reset (sadly i removed 'Ritual Mode')\nRaka -> Ability System & Tab\nRafa -> Reminder Text Idea & Bug Hunter")
 
 T5:AddParagraph("Possessor Label","The labels are not 100% accurate, because this depends on those who have respawned or reset their character.")
 T5:AddParagraph("Reminder Tab","The reminder tab is a tab where they can know which one is real and which one is possessed, for example: the real one can fly, and the fake one can't, they will know who is fake.")
@@ -190,7 +252,7 @@ T4:AddTextbox({
   end  
 })
 
-T4:AddToggle({
+--[[T4:AddToggle({
   Name = "Use GUID",
   Default = false,
   Callback = function(Value)
@@ -225,21 +287,24 @@ Callback = function()
       end
   end    
 })
+]]
+
+T4:AddToggle({
+  Name = "Use Glitch Text",
+  Default = false,
+  Callback = function(Value)
+    _G.GlitchArray = Value
+  end    
+})
 
 T4:AddButton({
 Name = "Sent Ur Code",
 Callback = function()
-if GUIDsaver ~= "" or GUIDsaver ~= nil then
-   if _G.GUID == true then
-	TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � | " .. tostring(GUIDsaver) .. " | �")
-   elseif _G.GUID == true and _G.sym_strip == true then
-	TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � |" .. tostring(GUIDsaver:gsub("-","")) .. " | �")
+if _G.GlitchArray == true then
+	TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � | " .. Convert(_G.OwnCode) .. " | �")
    else
 	TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � | " .. tostring(_G.OwnCode) .. " | �")
     end
-else
-	OrionLib:MakeNotification({Name = "Cannot Find GUID",Content = "Press 'Generate Random GUID'.",Image = "rbxassetid://",Time = 5})
-end
   end    
 })
 
@@ -250,11 +315,9 @@ T4:AddToggle({
     _G.auth_sent_code_sys = Value
 	while wait(3) do
 	   if _G.auth_sent_code_sys == false then break end
-		if getRoundTimer() == "0s" then
-                   if _G.GUID == true then
-	              TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � | " .. tostring(GUIDsaver) .. " | �")
-                   elseif _G.GUID == true and _G.sym_strip == true then
-	              TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � |" .. tostring(GUIDsaver:gsub("-","")) .. " | �")
+		if getRoundTimer() ~= "0s" then
+                   if _G.GlitchArray == true then
+	              TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � | " .. Convert(_G.OwnCode) .. " | �")
                    else
 	              TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � | " .. tostring(_G.OwnCode) .. " | �")
                    end
@@ -280,30 +343,44 @@ Callback = function()
 })
 
 T6:AddButton({
-Name = "Reminder: u always use bad grammar ( chance of getting possessed: 50% )",
+Name = "Reminder: u always use bad grammar ( 50% )",
 Callback = function()
       TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Remember: The real " .. client.DisplayName .. " Always using bad grammar.")
   end    
 })
 
 T6:AddButton({
-Name = "Reminder: u can fly? ( chance of getting possessed: 5% )",
+Name = "Reminder: u can fly? ( 5% )",
 Callback = function()
       TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Remember: The real " .. client.DisplayName .. " can fly.")
   end    
 })
 
 T6:AddButton({
-Name = "Reminder: u toxic? ( chance of getting possessed: 50/75% )",
+Name = "Reminder: u toxic? ( 50/75% )",
 Callback = function()
       TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Remember: The real " .. client.DisplayName .. " is toxic.")
   end    
 })
 
 T6:AddButton({
-Name = "Reminder: u always afk? ( chance of getting possessed: 90% )",
+Name = "Reminder: u always afk? ( 90% )",
 Callback = function()
       TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Remember: The real " .. client.DisplayName .. " is always afk.")
+  end    
+})
+
+T6:AddButton({
+Name = "Reminder: u dont have emote? ( 50% )",
+Callback = function()
+      TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Remember: The real " .. client.DisplayName .. " has no emotes.")
+  end    
+})
+
+T6:AddButton({
+Name = "Reminder: u have admin permission? ( % = depends )",
+Callback = function()
+      TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Remember: The real " .. client.DisplayName .. " has admin permission.")
   end    
 })
 
