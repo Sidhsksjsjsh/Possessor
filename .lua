@@ -1,7 +1,3 @@
---[[ Beta!
-soon ill added Possessor label!
-]]
-
 local OrionLib = loadstring(game:HttpGet("https://pastebin.com/raw/NMEHkVTb"))()
 local Window = OrionLib:MakeWindow({Name = "VIP Turtle Hub V3", HidePremium = false, SaveConfig = false, ConfigFolder = "TurtleFi"})
 local TextChatService = game:GetService("TextChatService")
@@ -88,7 +84,8 @@ local GlitchText = {
     w = "w̷̯̽ͅ",
     x = "x̶̯͐́",
     y = "ẏ̵̠̹̚",
-    z = "z̴͕̻̏̿"
+    z = "z̴͕̻̏̿",
+    [" "] = " "
 }
 
 local function Convert(str)
@@ -381,6 +378,13 @@ T6:AddButton({
 Name = "Reminder: u have admin permission? ( % = depends )",
 Callback = function()
       TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Remember: The real " .. client.DisplayName .. " has admin permission.")
+  end    
+})
+
+T6:AddButton({
+Name = "BURN ISRAEL!",
+Callback = function()
+      TextChatService["TextChannels"]["RBXGeneral"]:SendAsync(Convert("Burn Fucking Israel!"))
   end    
 })
 
