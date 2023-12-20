@@ -130,6 +130,12 @@ Icon = "rbxassetid://",
 PremiumOnly = false
 })
 
+local T10 = Window:MakeTab({
+Name = "Possessed Log",
+Icon = "rbxassetid://",
+PremiumOnly = false
+})
+
 local T5 = Window:MakeTab({
 Name = "NOTE",
 Icon = "rbxassetid://13030062874",
@@ -152,6 +158,7 @@ local function getRoundTimer()
 	return client["PlayerGui"]["MainUi"]["Frame"]["TimeLeft"].Text
 end
 
+T7:AddParagraph("Whats New? [ 20/12/2023 ]","[ + ] Added Possessed log\n[ +/- ] Improved Possessor Label\n[ + ] Improved chat bypass and glitched text in 'Code' Tab")
 T7:AddParagraph("Whats New? [ 15/12/2023 ]","[ + ] Replaced GUID with Glitch Text\n[ + ] Added 2 new reminder\n[ + ] Your code can now be sent automatically when the player says 'code' - Beta")
 T7:AddParagraph("Whats New? [ 14/12/2023 ]","[ + ] Added 'Auto sent code every round'!\n[ + ] Added 'Reminder' Tab\n[ + ] Added 'Ability' Tab - Beta\n[ +/- ] Fixed Ability Dropdown bugging when u use ur ability.\n[ +/- ] Fixed Not teleported to the area ( UserInput Bugging )\n[ + ] The possessor label is now only detected when the player resets or respawns their character. ( with Possessor MousePointer )")
 T7:AddParagraph("Whats New? [ 13/12/2023 ]","[ - ] Removed 'Ritual Mode' Tab")
@@ -448,6 +455,7 @@ end)
 local function getPossessor(str)
 str.CharacterAdded:Connect(function(character)
      Psps:Set(tostring(str.DisplayName) .. " is possessed!","")
+     T10:AddParagraph("Possessor log [ " .. tostring(os.date("%X")) .. " ]",tostring(str.DisplayName) .. " is possessed!")
 end)
 end
 
