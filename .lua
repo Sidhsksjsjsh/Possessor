@@ -103,6 +103,20 @@ Close.MouseButton1Down:Connect(function()
 ChatGui.Enabled = false
 end)
 
+local function copyText(v)
+    if v:IsA("TextButton") then
+        local success,error = pcall(function()
+            setclipboard(v)
+        end)
+
+        if not success then
+            warn("Gagal menyalin teks:",error)
+        end
+    end
+end
+
+--textButton.MouseButton1Click:Connect(copyText)
+
 local alls = 0
 local titlelog = "[Public]"
 local prevOutputPos = 0
