@@ -4,8 +4,167 @@ local TextChatService = game:GetService("TextChatService")
 local HttpService = game:GetService("HttpService")
 local client = game.Players.LocalPlayer
 
---textLabel.Selectable = true
---textLabel.TextEditable = false
+--o.Selectable = true
+--o.TextEditable = false
+
+local ChatGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local LogPanel = Instance.new("ScrollingFrame")
+local Close = Instance.new("TextButton")
+local Mini = Instance.new("TextButton")
+local Log = Instance.new("TextButton")
+local title = Instance.new("TextLabel")
+--Properties:
+ChatGui.Name = "ChatGui"
+ChatGui.Parent = game.Players.LocalPlayer.PlayerGui
+ChatGui.ResetOnSpawn = false
+ChatGui.Enabled = false
+
+Frame.Parent = ChatGui
+Frame.BackgroundColor3 = Color3.new(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.0278396439, 0, 0.565217376, 0)
+Frame.Size = UDim2.new(0, 392, 0, 25)
+Frame.Active = true
+Frame.Draggable = true
+
+LogPanel.Name = "LogPanel"
+LogPanel.Parent = Frame
+LogPanel.BackgroundColor3 = Color3.new(0, 0, 0)
+LogPanel.BorderColor3 = Color3.new(0.223529, 0.223529, 0.223529)
+LogPanel.Position = UDim2.new(-0.000221580267, 0, 0.968695641, 0)
+LogPanel.Size = UDim2.new(0, 392, 0, 203)
+LogPanel.ScrollBarThickness = 5
+LogPanel.ScrollingEnabled = true
+LogPanel.CanvasSize = UDim2.new(2,0,100,0)
+
+Close.Name = "Close"
+Close.Parent = Frame
+Close.BackgroundColor3 = Color3.new(1, 1, 1)
+Close.BackgroundTransparency = 1
+Close.Position = UDim2.new(0.823979557, 0, 0.0399999991, 0)
+Close.Size = UDim2.new(0, 69, 0, 24)
+Close.Font = Enum.Font.SourceSans
+Close.Text = "Hide"
+Close.TextColor3 = Color3.new(1, 1, 1)
+Close.TextSize = 14
+
+Mini.Name = "Mini"
+Mini.Parent = Frame
+Mini.BackgroundColor3 = Color3.new(1, 1, 1)
+Mini.BackgroundTransparency = 1
+Mini.Position = UDim2.new(0.647959173, 0, 0, 0)
+Mini.Size = UDim2.new(0, 69, 0, 24)
+Mini.Font = Enum.Font.SourceSans
+Mini.Text = "Minimize"
+Mini.TextColor3 = Color3.new(1, 1, 1)
+Mini.TextSize = 14
+
+Log.Name = "Log"
+Log.Parent = Frame
+Log.BackgroundColor3 = Color3.new(1, 1, 1)
+Log.BackgroundTransparency = 1
+Log.Position = UDim2.new(0.293367326, 0, 0, 0)
+Log.Size = UDim2.new(0, 69, 0, 24)
+Log.Font = Enum.Font.SourceSans
+Log.Text = "Clear"
+Log.TextColor3 = Color3.new(1, 1, 1)
+Log.TextSize = 14
+
+title.Name = "title"
+title.Parent = Frame
+title.BackgroundColor3 = Color3.new(1, 1, 1)
+title.BackgroundTransparency = 1
+title.Size = UDim2.new(0, 115, 0, 24)
+title.Font = Enum.Font.SourceSans
+title.Text = "Chatlogs"
+title.TextColor3 = Color3.new(1, 1, 1)
+title.TextSize = 14
+title.TextXAlignment = Enum.TextXAlignment.Left
+-- Scripts:
+local logging = true
+local minimized = false
+Log.MouseButton1Down:Connect(function()
+for i,v in pairs(client["PlayerGui"]["ChatGui"]["Frame"]["LogPanel"]:GetChildren()) do
+   LogPanel.CanvasSize = UDim2.new(2,0,100,0)
+   wait(0.1)
+   v:Destroy()
+end
+end)
+Mini.MouseButton1Down:Connect(function()
+	if minimized then
+		LogPanel:TweenSize(UDim2.new(0, 392, 0, 203), "InOut", "Sine", 0.5, false, nil)
+	else
+		LogPanel:TweenSize(UDim2.new(0, 392, 0, 0), "InOut", "Sine", 0.5, false, nil)
+	end
+	minimized = not minimized
+end)
+Close.MouseButton1Down:Connect(function()
+ChatGui.Enabled = false
+end)
+
+local alls = 0
+local titlelog = "[Public]"
+local prevOutputPos = 0
+local function output(plr, msg)
+	if not logging then return end
+	local colour = Color3.fromRGB(255,255,255)
+	
+if string.sub(msg, 1,1) == ":" or string.sub(msg,1,1) == ";" then 
+   colour = Color3.fromRGB(255,0,0)
+   titlelog = "[Admin]"
+elseif string.sub(msg,1,2) == "/w" or string.sub(msg,1,7) ==  "/whisper" then
+   colour = Color3.fromRGB(0,0,255)
+   titlelog = "[Private Chat]"
+elseif string.sub(msg,1,5) == "/team" or string.sub(msg,1,2) == "/t" then
+   colour = Color3.fromRGB(0,0,255)
+   titlelog = "[Team Chat]"
+     else
+    colour = Color3.fromRGB(255,255,255)
+    titlelog = "[Public]"
+end
+	
+ 	local o = Instance.new("TextLabel",LogPanel)
+ 	o.Text = tostring(titlelog) .. " [" .. plr .. "]: " .. msg
+ 	o.Size = UDim2.new(0.5,0,.006,0)
+ 	o.Position = UDim2.new(0,0,.007 + prevOutputPos ,0)
+ 	o.Font = Enum.Font.SourceSansSemibold
+ 	o.TextColor3 = colour
+ 	o.TextStrokeTransparency = 0
+ 	o.BackgroundTransparency = 0
+	o.BackgroundColor3 = Color3.new(0,0,0)
+ 	o.BorderSizePixel = 0
+	o.BorderColor3 = Color3.new(0,0,0)
+ 	o.FontSize = "Size14"
+	o.TextXAlignment = Enum.TextXAlignment.Left
+ 	o.ClipsDescendants = true
+        o.TextTransparency = 1
+	o.Selectable = true
+        o.TextEditable = false
+	prevOutputPos = prevOutputPos + 0.007
+        LogPanel.CanvasSize = UDim2.new(2,0,100,alls+o.TextBounds.Y)
+	LogPanel.CanvasPosition = Vector2.new(0,LogPanel.CanvasPosition.Y+o.TextBounds.Y)
+		for i,v in pairs(game.Players.LocalPlayer.PlayerGui.ChatGui.Frame.LogPanel:GetChildren()) do
+			if v then
+				alls = v.Size.Y.Offset + alls
+			end
+			if not v then
+				alls = 0
+			end
+		end
+      for i = 0,50 do wait(0.05)
+			o.TextTransparency = o.TextTransparency - 0.05
+		end
+		o.TextTransparency = 0
+	end
+
+game.Players.ChildAdded:Connect(function(plr)
+	if plr:IsA("Player") then
+		plr.Chatted:Connect(function(msg)
+			output(plr.Name, msg)
+		end)
+	end
+end)
 
 local ExcorcistHandler = {}
 local PossessorHandler = {}
@@ -161,6 +320,7 @@ local function getRoundTimer()
 	return client["PlayerGui"]["MainUi"]["Frame"]["TimeLeft"].Text
 end
 
+T7:AddParagraph("Whats New? [ 23/12/2023 ]","[ + ] Added Chatlog ( Can copy text from players )")
 T7:AddParagraph("Whats New? [ 20/12/2023 ]","[ + ] Added Possessed log\n[ +/- ] Improved Possessor Label\n[ + ] Improved chat bypass and glitched text in 'Code' Tab")
 T7:AddParagraph("Whats New? [ 15/12/2023 ]","[ + ] Replaced GUID with Glitch Text\n[ + ] Added 2 new reminder\n[ + ] Your code can now be sent automatically when the player says 'code' - Beta")
 T7:AddParagraph("Whats New? [ 14/12/2023 ]","[ + ] Added 'Auto sent code every round'!\n[ + ] Added 'Reminder' Tab\n[ + ] Added 'Ability' Tab - Beta\n[ +/- ] Fixed Ability Dropdown bugging when u use ur ability.\n[ +/- ] Fixed Not teleported to the area ( UserInput Bugging )\n[ + ] The possessor label is now only detected when the player resets or respawns their character. ( with Possessor MousePointer )")
@@ -201,6 +361,14 @@ T1:AddButton({
 Name = "Skip Vote",
 Callback = function()
       game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer("ConfirmSkip",true)
+  end    
+})
+
+T1:AddToggle({
+  Name = "Chatlog",
+  Default = false,
+  Callback = function(Value)
+    ChatGui.Enabled = Value
   end    
 })
 
@@ -463,6 +631,9 @@ end)
 end
 
 for _,v in pairs(game.Players:GetPlayers()) do
+	v.Chatted:Connect(function(msg)
+		output(v.DisplayName,msg)
+	end)
 	getPossessor(v)
 end
 
