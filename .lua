@@ -140,7 +140,7 @@ end
  	o.ClipsDescendants = true
         o.TextTransparency = 1
 	o.Selectable = true
-        o.TextEditable = false
+        --o.TextEditable = false
 	prevOutputPos = prevOutputPos + 0.007
         LogPanel.CanvasSize = UDim2.new(2,0,100,alls+o.TextBounds.Y)
 	LogPanel.CanvasPosition = Vector2.new(0,LogPanel.CanvasPosition.Y+o.TextBounds.Y)
@@ -320,7 +320,7 @@ local function getRoundTimer()
 	return client["PlayerGui"]["MainUi"]["Frame"]["TimeLeft"].Text
 end
 
-T7:AddParagraph("Whats New? [ 23/12/2023 ]","[ + ] Added Chatlog ( Can copy text from players )")
+T7:AddParagraph("Whats New? [ 23/12/2023 ]","[ + ] Added Chatlog ( Can copy text from players )\n[ +/- ] Fixed chatlog bugs - doesnt show player chat")
 T7:AddParagraph("Whats New? [ 20/12/2023 ]","[ + ] Added Possessed log\n[ +/- ] Improved Possessor Label\n[ + ] Improved chat bypass and glitched text in 'Code' Tab")
 T7:AddParagraph("Whats New? [ 15/12/2023 ]","[ + ] Replaced GUID with Glitch Text\n[ + ] Added 2 new reminder\n[ + ] Your code can now be sent automatically when the player says 'code' - Beta")
 T7:AddParagraph("Whats New? [ 14/12/2023 ]","[ + ] Added 'Auto sent code every round'!\n[ + ] Added 'Reminder' Tab\n[ + ] Added 'Ability' Tab - Beta\n[ +/- ] Fixed Ability Dropdown bugging when u use ur ability.\n[ +/- ] Fixed Not teleported to the area ( UserInput Bugging )\n[ + ] The possessor label is now only detected when the player resets or respawns their character. ( with Possessor MousePointer )")
