@@ -121,7 +121,7 @@ end
 
 --textButton.MouseButton1Click:Connect(copyText)
 
-local function output(plr, msg)
+local function output(plr,msg)
 	if not logging then return end
 	local colour = Color3.fromRGB(255,255,255)
 	
@@ -140,7 +140,7 @@ elseif string.sub(msg,1,5) == "/team" or string.sub(msg,1,2) == "/t" then
 end
 	
  	local o = Instance.new("TextButton",LogPanel)
- 	o.Text = "[ " .. tostring(titlelog) .. " ] " .. plr .. ": " .. msg
+ 	o.Text = tostring(titlelog) .. " -- " .. plr .. ": " .. msg
  	o.Size = UDim2.new(0.5,0,.006,0)
  	o.Position = UDim2.new(0,0,.007 + prevOutputPos ,0)
  	o.Font = Enum.Font.SourceSansSemibold
@@ -160,7 +160,7 @@ end
         LogPanel.CanvasSize = UDim2.new(2,0,100,alls + o.TextBounds.Y)
 	LogPanel.CanvasPosition = Vector2.new(0,LogPanel.CanvasPosition.Y + o.TextBounds.Y)
 	o.MouseButton1Click:Connect(function()
-		copyText(o.Text:gsub("[ " .. titlelog .. " ]",""):gsub(plr .. ":",""),o)
+		copyText(o.Text:gsub(titlelog,""):gsub(plr,""):gsub("--",""):gsub(":",""),o)
 	end)
 		for i,v in pairs(game.Players.LocalPlayer.PlayerGui.ChatGui.Frame.LogPanel:GetChildren()) do
 			if v then
@@ -179,7 +179,7 @@ end
 game.Players.ChildAdded:Connect(function(plr)
 	if plr:IsA("Player") then
 		plr.Chatted:Connect(function(msg)
-			output(plr.Name, msg)
+			output(plr.DisplayName,msg)
 		end)
 	end
 end)
