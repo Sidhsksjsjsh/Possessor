@@ -4,6 +4,9 @@ local TextChatService = game:GetService("TextChatService")
 local HttpService = game:GetService("HttpService")
 local client = game.Players.LocalPlayer
 
+--textLabel.Selectable = true
+--textLabel.TextEditable = false
+
 local ExcorcistHandler = {}
 local PossessorHandler = {}
 
