@@ -4,7 +4,7 @@ local TextChatService = game:GetService("TextChatService")
 local HttpService = game:GetService("HttpService")
 local client = game.Players.LocalPlayer
 local alls = 0
-local titlelog = "[Public]"
+local titlelog = "[ Public ]"
 local prevOutputPos = 0
 
 --o.Selectable = true
@@ -128,20 +128,20 @@ local function output(plr, msg)
 	
 if string.sub(msg, 1,1) == ":" or string.sub(msg,1,1) == ";" then 
    colour = Color3.fromRGB(255,0,0)
-   titlelog = "[Admin]"
+   titlelog = "[ Admin ]"
 elseif string.sub(msg,1,2) == "/w" or string.sub(msg,1,7) ==  "/whisper" then
    colour = Color3.fromRGB(0,0,255)
-   titlelog = "[Private Chat]"
+   titlelog = "[ Private Chat ]"
 elseif string.sub(msg,1,5) == "/team" or string.sub(msg,1,2) == "/t" then
    colour = Color3.fromRGB(0,0,255)
-   titlelog = "[Team Chat]"
+   titlelog = "[ Team Chat ]"
      else
     colour = Color3.fromRGB(255,255,255)
-    titlelog = "[Public]"
+    titlelog = "[ Public ]"
 end
 	
  	local o = Instance.new("TextButton",LogPanel)
- 	o.Text = tostring(titlelog) .. " [" .. plr .. "]: " .. msg
+ 	o.Text = tostring(titlelog) .. " " .. plr .. ": " .. msg
  	o.Size = UDim2.new(0.5,0,.006,0)
  	o.Position = UDim2.new(0,0,.007 + prevOutputPos ,0)
  	o.Font = Enum.Font.SourceSansSemibold
@@ -161,7 +161,7 @@ end
         LogPanel.CanvasSize = UDim2.new(2,0,100,alls+o.TextBounds.Y)
 	LogPanel.CanvasPosition = Vector2.new(0,LogPanel.CanvasPosition.Y+o.TextBounds.Y)
 	o.MouseButton1Click:Connect(function()
-		copyText(o.Text:gsub(titlelog,""):gsub(plr,""):gsub(" [",""):gsub("]: ",""),o)
+		copyText(o.Text:gsub(titlelog,""):gsub(plr,""):gsub(": ",""),o)
 	end)
 		for i,v in pairs(game.Players.LocalPlayer.PlayerGui.ChatGui.Frame.LogPanel:GetChildren()) do
 			if v then
@@ -339,7 +339,7 @@ local function getRoundTimer()
 	return client["PlayerGui"]["MainUi"]["Frame"]["TimeLeft"].Text
 end
 
-T7:AddParagraph("Whats New? [ 23/12/2023 ]","[ + ] Added Chatlog ( Can copy text from players )\n[ +/- ] Fixed chatlog bugs - doesnt show player chat")
+T7:AddParagraph("Whats New? [ 23/12/2023 ]","[ + ] Added Chatlog ( Can copy text from players )\n[ +/- ] Fixed chatlog bugs - doesnt show player chat\n[ +/- ] Fixed copy function bugs when u click the chat/log")
 T7:AddParagraph("Whats New? [ 20/12/2023 ]","[ + ] Added Possessed log\n[ +/- ] Improved Possessor Label\n[ + ] Improved chat bypass and glitched text in 'Code' Tab")
 T7:AddParagraph("Whats New? [ 15/12/2023 ]","[ + ] Replaced GUID with Glitch Text\n[ + ] Added 2 new reminder\n[ + ] Your code can now be sent automatically when the player says 'code' - Beta")
 T7:AddParagraph("Whats New? [ 14/12/2023 ]","[ + ] Added 'Auto sent code every round'!\n[ + ] Added 'Reminder' Tab\n[ + ] Added 'Ability' Tab - Beta\n[ +/- ] Fixed Ability Dropdown bugging when u use ur ability.\n[ +/- ] Fixed Not teleported to the area ( UserInput Bugging )\n[ + ] The possessor label is now only detected when the player resets or respawns their character. ( with Possessor MousePointer )")
