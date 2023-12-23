@@ -3,6 +3,9 @@ local Window = OrionLib:MakeWindow({Name = "VIP Turtle Hub V3", HidePremium = fa
 local TextChatService = game:GetService("TextChatService")
 local HttpService = game:GetService("HttpService")
 local client = game.Players.LocalPlayer
+local alls = 0
+local titlelog = "[Public]"
+local prevOutputPos = 0
 
 --o.Selectable = true
 --o.TextEditable = false
@@ -77,7 +80,7 @@ title.BackgroundColor3 = Color3.new(1, 1, 1)
 title.BackgroundTransparency = 1
 title.Size = UDim2.new(0, 115, 0, 24)
 title.Font = Enum.Font.SourceSans
-title.Text = "Chatlogs"
+title.Text = "Imitation | ChatLogs"
 title.TextColor3 = Color3.new(1, 1, 1)
 title.TextSize = 14
 title.TextXAlignment = Enum.TextXAlignment.Left
@@ -87,6 +90,8 @@ local minimized = false
 Log.MouseButton1Down:Connect(function()
 for i,v in pairs(client["PlayerGui"]["ChatGui"]["Frame"]["LogPanel"]:GetChildren()) do
    LogPanel.CanvasSize = UDim2.new(2,0,100,0)
+   alls = 0
+   prevOutputPos = 0
    wait(0.1)
    v:Destroy()
 end
@@ -103,8 +108,8 @@ Close.MouseButton1Down:Connect(function()
 ChatGui.Enabled = false
 end)
 
-local function copyText(v)
-    if v:IsA("TextButton") then
+local function copyText(v,frm)
+    if frm:IsA("TextButton") then
         local success,error = pcall(function()
             setclipboard(v)
         end)
@@ -117,9 +122,6 @@ end
 
 --textButton.MouseButton1Click:Connect(copyText)
 
-local alls = 0
-local titlelog = "[Public]"
-local prevOutputPos = 0
 local function output(plr, msg)
 	if not logging then return end
 	local colour = Color3.fromRGB(255,255,255)
@@ -138,7 +140,7 @@ elseif string.sub(msg,1,5) == "/team" or string.sub(msg,1,2) == "/t" then
     titlelog = "[Public]"
 end
 	
- 	local o = Instance.new("TextLabel",LogPanel)
+ 	local o = Instance.new("TextButton",LogPanel)
  	o.Text = tostring(titlelog) .. " [" .. plr .. "]: " .. msg
  	o.Size = UDim2.new(0.5,0,.006,0)
  	o.Position = UDim2.new(0,0,.007 + prevOutputPos ,0)
@@ -158,6 +160,9 @@ end
 	prevOutputPos = prevOutputPos + 0.007
         LogPanel.CanvasSize = UDim2.new(2,0,100,alls+o.TextBounds.Y)
 	LogPanel.CanvasPosition = Vector2.new(0,LogPanel.CanvasPosition.Y+o.TextBounds.Y)
+	o.MouseButton1Click:Connect(function()
+		copyText(o.Text:gsub(titlelog,""):gsub(plr,""):gsub(" [",""):gsub("]: ",""),o)
+	end)
 		for i,v in pairs(game.Players.LocalPlayer.PlayerGui.ChatGui.Frame.LogPanel:GetChildren()) do
 			if v then
 				alls = v.Size.Y.Offset + alls
