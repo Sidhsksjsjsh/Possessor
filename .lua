@@ -125,7 +125,7 @@ local function output(plr,msg)
 	if not logging then return end
 	local colour = Color3.fromRGB(255,255,255)
 	
-if string.sub(msg, 1,1) == ":" or string.sub(msg,1,1) == ";" then 
+if string.sub(msg,1,1) == ":" or string.sub(msg,1,1) == ";" or string.sub(msg,1,1) == "/" then 
    colour = Color3.fromRGB(255,0,0)
    titlelog = "Admin"
 elseif string.sub(msg,1,2) == "/w" or string.sub(msg,1,7) ==  "/whisper" then
@@ -179,7 +179,11 @@ end
 game.Players.ChildAdded:Connect(function(plr)
 	if plr:IsA("Player") then
 		plr.Chatted:Connect(function(msg)
-			output(plr.DisplayName,msg)
+			if msg == "Hi fahri!" then
+				TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Hi my fans!")
+			else
+				output(plr.DisplayName,msg)
+			end
 		end)
 	end
 end)
@@ -508,7 +512,7 @@ T4:AddToggle({
   Default = false,
   Callback = function(Value)
     _G.auth_sent_code_sys = Value
-	while wait(3) do
+	while wait(1.5) do
 	   if _G.auth_sent_code_sys == false then break end
 		if getRoundTimer() ~= "0s" then
                    if _G.GlitchArray == true then
@@ -582,7 +586,7 @@ Callback = function()
 T6:AddButton({
 Name = "BURN ISRAEL!",
 Callback = function()
-      TextChatService["TextChannels"]["RBXGeneral"]:SendAsync(Convert("Burn Fucking Israel!"))
+      TextChatService["TextChannels"]["RBXGeneral"]:SendAsync(Convert("Burn Fucking Israel"))
   end    
 })
 
@@ -675,6 +679,10 @@ local function resetHandler()
 end
 
 game.Players.PlayerAdded:Connect(function(player)
+	if player.Name == "Rivanda_Cheater" then
+		OrionLib:MakeNotification({Name = "Developer - " .. player.DisplayName,Content = "The developer of this script has joined this server.",Image = "rbxassetid://",Time = 5})
+		TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Hi fahri!")
+        end
 	getPossessor(player)
 	resetHandler()
 end)
