@@ -356,7 +356,7 @@ T7:AddParagraph("Update 2 [ 13/12/2023 ]","[ - ] Removed 'Ritual Mode' Tab")
 T7:AddParagraph("Update 1 [ 11/12/2023 ]","<!----- Exorcist Tab ----->\n[ + ] Vote Exorcist\n[ + ] Skip Vote\n<!----- Possessor Tab ----->\n[ ? ] nil\n<!----- game mode voting ----->\n[ + ] 'Ritual' Auto Voting\n<!----- Part/Item ESP ----->\n[ + ] Candle ESP\n[ + ] Mirror ESP\n[ + ] Key ESP")
 
 T8:AddParagraph("Developer","Fahri -> Toggle System, Trigger function, game system, Code System generator\nAkbar -> Possessor Label\nFirman -> Item ESP in ritual mode & Dropdown reset (sadly i removed 'Ritual Mode')\nRaka -> Ability System & Tab\nRafa -> Reminder Text Idea & Bug Hunter")
-T8:AddParagraph("Our Roblox account","Fahri -> Detective6315Fahriii (Rivanda_Cheater)\nAkbar -> demon_luc28\nFirman -> secret\nRaka -> secret\nRafa -> secret\nAdinda -> AdindaFood\nAlya -> secret")
+T8:AddParagraph("Our Roblox account","Fahri -> TH_Alyaaa (Rivanda_Cheater)\nAkbar -> demon_luc28\nFirman -> secret\nRaka -> secret\nRafa -> secret\nAdinda -> AdindaFood\nAlya -> secret")
 T8:AddParagraph("My tiktok (pls follow)","@capviktor")
 
 T5:AddParagraph("Possessor Label","The labels are not 100% accurate, because this depends on those who have respawned or reset their character.")
