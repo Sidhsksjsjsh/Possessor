@@ -159,8 +159,13 @@ end
 	prevOutputPos = prevOutputPos + 0.007
         LogPanel.CanvasSize = UDim2.new(2,0,100,alls + o.TextBounds.Y)
 	LogPanel.CanvasPosition = Vector2.new(0,LogPanel.CanvasPosition.Y + o.TextBounds.Y)
-	o.MouseButton1Click:Connect(function()
-		copyText(o.Text:gsub(titlelog,""):gsub(plr,""):gsub("--",""):gsub(":",""),o)
+	o.MouseButton1Click:Connect(function() --  k
+		local ableCopied = o.Text:gsub(titlelog,""):gsub(plr,""):gsub("--",""):gsub(":","")
+		if ableCopied:sub(1,4) == "--  " then
+		    copyText(ableCopied:sub(5),o)
+		elseif ableCopied:sub(1,5) == " --  " then
+		    copyText(ableCopied:sub(6),o)
+		end
 	end)
 		for i,v in pairs(game.Players.LocalPlayer.PlayerGui.ChatGui.Frame.LogPanel:GetChildren()) do
 			if v then
@@ -342,6 +347,7 @@ local function getRoundTimer()
 	return client["PlayerGui"]["MainUi"]["Frame"]["TimeLeft"].Text
 end
 
+T7:AddParagraph("Update 7 [ 25/12/2023 ]","[ +/- ] Fixed Chatlog bug when u tried to copied player message\n[ +/- ] Fixed 'Failed to run chatlog' message on some exploit.")
 T7:AddParagraph("Update 6 [ 23/12/2023 ]","[ + ] Added Chatlog ( Can copy text from players )\n[ +/- ] Fixed chatlog bugs - doesnt show player chat\n[ +/- ] Fixed copy function bugs when u click the chat/log\n[ +/- ] Fixed text copied when u copy the message\n[ +/- ] Reduced delay when clearing chat logs\n[ +/- ] Increase the copied word to the word you want to copy")
 T7:AddParagraph("Update 5 [ 20/12/2023 ]","[ + ] Added Possessed log\n[ +/- ] Improved Possessor Label\n[ + ] Improved chat bypass and glitched text in 'Code' Tab")
 T7:AddParagraph("Update 4 [ 15/12/2023 ]","[ + ] Replaced GUID with Glitch Text\n[ + ] Added 2 new reminder\n[ + ] Your code can now be sent automatically when the player says 'code' - Beta")
