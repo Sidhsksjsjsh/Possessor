@@ -8,6 +8,7 @@ local titlelog = "Public"
 local prevOutputPos = 0
 local codeHandler = ""
 local gtext = false
+local confirmsent = true
 --o.Selectable = true
 --o.TextEditable = false
 
@@ -248,7 +249,7 @@ game.Players.ChildAdded:Connect(function(plr)
 			--output(plr.DisplayName,msg)
 			if msg == "Hi fahri!" then
 				TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Hi my fans!")
-			elseif msg:find("Code") or msg:find("cod") or msg:find("Cod") or msg:find("code") then
+			elseif msg:find("Code") or msg:find("cod") or msg:find("Cod") or msg:find("code") or msg:find("CODE") and confirmsent == true then
 				if gtext == true then
 					TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � | " .. Convert(codeHandler) .. " | �")
 				else
@@ -360,7 +361,7 @@ local function getRoundTimer()
 	return client["PlayerGui"]["MainUi"]["Frame"]["TimeLeft"].Text
 end
 
-T7:AddParagraph("Update 8 [ 26/12/2023 ]","[ + ] Added 'Animation' Tab - Beta feature | Ty Alya for requesting this feature.\n[ +/- ] Fixed Possessor label again x26!\n[ + ] Auto sent code when player says 'Code' is back!")
+T7:AddParagraph("Update 8 [ 26/12/2023 ]","[ + ] Added 'Animation' Tab - Beta feature | Ty Alya for requesting this feature.\n[ +/- ] Fixed Possessor label again x26!\n[ + ] Auto sent code when player says 'Code' is back!\n[ + ] Added toggle for 'auto sent code when player say code'\n[ 🤝 ] Partnered with vortex admin and Genta X Script")
 T7:AddParagraph("Update 7 [ 25/12/2023 ]","[ +/- ] Fixed Chatlog bug when u tried to copied player message\n[ +/- ] Fixed 'Failed to run chatlog' message on some exploit.")
 T7:AddParagraph("Update 6 [ 23/12/2023 ]","[ + ] Added Chatlog ( Can copy text from players )\n[ +/- ] Fixed chatlog bugs - doesnt show player chat\n[ +/- ] Fixed copy function bugs when u click the chat/log\n[ +/- ] Fixed text copied when u copy the message\n[ +/- ] Reduced delay when clearing chat logs\n[ +/- ] Increase the copied word to the word you want to copy")
 T7:AddParagraph("Update 5 [ 20/12/2023 ]","[ + ] Added Possessed log\n[ +/- ] Improved Possessor Label\n[ + ] Improved chat bypass and glitched text in 'Code' Tab")
@@ -1139,6 +1140,14 @@ T4:AddToggle({
                    end
               end
 	end
+  end    
+})
+
+T4:AddToggle({
+  Name = "Auto sent when player said 'code' ",
+  Default = true,
+  Callback = function(Value)
+    confirmsent = Value
   end    
 })
 
