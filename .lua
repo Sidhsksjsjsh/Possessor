@@ -353,7 +353,7 @@ local function getRoundTimer()
 	return client["PlayerGui"]["MainUi"]["Frame"]["TimeLeft"].Text
 end
 
-T7:AddParagraph("Update 8 [ 26/12/2023 ]","[ + ] Added 'Animation' Tab - Beta feature | Ty Alya for requesting this feature".)
+T7:AddParagraph("Update 8 [ 26/12/2023 ]","[ + ] Added 'Animation' Tab - Beta feature | Ty Alya for requesting this feature.\[ +/- ] Fixed Possessor label again x26!")
 T7:AddParagraph("Update 7 [ 25/12/2023 ]","[ +/- ] Fixed Chatlog bug when u tried to copied player message\n[ +/- ] Fixed 'Failed to run chatlog' message on some exploit.")
 T7:AddParagraph("Update 6 [ 23/12/2023 ]","[ + ] Added Chatlog ( Can copy text from players )\n[ +/- ] Fixed chatlog bugs - doesnt show player chat\n[ +/- ] Fixed copy function bugs when u click the chat/log\n[ +/- ] Fixed text copied when u copy the message\n[ +/- ] Reduced delay when clearing chat logs\n[ +/- ] Increase the copied word to the word you want to copy")
 T7:AddParagraph("Update 5 [ 20/12/2023 ]","[ + ] Added Possessed log\n[ +/- ] Improved Possessor Label\n[ + ] Improved chat bypass and glitched text in 'Code' Tab")
