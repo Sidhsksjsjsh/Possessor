@@ -325,6 +325,12 @@ Icon = "rbxassetid://",
 PremiumOnly = false
 })
 
+local T11 = Window:MakeTab({
+Name = "Animation",
+Icon = "rbxassetid://",
+PremiumOnly = false
+})
+
 local T5 = Window:MakeTab({
 Name = "NOTE",
 Icon = "rbxassetid://13030062874",
@@ -347,6 +353,7 @@ local function getRoundTimer()
 	return client["PlayerGui"]["MainUi"]["Frame"]["TimeLeft"].Text
 end
 
+T7:AddParagraph("Update 8 [ 26/12/2023 ]","[ + ] Added 'Animation' Tab - Beta feature | Ty Alya for requesting this feature".)
 T7:AddParagraph("Update 7 [ 25/12/2023 ]","[ +/- ] Fixed Chatlog bug when u tried to copied player message\n[ +/- ] Fixed 'Failed to run chatlog' message on some exploit.")
 T7:AddParagraph("Update 6 [ 23/12/2023 ]","[ + ] Added Chatlog ( Can copy text from players )\n[ +/- ] Fixed chatlog bugs - doesnt show player chat\n[ +/- ] Fixed copy function bugs when u click the chat/log\n[ +/- ] Fixed text copied when u copy the message\n[ +/- ] Reduced delay when clearing chat logs\n[ +/- ] Increase the copied word to the word you want to copy")
 T7:AddParagraph("Update 5 [ 20/12/2023 ]","[ + ] Added Possessed log\n[ +/- ] Improved Possessor Label\n[ + ] Improved chat bypass and glitched text in 'Code' Tab")
@@ -363,6 +370,601 @@ T5:AddParagraph("Possessor Label","The labels are not 100% accurate, because thi
 T5:AddParagraph("Reminder Tab","The reminder tab is a tab where they can know which one is real and which one is possessed, for example: the real one can fly, and the fake one can't, they will know who is fake.")
 
 local Psps = T1:AddParagraph("👿 Possessor 👿","No one is possessed!")
+ 
+local Anim = Instance.new("Animation")
+local track = nil
+
+T11:AddToggle({
+   Name = "Head Throw",
+   Default = false,
+   Callback = function(Value)
+      _G.HT = Value
+	Anim.AnimationId = "rbxassetid://35154961"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+	if _G.HT == false then
+		track:Stop()
+	end
+
+	while wait() do
+		if _G.HT == false then break end
+			track:Play(.1,1,1)
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Floating Head",
+   Default = false,
+   Callback = function(Value)
+	Anim.AnimationId = "rbxassetid://121572214"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+       if Value then
+		track:Play(.1,1,1)
+	else
+		track:Stop()
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Crouch",
+   Default = false,
+   Callback = function(Value)
+	Anim.AnimationId = "rbxassetid://182724289"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+       if Value then
+		track:Play(.1,1,1)
+	else
+		track:Stop()
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Floor Crawl",
+   Default = false,
+   Callback = function(Value)
+	Anim.AnimationId = "rbxassetid://282574440"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+       if Value then
+		track:Play(.1,1,1)
+	else
+		track:Stop()
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Dino Walk",
+   Default = false,
+   Callback = function(Value)
+	Anim.AnimationId = "rbxassetid://204328711"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+       if Value then
+		track:Play(.1,1,1)
+	else
+		track:Stop()
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Jumping Jacks",
+   Default = false,
+   Callback = function(Value)
+	Anim.AnimationId = "rbxassetid://429681631"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+       if Value then
+		track:Play(.1,1,1)
+	else
+		track:Stop()
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Loop Head",
+   Default = false,
+   Callback = function(Value)
+      _G.LH = Value
+	Anim.AnimationId = "rbxassetid://35154961"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+	if _G.LH == false then
+		track:Stop()
+	end
+
+	while wait() do
+		if _G.LH == false then break end
+			track:Play(.5,1,1e6)
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Hero Jump",
+   Default = false,
+   Callback = function(Value)
+      _G.HJ = Value
+	Anim.AnimationId = "rbxassetid://184574340"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+	if _G.HJ == false then
+		track:Stop()
+	end
+
+	while wait() do
+		if _G.HJ == false then break end
+			track:Play(.1,1,1)
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Faint",
+   Default = false,
+   Callback = function(Value)
+	Anim.AnimationId = "rbxassetid://181526230"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+       if Value then
+		track:Play(.1,1,1)
+	else
+		track:Stop()
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Floor Faint",
+   Default = false,
+   Callback = function(Value)
+      _G.FF = Value
+	Anim.AnimationId = "rbxassetid://181525546"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+	if _G.FF == false then
+		track:Stop()
+	end
+
+	while wait() do
+		if _G.FF == false then break end
+			track:Play(.1,1,2)
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Super Faint",
+   Default = false,
+   Callback = function(Value)
+      _G.SF = Value
+	Anim.AnimationId = "rbxassetid://181525546"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+	if _G.SF == false then
+		track:Stop()
+	end
+
+	while wait() do
+		if _G.SF == false then break end
+			track:Play(.1,0.5,40)
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Levitate",
+   Default = false,
+   Callback = function(Value)
+	Anim.AnimationId = "rbxassetid://313762630"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+       if Value then
+		track:Play(.1,1,1)
+	else
+		track:Stop()
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Dab",
+   Default = false,
+   Callback = function(Value)
+      _G.D = Value
+	Anim.AnimationId = "rbxassetid://183412246"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+	if _G.D == false then
+		track:Stop()
+	end
+
+	while wait() do
+		if _G.D == false then break end
+			track:Play(.1,1,2)
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Spinner",
+   Default = false,
+   Callback = function(Value)
+      _G.S = Value
+	Anim.AnimationId = "rbxassetid://188632011"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+	if _G.S == false then
+		track:Stop()
+	end
+
+	while wait() do
+		if _G.S == false then break end
+			track:Play(.1,1,2)
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Float Sit",
+   Default = false,
+   Callback = function(Value)
+	Anim.AnimationId = "rbxassetid://179224234"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+       if Value then
+		track:Play(.1,1,1)
+	else
+		track:Stop()
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Moving Dance",
+   Default = false,
+   Callback = function(Value)
+      _G.MD = Value
+	Anim.AnimationId = "rbxassetid://429703734"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+	if _G.MD == false then
+		track:Stop()
+	end
+
+	while wait() do
+		if _G.MD == false then break end
+			track:Play(.1,1,1)
+	end
+   end    
+})
+ 
+T11:AddToggle({
+   Name = "Weird Move",
+   Default = false,
+   Callback = function(Value)
+	Anim.AnimationId = "rbxassetid://215384594"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+       if Value then
+		track:Play(.1,1,1)
+	else
+		track:Stop()
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Clone Illusion",
+   Default = false,
+   Callback = function(Value)
+	Anim.AnimationId = "rbxassetid://215384594"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+       if Value then
+		track:Play(.5,1,1e7)
+	else
+		track:Stop()
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Glitch Levitate",
+   Default = false,
+   Callback = function(Value)
+	Anim.AnimationId = "rbxassetid://313762630"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+       if Value then
+		track:Play(.5,1,1e7)
+	else
+		track:Stop()
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Spin Dance",
+   Default = false,
+   Callback = function(Value)
+      _G.SD = Value
+	Anim.AnimationId = "rbxassetid://429730430"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+	if _G.SD == false then
+		track:Stop()
+	end
+
+	while wait() do
+		if _G.SD == false then break end
+			track:Play(.1,1,1)
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Moon Dance",
+   Default = false,
+   Callback = function(Value)
+      _G.MD2 = Value
+	Anim.AnimationId = "rbxassetid://45834924"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+	if _G.MD2 == false then
+		track:Stop()
+	end
+
+	while wait() do
+		if _G.MD2 == false then break end
+			track:Play(.1,1,1)
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Full Punch",
+   Default = false,
+   Callback = function(Value)
+      _G.FP = Value
+	Anim.AnimationId = "rbxassetid://204062532"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+	if _G.FP == false then
+		track:Stop()
+	end
+
+	while wait() do
+		if _G.FP == false then break end
+			track:Play(.1,1,1)
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Spin Dance 2",
+   Default = false,
+   Callback = function(Value)
+      _G.SD2 = Value
+	Anim.AnimationId = "rbxassetid://186934910"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+	if _G.SD2 == false then
+		track:Stop()
+	end
+
+	while wait() do
+		if _G.SD2 == false then break end
+			track:Play(.1,1,1)
+	end
+   end    
+})
+ 
+T11:AddToggle({
+   Name = "Bow Down",
+   Default = false,
+   Callback = function(Value)
+      _G.BD = Value
+	Anim.AnimationId = "rbxassetid://204292303"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+	if _G.BD == false then
+		track:Stop()
+	end
+
+	while wait() do
+		if _G.BD == false then break end
+			track:Play(.1,1,3)
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Sword Slam",
+   Default = false,
+   Callback = function(Value)
+      _G.SS = Value
+	Anim.AnimationId = "rbxassetid://204295235"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+	if _G.SS == false then
+		track:Stop()
+	end
+
+	while wait() do
+		if _G.SS == false then break end
+			track:Play(.1,1,1)
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Loop Slam",
+   Default = false,
+   Callback = function(Value)
+      _G.LS = Value
+	Anim.AnimationId = "rbxassetid://204295235"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+	if _G.LS == false then
+		track:Stop()
+	end
+
+	while wait() do
+		if _G.LS == false then break end
+			track:Play(.1,1,1e4)
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Mega Insane",
+   Default = false,
+   Callback = function(Value)
+      _G.MI = Value
+	Anim.AnimationId = "rbxassetid://184574340"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+	if _G.MI == false then
+		track:Stop()
+	end
+
+	while wait() do
+		if _G.MI == false then break end
+			track:Play(.1,0.5,40)
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Super Punch",
+   Default = false,
+   Callback = function(Value)
+      _G.SP = Value
+	Anim.AnimationId = "rbxassetid://126753849"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+	if _G.SP == false then
+		track:Stop()
+	end
+
+	while wait() do
+		if _G.SP == false then break end
+			track:Play(.1,1,3)
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Full Swing",
+   Default = false,
+   Callback = function(Value)
+      _G.FS2 = Value
+	Anim.AnimationId = "rbxassetid://218504594"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+	if _G.FS2 == false then
+		track:Stop()
+	end
+
+	while wait() do
+		if _G.FS2 == false then break end
+			track:Play(.1,1,1)
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Arm Turbine",
+   Default = false,
+   Callback = function(Value)
+	Anim.AnimationId = "rbxassetid://259438880"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+       if Value then
+		track:Play(.1,1,1e3)
+	else
+		track:Stop()
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Barrel Roll",
+   Default = false,
+   Callback = function(Value)
+      _G.BR = Value
+	Anim.AnimationId = "rbxassetid://136801964"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+	if _G.BR == false then
+		track:Stop()
+	end
+
+	while wait() do
+		if _G.BR == false then break end
+			track:Play(.1,1,1)
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Scared",
+   Default = false,
+   Callback = function(Value)
+      _G.BR = Value
+	Anim.AnimationId = "rbxassetid://180612465"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+	if _G.BR == false then
+		track:Stop()
+	end
+
+	while wait() do
+		if _G.BR == false then break end
+			track:Play(.1,1,1)
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Insane",
+   Default = false,
+   Callback = function(Value)
+	Anim.AnimationId = "rbxassetid://33796059"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+       if Value then
+		track:Play(.1,1,1e8)
+	else
+		track:Stop()
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Arm Detach",
+   Default = false,
+   Callback = function(Value)
+      _G.AD = Value
+	Anim.AnimationId = "rbxassetid://33169583"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+	if _G.AD == false then
+		track:Stop()
+	end
+
+	while wait() do
+		if _G.AD == false then break end
+			track:Play(.1,1,1e6)
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Sword Slice",
+   Default = false,
+   Callback = function(Value)
+	Anim.AnimationId = "rbxassetid://35978879"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+       if Value then
+		track:Play(.1,1,1)
+	else
+		track:Stop()
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Insane Arms",
+   Default = false,
+   Callback = function(Value)
+      _G.ARMSI = Value
+	Anim.AnimationId = "rbxassetid://27432691"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+	if _G.ARMSI == false then
+		track:Stop()
+	end
+
+	while wait() do
+		if _G.ARMSI == false then break end
+			track:Play(.1,1,1e4)
+	end
+   end    
+})
 
 local excHandler = T1:AddDropdown({
   Name = "Select player to Exorcist",
