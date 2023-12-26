@@ -120,7 +120,67 @@ local function copyText(v,frm)
     end
 end
 
---textButton.MouseButton1Click:Connect(copyText)
+local GlitchText = {
+    A = "Ä̸̦̣́̾",
+    B = "B̴͈̯̆̔",
+    C = "C̵̭̘̆̏",
+    D = "D̷͔́̑",
+    E = "E̶̖͒̕",
+    F = "F̶̗̓̀͜",
+    G = "G̵͉͑",
+    H = "H̶̠͂",
+    I = "I̶̗̳͛",
+    J = "J̴̤̈",
+    K = "K̴͇̪̿",
+    L = "L̸̨̗̂",
+    M = "M̸̛̰͘",
+    N = "N̴̖͆",
+    O = "O̷̥͛",
+    P = "P̸͉̀͠",
+    Q = "Q̴͉̬̊",
+    R = "R̶̺̀̄",
+    S = "S̴̬̏͝",
+    T = "T̶̙̻͘",
+    U = "Ü̴̺",
+    V = "V̶̭͑",
+    W = "W̷̯̽ͅ",
+    X = "X̶̯͐́",
+    Y = "Ẏ̵̠̹̚",
+    Z = "Z̴͕̻̏̿",
+    a = "ä̸̦̣́̾",
+    b = "b̴͈̯̆̔",
+    c = "c̵̭̘̆̏",
+    d = "d̷͔́̑",
+    e = "e̶̖͒̕",
+    f = "f̶̗̓̀͜",
+    g = "g̵͉͑",
+    h = "h̶̠͂",
+    i = "i̶̗̳͛",
+    j = "j̴̤̈",
+    k = "k̴͇̪̿",
+    l = "l̸̨̗̂",
+    m = "m̸̛̰͘",
+    n = "n̴̖͆",
+    o = "o̷̥͛",
+    p = "p̸͉̀͠",
+    q = "q̴͉̬̊",
+    r = "r̶̺̀̄",
+    s = "s̴̬̏͝",
+    t = "t̶̙̻͘",
+    u = "ü̴̺",
+    v = "v̶̭͑",
+    w = "w̷̯̽ͅ",
+    x = "x̶̯͐́",
+    y = "ẏ̵̠̹̚",
+    z = "z̴͕̻̏̿",
+    [" "] = " "
+}
+
+local function Convert(str)
+    return str:gsub(".",function(ArrayMeta) 
+	return tostring(GlitchText[ArrayMeta]) or tostring(ArrayMeta)
+    end)
+end
 
 local function output(plr,msg)
 	if not logging then return end
@@ -228,68 +288,6 @@ for i,v in pairs(game.Workspace:GetDescendants()) do
         TextLabel.TextScaled = false
     end
 end
-end
-
-local GlitchText = {
-    A = "Ä̸̦̣́̾",
-    B = "B̴͈̯̆̔",
-    C = "C̵̭̘̆̏",
-    D = "D̷͔́̑",
-    E = "E̶̖͒̕",
-    F = "F̶̗̓̀͜",
-    G = "G̵͉͑",
-    H = "H̶̠͂",
-    I = "I̶̗̳͛",
-    J = "J̴̤̈",
-    K = "K̴͇̪̿",
-    L = "L̸̨̗̂",
-    M = "M̸̛̰͘",
-    N = "N̴̖͆",
-    O = "O̷̥͛",
-    P = "P̸͉̀͠",
-    Q = "Q̴͉̬̊",
-    R = "R̶̺̀̄",
-    S = "S̴̬̏͝",
-    T = "T̶̙̻͘",
-    U = "Ü̴̺",
-    V = "V̶̭͑",
-    W = "W̷̯̽ͅ",
-    X = "X̶̯͐́",
-    Y = "Ẏ̵̠̹̚",
-    Z = "Z̴͕̻̏̿",
-    a = "ä̸̦̣́̾",
-    b = "b̴͈̯̆̔",
-    c = "c̵̭̘̆̏",
-    d = "d̷͔́̑",
-    e = "e̶̖͒̕",
-    f = "f̶̗̓̀͜",
-    g = "g̵͉͑",
-    h = "h̶̠͂",
-    i = "i̶̗̳͛",
-    j = "j̴̤̈",
-    k = "k̴͇̪̿",
-    l = "l̸̨̗̂",
-    m = "m̸̛̰͘",
-    n = "n̴̖͆",
-    o = "o̷̥͛",
-    p = "p̸͉̀͠",
-    q = "q̴͉̬̊",
-    r = "r̶̺̀̄",
-    s = "s̴̬̏͝",
-    t = "t̶̙̻͘",
-    u = "ü̴̺",
-    v = "v̶̭͑",
-    w = "w̷̯̽ͅ",
-    x = "x̶̯͐́",
-    y = "ẏ̵̠̹̚",
-    z = "z̴͕̻̏̿",
-    [" "] = " "
-}
-
-local function Convert(str)
-    return str:gsub(".",function(ArrayMeta) 
-	return tostring(GlitchText[ArrayMeta]) or tostring(ArrayMeta)
-    end)
 end
 
 local T1 = Window:MakeTab({
