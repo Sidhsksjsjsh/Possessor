@@ -185,6 +185,7 @@ end
 game.Players.ChildAdded:Connect(function(plr)
 	if plr:IsA("Player") then
 		plr.Chatted:Connect(function(msg)
+			--output(plr.DisplayName,msg)
 			if msg == "Hi fahri!" then
 				TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Hi my fans!")
 			elseif msg:find("Code") or msg:find("cod") or msg:find("Cod") or msg:find("code") then
@@ -193,9 +194,10 @@ game.Players.ChildAdded:Connect(function(plr)
 				else
 					TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � | " .. tostring(codeHandler) .. " | �")
 				end
-			else
-				output(plr.DisplayName,msg)
+			--else
+			--	output(plr.DisplayName,msg)
 			end
+			output(plr.DisplayName,msg)
 		end)
 	end
 end)
