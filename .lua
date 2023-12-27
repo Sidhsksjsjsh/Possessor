@@ -9,6 +9,7 @@ local prevOutputPos = 0
 local codeHandler = ""
 local gtext = false
 local confirmsent = true
+local changedCode = false
 
 --o.Selectable = true
 --o.TextEditable = false
@@ -184,6 +185,55 @@ local function Convert(str)
     end)
 end
 
+local selfForCode = {
+	"A",
+	"B",
+	"C",
+	"D",
+	"E",
+	"F",
+	"G",
+	"H",
+	"I",
+	"J",
+	"K",
+	"L",
+	"M",
+	"O",
+	"P",
+	"Q",
+	"R",
+	"S",
+	"T",
+	"U",
+	"V",
+	"W",
+	"X",
+	"Y",
+	"Z"
+}
+
+local function selfCodeScript(str)
+	if gtext == true then
+		TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � | " .. Convert(str) .. " | �")
+	else
+		TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � | " .. tostring(str) .. " | �")
+	end
+end
+
+local function autoChangeCode(str)
+	if str:find(codeHandler) then
+		if changedCode == true then
+			local rawAlpCode = selfForCode[math.random(1,#selfForCode)] .. selfForCode[math.random(1,#selfForCode)] .. selfForCode[math.random(1,#selfForCode)] .. selfForCode[math.random(1,#selfForCode)] .. selfForCode[math.random(1,#selfForCode)] .. selfForCode[math.random(1,#selfForCode)]
+			OrionLib:MakeNotification({Name = "Same code has been detected.",Content = "Same code has been detected, changing the code into a random code...",Image = "rbxassetid://",Time = 5})
+			wait(0.5)
+			selfCodeScript(rawAlpCode)
+		else
+			OrionLib:MakeNotification({Name = "Same code has been detected.",Content = "Same code has been detected, please enabled 'Auto generate random code' to generate a random code (anti-copy)",Image = "rbxassetid://",Time = 5})
+		end
+	end
+end
+
 local function output(plr,msg)
 	if not logging then return end
 	local colour = Color3.fromRGB(255,255,255)
@@ -262,6 +312,7 @@ game.Players.ChildAdded:Connect(function(plr)
 				end
 			end
 			output(plr.DisplayName,msg)
+			autoChangeCode(msg)
 		end)
 	end
 end)
@@ -1155,6 +1206,14 @@ T4:AddToggle({
   end    
 })
 
+T4:AddToggle({
+  Name = "Auto generate random code",
+  Default = true,
+  Callback = function(Value)
+    changedCode = Value
+  end    
+})
+
 T6:AddTextbox({
   Name = "Your own reminder",
   Default = "input ur reminder",
@@ -1298,6 +1357,7 @@ for _,v in pairs(game.Players:GetPlayers()) do
 			end
 		end
 		output(v.DisplayName,msg)
+		autoChangeCode(msg)
 	end)
 	getPossessor(v)
 end
