@@ -228,6 +228,7 @@ local function autoChangeCode(str)
 			OrionLib:MakeNotification({Name = "Same code has been detected.",Content = "Same code has been detected, changing the code into a random code...",Image = "rbxassetid://",Time = 5})
 			wait(0.5)
 			selfCodeScript(rawAlpCode)
+			codeHandler = rawAlpCode
 		else
 			OrionLib:MakeNotification({Name = "Same code has been detected.",Content = "Same code has been detected, please enabled 'Auto generate random code' to generate a random code (anti-copy)",Image = "rbxassetid://",Time = 5})
 		end
@@ -310,9 +311,10 @@ game.Players.ChildAdded:Connect(function(plr)
 				else
 					OrionLib:MakeNotification({Name = "🤖",Content = "Auto sent disabled",Image = "rbxassetid://",Time = 5})
 				end
+			elseif msg:find(codeHandler) then
+				autoChangeCode(msg)
 			end
 			output(plr.DisplayName,msg)
-			autoChangeCode(msg)
 		end)
 	end
 end)
@@ -387,12 +389,12 @@ Icon = "rbxassetid://",
 PremiumOnly = false
 })
 
-local T11 = Window:MakeTab({
+--[[local T11 = Window:MakeTab({
 Name = "Animation",
 Icon = "rbxassetid://",
 PremiumOnly = false
 })
-
+]]
 local T5 = Window:MakeTab({
 Name = "NOTE",
 Icon = "rbxassetid://13030062874",
@@ -415,7 +417,7 @@ local function getRoundTimer()
 	return client["PlayerGui"]["MainUi"]["Frame"]["TimeLeft"].Text
 end
 
-T7:AddParagraph("Update 9 [ 27/12/2023 ]","[ +/- ] Fixed all bugs (including animation, possessor label & auto sent code) | Ty rafa for telling me this bug.")
+T7:AddParagraph("Update 9 [ 27/12/2023 ]","[ +/- ] Fixed all bugs (including animation, possessor label & auto sent code) | Ty rafa for telling me this bug.\n[ + ] Added 'Generate random code' feature - check NOTE!\n[ - ] Moved 'animation' Tab to Developer Mode (testing feature)")
 T7:AddParagraph("Update 8 [ 26/12/2023 ]","[ + ] Added 'Animation' Tab - Beta feature | Ty Alya for requesting this feature.\n[ +/- ] Fixed Possessor label again x26!\n[ + ] Auto sent code when player says 'Code' is back!\n[ + ] Added toggle for 'auto sent code when player say code'\n[ 🤝 ] Partnered with vortex admin and Genta X Script")
 T7:AddParagraph("Update 7 [ 25/12/2023 ]","[ +/- ] Fixed Chatlog bug when u tried to copied player message\n[ +/- ] Fixed 'Failed to run chatlog' message on some exploit.")
 T7:AddParagraph("Update 6 [ 23/12/2023 ]","[ + ] Added Chatlog ( Can copy text from players )\n[ +/- ] Fixed chatlog bugs - doesnt show player chat\n[ +/- ] Fixed copy function bugs when u click the chat/log\n[ +/- ] Fixed text copied when u copy the message\n[ +/- ] Reduced delay when clearing chat logs\n[ +/- ] Increase the copied word to the word you want to copy")
@@ -431,12 +433,13 @@ T8:AddParagraph("My tiktok (pls follow)","@capviktor")
 
 T5:AddParagraph("Possessor Label","The labels are not 100% accurate, because this depends on those who have respawned or reset their character.")
 T5:AddParagraph("Reminder Tab","The reminder tab is a tab where they can know which one is real and which one is possessed, for example: the real one can fly, and the fake one can't, they will know who is fake.")
+T5:AddParagraph("Code system 'Generate random code'","This feature will replace your code with a random code if Possessed copies your code.")
 
 local Psps = T1:AddParagraph("👿 Possessor 👿","No one is possessed!")
  
 local Anim = Instance.new("Animation")
 local track = nil
-
+--[[
 T11:AddToggle({
    Name = "Head Throw",
    Default = false,
@@ -1028,7 +1031,7 @@ T11:AddToggle({
 	end
    end    
 })
-
+]]
 local excHandler = T1:AddDropdown({
   Name = "Select player to Exorcist",
   Default = ExcorcistHandler[1],
@@ -1355,9 +1358,10 @@ for _,v in pairs(game.Players:GetPlayers()) do
 			else
 				OrionLib:MakeNotification({Name = "🤖",Content = "Auto sent disabled",Image = "rbxassetid://",Time = 5})
 			end
+		elseif msg:find(codeHandler) then
+			autoChangeCode(msg)
 		end
 		output(v.DisplayName,msg)
-		autoChangeCode(msg)
 	end)
 	getPossessor(v)
 end
