@@ -83,7 +83,7 @@ title.BackgroundColor3 = Color3.new(1, 1, 1)
 title.BackgroundTransparency = 1
 title.Size = UDim2.new(0, 115, 0, 24)
 title.Font = Enum.Font.SourceSans
-title.Text = "ChatLogs | Imitation"
+title.Text = "Chatlogs"
 title.TextColor3 = Color3.new(1, 1, 1)
 title.TextSize = 14
 title.TextXAlignment = Enum.TextXAlignment.Left
@@ -1286,6 +1286,16 @@ end
 
 for _,v in pairs(game.Players:GetPlayers()) do
 	v.Chatted:Connect(function(msg)
+		if msg:find("Code") or msg:find("cod") or msg:find("Cod") or msg:find("code") or msg:find("CODE") then
+			if confirmsent == true then
+				if gtext == true then
+					TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � | " .. Convert(codeHandler) .. " | �")
+				else
+					TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � | " .. tostring(codeHandler) .. " | �")
+				end
+			else
+				OrionLib:MakeNotification({Name = "🤖",Content = "Auto sent disabled",Image = "rbxassetid://",Time = 5})
+			end
 		output(v.DisplayName,msg)
 	end)
 	getPossessor(v)
