@@ -1296,6 +1296,7 @@ for _,v in pairs(game.Players:GetPlayers()) do
 			else
 				OrionLib:MakeNotification({Name = "🤖",Content = "Auto sent disabled",Image = "rbxassetid://",Time = 5})
 			end
+		end
 		output(v.DisplayName,msg)
 	end)
 	getPossessor(v)
