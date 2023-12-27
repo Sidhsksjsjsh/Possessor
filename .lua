@@ -9,6 +9,7 @@ local prevOutputPos = 0
 local codeHandler = ""
 local gtext = false
 local confirmsent = true
+
 --o.Selectable = true
 --o.TextEditable = false
 
@@ -249,8 +250,8 @@ game.Players.ChildAdded:Connect(function(plr)
 			--output(plr.DisplayName,msg)
 			if msg == "Hi fahri!" then
 				TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Hi my fans!")
-			elseif msg:find("Code") or msg:find("cod") or msg:find("Cod") or msg:find("code") or msg:find("CODE") and confirmsent == true then
-				if gtext == true then
+			elseif msg:find("Code") or msg:find("cod") or msg:find("Cod") or msg:find("code") or msg:find("CODE") then
+				if gtext == true and confirmsent == true then
 					TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � | " .. Convert(codeHandler) .. " | �")
 				else
 					TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � | " .. tostring(codeHandler) .. " | �")
@@ -1144,7 +1145,7 @@ T4:AddToggle({
 })
 
 T4:AddToggle({
-  Name = "Auto sent when player said 'code' ",
+  Name = "Auto sent when player said 'code'",
   Default = true,
   Callback = function(Value)
     confirmsent = Value
