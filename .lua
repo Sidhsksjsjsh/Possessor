@@ -117,7 +117,7 @@ local function copyText(v,frm)
         end)
 
         if not success then
-            warn("Gagal menyalin teks:",error)
+            OrionLib:MakeNotification({Name = "🦠👾",Content = "Failed to copy text: " .. error,Image = "rbxassetid://",Time = 5})
         end
     end
 end
@@ -251,13 +251,15 @@ game.Players.ChildAdded:Connect(function(plr)
 			if msg == "Hi fahri!" then
 				TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Hi my fans!")
 			elseif msg:find("Code") or msg:find("cod") or msg:find("Cod") or msg:find("code") or msg:find("CODE") then
-				if gtext == true and confirmsent == true then
-					TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � | " .. Convert(codeHandler) .. " | �")
+				if confirmsent == true then
+					if gtext == true then
+						TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � | " .. Convert(codeHandler) .. " | �")
+					else
+						TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � | " .. tostring(codeHandler) .. " | �")
+					end
 				else
-					TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � | " .. tostring(codeHandler) .. " | �")
+					OrionLib:MakeNotification({Name = "🤖",Content = "Auto sent disabled",Image = "rbxassetid://",Time = 5})
 				end
-			--else
-			--	output(plr.DisplayName,msg)
 			end
 			output(plr.DisplayName,msg)
 		end)
@@ -362,6 +364,7 @@ local function getRoundTimer()
 	return client["PlayerGui"]["MainUi"]["Frame"]["TimeLeft"].Text
 end
 
+T7:AddParagraph("Update 9 [ 27/12/2023 ]","[ +/- ] Fixed all bugs (including animation, possessor label & auto sent code) | Ty rafa for telling me this bug.")
 T7:AddParagraph("Update 8 [ 26/12/2023 ]","[ + ] Added 'Animation' Tab - Beta feature | Ty Alya for requesting this feature.\n[ +/- ] Fixed Possessor label again x26!\n[ + ] Auto sent code when player says 'Code' is back!\n[ + ] Added toggle for 'auto sent code when player say code'\n[ 🤝 ] Partnered with vortex admin and Genta X Script")
 T7:AddParagraph("Update 7 [ 25/12/2023 ]","[ +/- ] Fixed Chatlog bug when u tried to copied player message\n[ +/- ] Fixed 'Failed to run chatlog' message on some exploit.")
 T7:AddParagraph("Update 6 [ 23/12/2023 ]","[ + ] Added Chatlog ( Can copy text from players )\n[ +/- ] Fixed chatlog bugs - doesnt show player chat\n[ +/- ] Fixed copy function bugs when u click the chat/log\n[ +/- ] Fixed text copied when u copy the message\n[ +/- ] Reduced delay when clearing chat logs\n[ +/- ] Increase the copied word to the word you want to copy")
@@ -1213,7 +1216,7 @@ Callback = function()
 T6:AddButton({
 Name = "BURN ISRAEL!",
 Callback = function()
-      TextChatService["TextChannels"]["RBXGeneral"]:SendAsync(Convert("Burn Fucking Israel"))
+      TextChatService["TextChannels"]["RBXGeneral"]:SendAsync(Convert("BURN FUCKING ISRAEL"))
   end    
 })
 
@@ -1251,8 +1254,8 @@ local function AbilityChanged()
 	AbilityHandleS.B = client["PlayerGui"]["StickUi"]["AbilityFrame"]["S2"]["TextLabel"].Text
 	AbilityHandleS.C = client["PlayerGui"]["StickUi"]["AbilityFrame"]["S3"]["TextLabel"].Text
 	wait(0.1)
-	excHandler:Refresh({AbilityHandleS.A,AbilityHandleS.B,AbilityHandleS.C},true)
-        excHandler:Set(AbilityHandleS.A)
+	abilityHandler:Refresh({AbilityHandleS.A,AbilityHandleS.B,AbilityHandleS.C},true)
+        abilityHandler:Set(AbilityHandleS.A)
 end
 
 client["PlayerGui"]["StickUi"]["AbilityFrame"]["S1"]["TextLabel"]:GetPropertyChangedSignal("Text"):Connect(function()
