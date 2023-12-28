@@ -347,67 +347,67 @@ for i,v in pairs(game.Workspace:GetDescendants()) do
 end
 end
 
-local T1 = Window:MakeTab({
+local T7 = Window:MakeTab({ -- T1
+Name = "Update Log",
+Icon = "rbxassetid://",
+PremiumOnly = false
+})
+
+local T1 = Window:MakeTab({ --T2
 Name = "Exorcist",
 Icon = "rbxassetid://",
 PremiumOnly = false
 })
 
-local T2 = Window:MakeTab({
+local T2 = Window:MakeTab({ --T3
 Name = "Possessor",
 Icon = "rbxassetid://",
 PremiumOnly = false
 })
 
-local T3 = Window:MakeTab({
-Name = "Game Mode Vote",
+local T3 = Window:MakeTab({ --T4
+Name = "Gamemode vote",
 Icon = "rbxassetid://",
 PremiumOnly = false
 })
 
-local T4 = Window:MakeTab({
-Name = "Code",
+local T4 = Window:MakeTab({ --T6
+Name = "code",
 Icon = "rbxassetid://",
 PremiumOnly = false
 })
 
-local T6 = Window:MakeTab({
-Name = "Reminder!",
+local T6 = Window:MakeTab({ --T9
+Name = "Reminder",
 Icon = "rbxassetid://",
 PremiumOnly = false
 })
 
-local T9 = Window:MakeTab({
+local T9 = Window:MakeTab({ --T10
 Name = "Ability",
 Icon = "rbxassetid://",
 PremiumOnly = false
 })
 
-local T10 = Window:MakeTab({
-Name = "Possessed Log",
-Icon = "rbxassetid://",
-PremiumOnly = false
-})
-
---[[local T11 = Window:MakeTab({
+--[[local T11 = Window:MakeTab({ --T11
 Name = "Animation",
 Icon = "rbxassetid://",
 PremiumOnly = false
 })
 ]]
-local T5 = Window:MakeTab({
-Name = "NOTE",
+local T10 = Window:MakeTab({ --T5
+Name = "Possessed Log",
 Icon = "rbxassetid://13030062874",
 PremiumOnly = false
 })
 
-local T7 = Window:MakeTab({
-Name = "Update log",
+local T5 = Window:MakeTab({ --T7
+Name = "NOTE",
 Icon = "rbxassetid://13040484705",
 PremiumOnly = false
 })
 
-local T8 = Window:MakeTab({
+local T8 = Window:MakeTab({ --T8
 Name = "Credit",
 Icon = "rbxassetid://13040484705",
 PremiumOnly = false
@@ -417,6 +417,7 @@ local function getRoundTimer()
 	return client["PlayerGui"]["MainUi"]["Frame"]["TimeLeft"].Text
 end
 
+T7:AddParagraph("Update 10 [ 28/12/2023 ]","[ +/- ] Fixed Code bug (including 'auto generate random code' and 'auto sent when player says code')")
 T7:AddParagraph("Update 9 [ 27/12/2023 ]","[ +/- ] Fixed all bugs (including animation, possessor label & auto sent code) | Ty rafa for telling me this bug.\n[ + ] Added 'Generate random code' feature - check NOTE!\n[ - ] Moved 'animation' Tab to Developer Mode (testing feature)")
 T7:AddParagraph("Update 8 [ 26/12/2023 ]","[ + ] Added 'Animation' Tab - Beta feature | Ty Alya for requesting this feature.\n[ +/- ] Fixed Possessor label again x26!\n[ + ] Auto sent code when player says 'Code' is back!\n[ + ] Added toggle for 'auto sent code when player say code'\n[ 🤝 ] Partnered with vortex admin and Genta X Script")
 T7:AddParagraph("Update 7 [ 25/12/2023 ]","[ +/- ] Fixed Chatlog bug when u tried to copied player message\n[ +/- ] Fixed 'Failed to run chatlog' message on some exploit.")
