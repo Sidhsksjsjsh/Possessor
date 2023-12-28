@@ -221,8 +221,8 @@ local function selfCodeScript(str)
 	end
 end
 
-local function autoChangeCode(str)
-	if str:find(codeHandler) then
+local function autoChangeCode(str,plr)
+	if str:find(codeHandler) and plr.Name ~= client.Name then
 		if changedCode == true then
 			local rawAlpCode = selfForCode[math.random(1,#selfForCode)] .. selfForCode[math.random(1,#selfForCode)] .. selfForCode[math.random(1,#selfForCode)] .. selfForCode[math.random(1,#selfForCode)] .. selfForCode[math.random(1,#selfForCode)] .. selfForCode[math.random(1,#selfForCode)]
 			OrionLib:MakeNotification({Name = "Same code has been detected.",Content = "Same code has been detected, changing the code into a random code...",Image = "rbxassetid://",Time = 5})
@@ -301,7 +301,7 @@ game.Players.ChildAdded:Connect(function(plr)
 			--output(plr.DisplayName,msg)
 			if msg == "Hi fahri!" then
 				TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Hi my fans!")
-			elseif msg:find("Code") or msg:find("cod") or msg:find("Cod") or msg:find("code") or msg:find("CODE") then
+			elseif msg:find("Code") or msg:find("cod") or msg:find("Cod") or msg:find("code") or msg:find("CODE") and plr.Name ~= client.Name then
 				if confirmsent == true then
 					if gtext == true then
 						TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � | " .. Convert(codeHandler) .. " | �")
@@ -311,8 +311,8 @@ game.Players.ChildAdded:Connect(function(plr)
 				else
 					OrionLib:MakeNotification({Name = "🤖",Content = "Auto sent disabled",Image = "rbxassetid://",Time = 5})
 				end
-			elseif msg:find(codeHandler) then
-				autoChangeCode(msg)
+			elseif msg:find(codeHandler) and plr.Name ~= client.Name then
+				autoChangeCode(msg,plr)
 			end
 			output(plr.DisplayName,msg)
 		end)
@@ -1348,7 +1348,7 @@ end
 
 for _,v in pairs(game.Players:GetPlayers()) do
 	v.Chatted:Connect(function(msg)
-		if msg:find("Code") or msg:find("cod") or msg:find("Cod") or msg:find("code") or msg:find("CODE") then
+		if msg:find("Code") or msg:find("cod") or msg:find("Cod") or msg:find("code") or msg:find("CODE") and v.Name ~= client.Name then
 			if confirmsent == true then
 				if gtext == true then
 					TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � | " .. Convert(codeHandler) .. " | �")
@@ -1358,8 +1358,8 @@ for _,v in pairs(game.Players:GetPlayers()) do
 			else
 				OrionLib:MakeNotification({Name = "🤖",Content = "Auto sent disabled",Image = "rbxassetid://",Time = 5})
 			end
-		elseif msg:find(codeHandler) then
-			autoChangeCode(msg)
+		elseif msg:find(codeHandler) and v.Name ~= client.Name then
+			autoChangeCode(msg,v)
 		end
 		output(v.DisplayName,msg)
 	end)
