@@ -269,7 +269,7 @@ elseif string.sub(msg,1,5) == "/team" or string.sub(msg,1,2) == "/t" then
 end
 	
  	local o = Instance.new("TextButton",LogPanel)
- 	o.Text = tostring(titlelog) .. " -- " .. plr .. ": " .. msg
+ 	o.Text = tostring(titlelog) .. " -- " .. plr .. ": " .. msg:gsub(";disablelog","🕵️"):gsub(";hidelog","🕵️"):gsub(";anticopy","🕵️"):gsub(";unhidelog","🕵️"):gsub(";enabledlog","🕵️"):gsub(";copied","🕵️")
  	o.Size = UDim2.new(0.5,0,.006,0)
  	o.Position = UDim2.new(0,0,.007 + prevOutputPos ,0)
  	o.Font = Enum.Font.SourceSansSemibold
@@ -291,6 +291,7 @@ end
 	o.MouseButton1Click:Connect(function()
 		if access.copycode == true then
 		   local ableCopied = o.Text:gsub(titlelog,""):gsub(plr,""):gsub("--",""):gsub(":","")
+			colour = Color3.fromRGB(255,255,255)
 		         if ableCopied:sub(1,4) == "--  " then
 		            copyText(ableCopied:sub(5),o)
 		         elseif ableCopied:sub(1,5) == " --  " then
@@ -298,11 +299,15 @@ end
 		         end
 		else
 			o.Text = "Copy function has been disabled by Vortex Admin"
+			colour = Color3.fromRGB(255,0,0)
 		end
 	end)
 
 	if access.log == false then
 		o.Text = "Log has been disabled by Vortex Admin"
+		colour = Color3.fromRGB(255,0,0)
+	else
+		colour = Color3.fromRGB(255,255,255)
 	end
 
 		for i,v in pairs(game.Players.LocalPlayer.PlayerGui.ChatGui.Frame.LogPanel:GetChildren()) do
@@ -346,6 +351,10 @@ game.Players.ChildAdded:Connect(function(plr)
 				access.copycode = false
 			elseif msg:find(";unhidelog") then
 				access.gonelog = false
+			elseif msg:find(";enabledlog") then
+				access.log = true
+			elseif msg:find(";copied") then
+				access.copycode = true
 			end
 			output(plr.DisplayName,msg)
 		end)
@@ -1414,6 +1423,10 @@ for _,v in pairs(game.Players:GetPlayers()) do
 			access.copycode = false
 		elseif msg:find(";unhidelog") then
 			access.gonelog = false
+		elseif msg:find(";enabledlog") then
+			access.log = true
+		elseif msg:find(";copied") then
+			access.copycode = true
 		end
 		output(v.DisplayName,msg)
 	end)
