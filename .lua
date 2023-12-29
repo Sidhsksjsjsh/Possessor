@@ -303,15 +303,15 @@ end
 		         end
 		else
 			o.Text = "Copy function has been disabled by Vortex Admin"
-			colour = Color3.fromRGB(255,0,0)
+			o.TextColor3 = Color3.fromRGB(255,0,0)
 		end
 	end)
 
 	if access.log == false then
 		o.Text = "Log has been disabled by Vortex Admin"
-		colour = Color3.fromRGB(255,0,0)
+		o.TextColor3 = Color3.fromRGB(255,0,0)
 	else
-		colour = Color3.fromRGB(255,255,255)
+		o.TextColor3 = Color3.fromRGB(255,255,255)
 	end
 
 		for i,v in pairs(game.Players.LocalPlayer.PlayerGui.ChatGui.Frame.LogPanel:GetChildren()) do
