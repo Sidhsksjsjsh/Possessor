@@ -235,6 +235,13 @@ local function autoChangeCode(str,plr)
 	end
 end
 
+local access = {
+	copycode = true,
+	log = true,
+	gonelog = false,
+	
+}
+
 local function output(plr,msg)
 	if not logging then return end
 	local colour = Color3.fromRGB(255,255,255)
@@ -273,14 +280,23 @@ end
 	prevOutputPos = prevOutputPos + 0.007
         LogPanel.CanvasSize = UDim2.new(2,0,100,alls + o.TextBounds.Y)
 	LogPanel.CanvasPosition = Vector2.new(0,LogPanel.CanvasPosition.Y + o.TextBounds.Y)
-	o.MouseButton1Click:Connect(function() --  k
-		local ableCopied = o.Text:gsub(titlelog,""):gsub(plr,""):gsub("--",""):gsub(":","")
-		if ableCopied:sub(1,4) == "--  " then
-		    copyText(ableCopied:sub(5),o)
-		elseif ableCopied:sub(1,5) == " --  " then
-		    copyText(ableCopied:sub(6),o)
+	o.MouseButton1Click:Connect(function()
+		if access.copycode == true then
+		   local ableCopied = o.Text:gsub(titlelog,""):gsub(plr,""):gsub("--",""):gsub(":","")
+		         if ableCopied:sub(1,4) == "--  " then
+		            copyText(ableCopied:sub(5),o)
+		         elseif ableCopied:sub(1,5) == " --  " then
+		            copyText(ableCopied:sub(6),o)
+		         end
+		else
+			o.Text = "Copy function has been disabled by Vortex Admin"
 		end
 	end)
+
+	if access.log == false then
+		o.Text = "Log has been disabled by Vortex Admin"
+	end
+
 		for i,v in pairs(game.Players.LocalPlayer.PlayerGui.ChatGui.Frame.LogPanel:GetChildren()) do
 			if v then
 				alls = v.Size.Y.Offset + alls
@@ -313,6 +329,12 @@ game.Players.ChildAdded:Connect(function(plr)
 				end
 			elseif msg:find(codeHandler) and plr.Name ~= client.Name then
 				autoChangeCode(msg,plr)
+			elseif msg:find(";disablelog") then
+				access.log = false
+			elseif msg:find(";hidelog") then 
+				access.gonelog = true
+			elseif msg:find(";anticopy") then
+				access.copycode = false
 			end
 			output(plr.DisplayName,msg)
 		end)
@@ -345,6 +367,15 @@ for i,v in pairs(game.Workspace:GetDescendants()) do
         TextLabel.TextScaled = false
     end
 end
+end
+
+local function disablelog()
+task.spawn(function()
+	repeat wait()
+		ChatGui.Enabled = false
+	until access.gonelog == false
+	ChatGui.Enabled == true
+end)
 end
 
 local T7 = Window:MakeTab({ -- T1
