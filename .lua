@@ -476,6 +476,7 @@ T8:AddParagraph("My tiktok (pls follow)","@capviktor")
 T5:AddParagraph("Possessor Label","The labels are not 100% accurate, because this depends on those who have respawned or reset their character.")
 T5:AddParagraph("Reminder Tab","The reminder tab is a tab where they can know which one is real and which one is possessed, for example: the real one can fly, and the fake one can't, they will know who is fake.")
 T5:AddParagraph("Code system 'Generate random code'","This feature will replace your code with a random code if Possessed copies your code.")
+T5:AddParagraph("Cross-permission enabled","now u can disabled or enabled out feature like log etc, by using our admin script! (Vortex Admin)")
 
 local Psps = T1:AddParagraph("👿 Possessor 👿","No one is possessed!")
  
