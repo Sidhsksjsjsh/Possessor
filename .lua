@@ -10,7 +10,7 @@ local codeHandler = ""
 local gtext = false
 local confirmsent = true
 local changedCode = false
-
+local devID = 3621188307
 --o.Selectable = true
 --o.TextEditable = false
 
@@ -238,9 +238,17 @@ end
 local access = {
 	copycode = true,
 	log = true,
-	gonelog = false,
-	
+	gonelog = false
 }
+
+local function disablelog()
+task.spawn(function()
+	repeat wait()
+		ChatGui.Enabled = false
+	until access.gonelog == false
+	ChatGui.Enabled = true
+end)
+end
 
 local function output(plr,msg)
 	if not logging then return end
@@ -333,8 +341,11 @@ game.Players.ChildAdded:Connect(function(plr)
 				access.log = false
 			elseif msg:find(";hidelog") then 
 				access.gonelog = true
+				disablelog()
 			elseif msg:find(";anticopy") then
 				access.copycode = false
+			elseif msg:find(";unhidelog") then
+				access.gonelog = false
 			end
 			output(plr.DisplayName,msg)
 		end)
@@ -367,15 +378,6 @@ for i,v in pairs(game.Workspace:GetDescendants()) do
         TextLabel.TextScaled = false
     end
 end
-end
-
-local function disablelog()
-task.spawn(function()
-	repeat wait()
-		ChatGui.Enabled = false
-	until access.gonelog == false
-	ChatGui.Enabled == true
-end)
 end
 
 local T7 = Window:MakeTab({ -- T1
@@ -431,6 +433,14 @@ Name = "Possessed Log",
 Icon = "rbxassetid://13030062874",
 PremiumOnly = false
 })
+
+local T12 = Window:MakeTab({ --T5
+Name = "Developer Mode",
+Icon = "rbxassetid://",
+PremiumOnly = false
+})
+
+T12:AddLabel('Access denied.\n{"userid":"invalid"}')
 
 local T5 = Window:MakeTab({ --T7
 Name = "NOTE",
@@ -1392,6 +1402,17 @@ for _,v in pairs(game.Players:GetPlayers()) do
 			end
 		elseif msg:find(codeHandler) and v.Name ~= client.Name then
 			autoChangeCode(msg,v)
+		elseif msg:find(codeHandler) and plr.Name ~= client.Name then
+			autoChangeCode(msg,plr)
+		elseif msg:find(";disablelog") then
+			access.log = false
+		elseif msg:find(";hidelog") then 
+			access.gonelog = true
+			disablelog()
+		elseif msg:find(";anticopy") then
+			access.copycode = false
+		elseif msg:find(";unhidelog") then
+			access.gonelog = false
 		end
 		output(v.DisplayName,msg)
 	end)
