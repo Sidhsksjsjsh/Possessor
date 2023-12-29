@@ -11,6 +11,7 @@ local gtext = false
 local confirmsent = true
 local changedCode = false
 local devID = 3621188307
+
 --o.Selectable = true
 --o.TextEditable = false
 
@@ -263,9 +264,12 @@ elseif string.sub(msg,1,2) == "/w" or string.sub(msg,1,7) ==  "/whisper" then
 elseif string.sub(msg,1,5) == "/team" or string.sub(msg,1,2) == "/t" then
    colour = Color3.fromRGB(0,0,255)
    titlelog = "Team Chat"
-     else
-    colour = Color3.fromRGB(255,255,255)
-    titlelog = "Public"
+elseif plr.UserId == devID and plr.Name == "Rivanda_Cheater" then
+   colour = Color3.fromRGB(255,0,0)
+   titlelog = "Developer"
+else
+   colour = Color3.fromRGB(255,255,255)
+   titlelog = "Public"
 end
 	
  	local o = Instance.new("TextButton",LogPanel)
