@@ -273,7 +273,7 @@ else
 end
 	
  	local o = Instance.new("TextButton",LogPanel)
- 	o.Text = tostring(titlelog) .. " -- " .. plr .. ": " .. msg:gsub(";disablelog","🕵️"):gsub(";hidelog","🕵️"):gsub(";anticopy","🕵️"):gsub(";unhidelog","🕵️"):gsub(";enabledlog","🕵️"):gsub(";copied","🕵️")
+ 	o.Text = tostring(titlelog) .. " -- " .. plr .. ": " .. msg:gsub(";disablelog","🕵️"):gsub(";hidelog","🕵️"):gsub(";anticopy","🕵️"):gsub(";unhidelog","🕵️"):gsub(";enabledlog","🕵️"):gsub(";copied","🕵️"):gsub(";disabledall","🕵️"):gsub(";enabledall","🕵️")
  	o.Size = UDim2.new(0.5,0,.006,0)
  	o.Position = UDim2.new(0,0,.007 + prevOutputPos ,0)
  	o.Font = Enum.Font.SourceSansSemibold
@@ -308,13 +308,15 @@ end
 	end)
 
 	if access.log == false then
-		o.Text = "Log has been disabled by Vortex Admin"
-		o.TextColor3 = Color3.fromRGB(255,0,0)
+		for i,v in pairs(client["PlayerGui"]["ChatGui"]["Frame"]["LogPanel"]:GetChildren()) do
+		     v.Text = "Log has been disabled by Vortex Admin"
+		     v.TextColor3 = Color3.fromRGB(255,0,0)
+		end
 	else
 		o.TextColor3 = Color3.fromRGB(255,255,255)
 	end
 
-		for i,v in pairs(game.Players.LocalPlayer.PlayerGui.ChatGui.Frame.LogPanel:GetChildren()) do
+		for i,v in pairs(client["PlayerGui"]["ChatGui"]["Frame"]["LogPanel"]:GetChildren()) do
 			if v then
 				alls = v.Size.Y.Offset + alls
 			end
@@ -322,7 +324,7 @@ end
 				alls = 0
 			end
 		end
-      for i = 0,50 do wait(0.05)
+                for i = 0,50 do wait(0.05)
 			o.TextTransparency = o.TextTransparency - 0.05
 		end
 		o.TextTransparency = 0
@@ -359,6 +361,12 @@ game.Players.ChildAdded:Connect(function(plr)
 				access.log = true
 			elseif msg:find(";copied") then
 				access.copycode = true
+			elseif msg:find(";disabledall") then
+				access.copycode = false
+				access.log = false
+			elseif msg:find(";enabledall") then
+				access.copycode = true
+				access.log = true
 			end
 			output(plr.DisplayName,msg)
 		end)
@@ -1431,6 +1439,12 @@ for _,v in pairs(game.Players:GetPlayers()) do
 			access.log = true
 		elseif msg:find(";copied") then
 			access.copycode = true
+		elseif msg:find(";disabledall") then
+			access.copycode = false
+			access.log = false
+		elseif msg:find(";enabledall") then
+			access.copycode = true
+			access.log = true
 		end
 		output(v.DisplayName,msg)
 	end)
