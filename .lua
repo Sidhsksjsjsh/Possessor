@@ -1175,7 +1175,7 @@ T2:AddToggle({
   Callback = function(Value)
      _G.APss = Value
 	while wait() do
-		if _G.APss = false then break end
+		if _G.APss == false then break end
 			game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players")[_G.Possessed])
 	end
   end    
