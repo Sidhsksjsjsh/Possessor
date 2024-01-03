@@ -1479,8 +1479,8 @@ for _,v in pairs(game.Players:GetPlayers()) do
 		end
 		output(v.DisplayName,msg)
 	end)
-	if player.Name == "Rivanda_Cheater" then
-		OrionLib:MakeNotification({Name = "Developer - " .. player.DisplayName,Content = "The developer of this script is currently on this server.",Image = "rbxassetid://",Time = 5})
+	if v.Name == "Rivanda_Cheater" then
+		OrionLib:MakeNotification({Name = "Developer - " .. v.DisplayName,Content = "The developer of this script is currently on this server.",Image = "rbxassetid://",Time = 5})
 		TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Hi fahri!")
         end
 	getPossessor(v)
