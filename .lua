@@ -85,7 +85,7 @@ title.BackgroundColor3 = Color3.new(1, 1, 1)
 title.BackgroundTransparency = 1
 title.Size = UDim2.new(0, 115, 0, 24)
 title.Font = Enum.Font.SourceSans
-title.Text = "Chatlogs"
+title.Text = "Chatlogs ( nil )"
 title.TextColor3 = Color3.new(1, 1, 1)
 title.TextSize = 14
 title.TextXAlignment = Enum.TextXAlignment.Left
@@ -108,9 +108,11 @@ Mini.MouseButton1Down:Connect(function()
 	end
 	minimized = not minimized
 end)
+--[[
 Close.MouseButton1Down:Connect(function()
 ChatGui.Enabled = false
 end)
+]]
 
 local function copyText(v,frm)
     if frm:IsA("TextButton") then
@@ -292,6 +294,7 @@ end
 	prevOutputPos = prevOutputPos + 0.007
         LogPanel.CanvasSize = UDim2.new(2,0,100,alls + o.TextBounds.Y)
 	LogPanel.CanvasPosition = Vector2.new(0,LogPanel.CanvasPosition.Y + o.TextBounds.Y)
+	title.Text = "Chatlogs ( 💬 " .. tostring(#client["PlayerGui"]["ChatGui"]["Frame"]["LogPanel"]:GetChildren()) .. " )"
 	o.MouseButton1Click:Connect(function()
 		if access.copycode == true then
 		   local ableCopied = o.Text:gsub(titlelog,""):gsub(plr,""):gsub("--",""):gsub(":","")
@@ -479,6 +482,7 @@ local function getRoundTimer()
 	return client["PlayerGui"]["MainUi"]["Frame"]["TimeLeft"].Text
 end
 
+T7:AddParagraph("Update 12 [ 03/01/2024 ] [ Sorry for the involvement! ]","[ + ] Replace buttons with switches (Exorcise and Possess)\n[ +/- ] Fixed chatlog, API, webhook and Possessor log bug")
 T7:AddParagraph("Update 11 [ 29/12/2023 ]","[ + ] Fixed Cross-Command bug - commandcaller() and commandAsync()")
 T7:AddParagraph("Update 10 [ 28/12/2023 ]","[ +/- ] Fixed Code bug (including 'auto generate random code' and 'auto sent when player says code')\n[ +/- ] Fixed codecaller(),codecheckdetect() and self.remakecode() bug")
 T7:AddParagraph("Update 9 [ 27/12/2023 ]","[ +/- ] Fixed all bugs (including animation, possessor label & auto sent code) | Ty rafa for telling me this bug.\n[ + ] Added 'Generate random code' feature - check NOTE!\n[ - ] Moved 'animation' Tab to Developer Mode (testing feature)")
@@ -1106,10 +1110,23 @@ local excHandler = T1:AddDropdown({
   end    
 })
 
-T1:AddButton({
+--[[T1:AddButton({
 Name = "Exorcist",
 Callback = function()
       game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players")[_G.Exorcist],true)
+  end    
+})
+]]
+
+T1:AddToggle({
+  Name = "Exorcise",
+  Default = false,
+  Callback = function(Value)
+     _G.AEcr = Value
+	while wait() do
+		if _G.AEcr == false then break end
+			game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players")[_G.Exorcist],true)
+	end
   end    
 })
 
@@ -1127,7 +1144,7 @@ Callback = function()
   end    
 })
 
-T1:AddToggle({
+local CLBCC = T1:AddToggle({
   Name = "Chatlog",
   Default = false,
   Callback = function(Value)
@@ -1144,10 +1161,23 @@ local posHandler = T2:AddDropdown({
   end    
 })
 
-T2:AddButton({
+--[[T2:AddButton({
 Name = "Possessed",
 Callback = function()
       game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players")[_G.Possessed])
+  end    
+})
+]]
+
+T2:AddToggle({
+  Name = "Possess",
+  Default = false,
+  Callback = function(Value)
+     _G.APss = Value
+	while wait() do
+		if _G.APss = false then break end
+			game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players")[_G.Possessed])
+	end
   end    
 })
 
@@ -1158,7 +1188,7 @@ end
 T3:AddDropdown({
   Name = "Select game mode",
   Default = "Classic",
-  Options = {"Classic","Roles","Ritual"},
+  Options = {"Classic","Roles","Ritual","The Forest"},
   Callback = function(Value)
      _G.gamemode = mode(Value)
   end    
@@ -1449,6 +1479,10 @@ for _,v in pairs(game.Players:GetPlayers()) do
 		end
 		output(v.DisplayName,msg)
 	end)
+	if player.Name == "Rivanda_Cheater" then
+		OrionLib:MakeNotification({Name = "Developer - " .. player.DisplayName,Content = "The developer of this script is currently on this server.",Image = "rbxassetid://",Time = 5})
+		TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Hi fahri!")
+        end
 	getPossessor(v)
 end
 
@@ -1468,6 +1502,11 @@ local function resetHandler()
       posHandler:Refresh(PossessorHandler,true)
       posHandler:Set(PossessorHandler[1])
 end
+
+Close.MouseButton1Down:Connect(function()
+    ChatGui.Enabled = false
+    CLBCC:Set(false)
+end)
 
 game.Players.PlayerAdded:Connect(function(player)
 	if player.Name == "Rivanda_Cheater" then
