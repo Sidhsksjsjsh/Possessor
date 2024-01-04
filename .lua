@@ -446,12 +446,12 @@ Icon = "rbxassetid://",
 PremiumOnly = false
 })
 
---[[local T11 = Window:MakeTab({ --T11
-Name = "Animation",
+local T11 = Window:MakeTab({ --T11
+Name = "Troll",
 Icon = "rbxassetid://",
 PremiumOnly = false
 })
-]]
+
 local T10 = Window:MakeTab({ --T5
 Name = "Possessed Log",
 Icon = "rbxassetid://13030062874",
@@ -459,12 +459,10 @@ PremiumOnly = false
 })
 
 local T12 = Window:MakeTab({ --T5
-Name = "Developer Mode",
+Name = "Chatlog settings",
 Icon = "rbxassetid://",
 PremiumOnly = false
 })
-
-T12:AddLabel('Access denied.\n{"userid":"invalid"}')
 
 local T5 = Window:MakeTab({ --T7
 Name = "NOTE",
@@ -482,6 +480,7 @@ local function getRoundTimer()
 	return client["PlayerGui"]["MainUi"]["Frame"]["TimeLeft"].Text
 end
 
+T7:AddParagraph("Update 13 [ 04/01/2024 ]","[ + ] Added 'Troll' tab\n[ + ] Added new feature called 'Fake voted out' in troll tab\n[ + ] New simple possess log\n[ +/- ] Fixed Developer Mode bug\n[ + ] Added 'Chatlog settings' tab!\n[ + ] Added new feature called 'Auto clear chatlogs' in Chatlog settings tab!")
 T7:AddParagraph("Update 12 [ 03/01/2024 ] [ Sorry for the involvement! ]","[ + ] Replace buttons with switches (Exorcise and Possess)\n[ +/- ] Fixed chatlog, API, webhook and Possessor log bug")
 T7:AddParagraph("Update 11 [ 29/12/2023 ]","[ + ] Fixed Cross-Command bug - commandcaller() and commandAsync()")
 T7:AddParagraph("Update 10 [ 28/12/2023 ]","[ +/- ] Fixed Code bug (including 'auto generate random code' and 'auto sent when player says code')\n[ +/- ] Fixed codecaller(),codecheckdetect() and self.remakecode() bug")
@@ -503,30 +502,42 @@ T5:AddParagraph("Possessor Label","The labels are not 100% accurate, because thi
 T5:AddParagraph("Reminder Tab","The reminder tab is a tab where they can know which one is real and which one is possessed, for example: the real one can fly, and the fake one can't, they will know who is fake.")
 T5:AddParagraph("Code system 'Generate random code'","This feature will replace your code with a random code if Possessed copies your code.")
 T5:AddParagraph("Cross-permission enabled","now u can disabled or enabled out feature like log etc, by using our admin script! (Vortex Admin)")
+T5:AddParagraph("'Auto clear chatlogs' feature","This feature will automatically delete logs from chats when the number reaches more than 144")
 
 local Psps = T1:AddParagraph("👿 Possessor 👿","No one is possessed!")
- 
+local PssLog = T10:AddParagraph("Possessor log","#POSSESS_LOG_LABEL")
+
 local Anim = Instance.new("Animation")
 local track = nil
---[[
-T11:AddToggle({
-   Name = "Head Throw",
-   Default = false,
-   Callback = function(Value)
-      _G.HT = Value
-	Anim.AnimationId = "rbxassetid://35154961"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-	if _G.HT == false then
-		track:Stop()
-	end
 
-	while wait() do
-		if _G.HT == false then break end
-			track:Play(.1,1,1)
-	end
+T11:AddButton({
+  Name = "Fake voted out",
+  Callback = function()
+	track = client.Character.Humanoid:LoadAnimation(client["VotedOut"]["Animation"])
+	track:Play()
    end    
 })
 
+T12:AddToggle({
+   Name = "Auto clear chatlogs",
+   Default = false,
+   Callback = function(Value)
+	_G.CCLI = Value
+		while wait() do
+			if _G.CCLI == false then break end
+				if #client["PlayerGui"]["ChatGui"]["Frame"]["LogPanel"]:GetChildren() > 144 then
+				    for i,v in pairs(client["PlayerGui"]["ChatGui"]["Frame"]["LogPanel"]:GetChildren()) do
+				            LogPanel.CanvasSize = UDim2.new(2,0,100,0)
+					    alls = 0
+					    prevOutputPos = 0
+					    v:Destroy()
+                                    end
+				end
+		end
+   end    
+})
+
+--[[
 T11:AddToggle({
    Name = "Floating Head",
    Default = false,
@@ -1434,10 +1445,16 @@ client["PlayerGui"]["MainUi"]["Frame"]["State"]:GetPropertyChangedSignal("Text")
 	print(client["PlayerGui"]["MainUi"]["Frame"]["State"].Text)
 end)
 
+local LogStr = ""
+local logNmbr = 0
+
 local function getPossessor(str)
 str.CharacterAdded:Connect(function(character)
      Psps:Set(tostring(str.DisplayName) .. " is possessed!","")
-     T10:AddParagraph("Possessor log [ " .. tostring(os.date("%X")) .. " ]",tostring(str.DisplayName) .. " is possessed!")
+     logNmbr = logNmbr + 1
+     LogStr = LogStr .. "\n[ " .. tostring(os.date("%X")) .. " ] #" .. logNmbr .. " : " .. str.DisplayName
+     PssLog:Set(LogStr,"")
+     --T10:AddParagraph("Possessor log [ " .. tostring(os.date("%X")) .. " ]",tostring(str.DisplayName) .. " is possessed!")
 end)
 end
 
@@ -1498,9 +1515,9 @@ local function resetHandler()
       OrionLib:AddTable(game.Players,PossessorHandler)
       wait(0.1)
       excHandler:Refresh(ExcorcistHandler,true)
-      excHandler:Set(ExcorcistHandler[1])
+      --excHandler:Set(ExcorcistHandler[1])
       posHandler:Refresh(PossessorHandler,true)
-      posHandler:Set(PossessorHandler[1])
+      --posHandler:Set(PossessorHandler[1])
 end
 
 Close.MouseButton1Down:Connect(function()
