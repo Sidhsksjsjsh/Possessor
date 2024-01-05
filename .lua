@@ -563,9 +563,9 @@ local PssLog = T10:AddParagraph("Possessor log","#POSSESS_LOG_LABEL")
 local Anim = Instance.new("Animation")
 local track = nil
 
-for i,v in pairs(game:GetChildren()) do
-	OrionLib:AddTable(v.Name,gameInstance)
-end
+--for i,v in pairs(game:GetChildren()) do
+--	OrionLib:AddTable(v.Name,gameInstance)
+--end
 
 local remtetype = ""
 
@@ -583,17 +583,6 @@ local remote1 = T13:AddDropdown({
      end
   end    
 })
-
-local function clearRemote()
-      remoteTable = {}
-      remote1:Refresh({"Refreshing.."},true)
-      remote1:Set("Refreshing..")
-      wait(0.1)
-      OrionLib:AddTable(game.Players,PossessorHandler)
-      wait(0.1)
-      remote1:Refresh(remoteTable,true)
-      remote1:Set(remoteTable[1])
-end
 
 T13:AddDropdown({
   Name = "Select instance",
