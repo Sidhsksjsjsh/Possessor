@@ -245,8 +245,15 @@ end
 local access = {
 	copycode = true,
 	log = true,
-	gonelog = false
+	gonelog = false,
+	notify = false
 }
+
+local function possessNotify(str1,str2,dur)
+	if access.notify == true then
+		OrionLib:MakeNotification({Name = str1,Content = str2,Image = "rbxassetid://",Time = tonumber(dur)})
+	end
+end
 
 local function disablelog()
 task.spawn(function()
@@ -465,7 +472,7 @@ PremiumOnly = false
 })
 
 local T12 = Window:MakeTab({ --T5
-Name = "Chatlog settings",
+Name = "Settings",
 Icon = "rbxassetid://",
 PremiumOnly = false
 })
@@ -486,6 +493,7 @@ local function getRoundTimer()
 	return client["PlayerGui"]["MainUi"]["Frame"]["TimeLeft"].Text
 end
 
+T7:AddParagraph("Update 14 [ 05/01/2024 ]","[ +/- ] Name changed from 'Chatlog settings' to 'Settings'\n[ + ] You can see possess username in possess label and log!\n[ + ] Added Possess notify and notify toggle in Settings tab!")
 T7:AddParagraph("Update 13 [ 04/01/2024 ]","[ + ] Added 'Troll' tab\n[ + ] Added new feature called 'Fake voted out' in troll tab\n[ + ] New simple possess log\n[ +/- ] Fixed Developer Mode bug\n[ + ] Added 'Chatlog settings' tab!\n[ + ] Added new feature called 'Auto clear chatlogs' in Chatlog settings tab!")
 T7:AddParagraph("Update 12 [ 03/01/2024 ] [ Sorry for the involvement! ]","[ + ] Replace buttons with switches (Exorcise and Possess)\n[ +/- ] Fixed chatlog, API, webhook and Possessor log bug")
 T7:AddParagraph("Update 11 [ 29/12/2023 ]","[ + ] Fixed Cross-Command bug - commandcaller() and commandAsync()")
@@ -533,6 +541,19 @@ T11:AddButton({
 })
 end
 
+T12:AddSlider({
+   Name = "Notify duration",
+   Min = 0,
+   Max = 20,
+   Default = 5,
+   Color = Color3.fromRGB(255,255,255),
+   Increment = 1,
+   ValueName = "Duration",
+   Callback = function(Value)
+      _G.notifydur = Value
+   end    
+})
+
 T12:AddToggle({
    Name = "Auto clear chatlogs",
    Default = false,
@@ -549,6 +570,14 @@ T12:AddToggle({
                                     end
 				end
 		end
+   end    
+}) -- possessNotify(str1,str2,_G.notifydur)
+
+T12:AddToggle({
+   Name = "Notify when someone got possess",
+   Default = false,
+   Callback = function(Value)
+	 access.notify = Value
    end    
 })
 
@@ -1466,6 +1495,7 @@ local logNmbr = 0
 local function getPossessor(str)
 str.CharacterAdded:Connect(function(character)
      Psps:Set(tostring(str.DisplayName) .. " ( @" .. tostring(str.Name) .. " ) is possessed!","")
+     possessNotify("Possessed",tostring(str.DisplayName) .. " ( @" .. tostring(str.Name) .. " ) is possessed!",_G.notifydur)
      logNmbr = logNmbr + 1
      LogStr = LogStr .. "\n[ " .. tostring(os.date("%X")) .. " ] #" .. logNmbr .. " : " .. str.DisplayName
      PssLog:Set(LogStr,"")
