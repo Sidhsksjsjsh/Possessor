@@ -11,6 +11,7 @@ local gtext = false
 local confirmsent = true
 local changedCode = false
 local devID = 3621188307
+local ih = client["PlayerGui"]["StickUi"]["Frame"]["Items"]["Frame"]["ScrollingFrame"]["TextButton"]
 
 --o.Selectable = true
 --o.TextEditable = false
@@ -249,9 +250,30 @@ local access = {
 	notify = false
 }
 
-local function possessNotify(str1,str2,dur)
+local function getImage(str)
+	return str.Image
+end
+
+local image = {
+	extrapossess = getImage(ih["ExtraImage"]["ImageLabel"]),
+	cupid = getImage(ih["CupidImage"]),
+	blame = getImage(ih["BlameImage"]),
+	masq = getImage(ih["MasqImage"]),
+	darkness = getImage(ih["DarknessImage"]),
+	imitation = getImage(ih["ImImage"]),
+	mindcontrol = getImage(ih["MindControlImage"]),
+	haunt = getImage(ih["HauntImage"]["ImageLabel"]),
+	paranoid = getImage(ih["ParanoidImage"]),
+	mute = getImage(ih["MuteImage"]),
+	poltergeist = getImage(ih["PImage"]),
+	idk = getImage(ih["ChatImage"]),
+	swap = getImage(ih["SwapImage"]),
+	haunt2 = getImage(ih["HauntImage"])
+}
+
+local function possessNotify(str1,str2,dur,imgstr)
 	if access.notify == true then
-		OrionLib:MakeNotification({Name = str1,Content = str2,Image = "rbxassetid://",Time = tonumber(dur)})
+		OrionLib:MakeNotification({Name = str1,Content = str2,Image = imgstr,Time = tonumber(dur)})
 	end
 end
 
@@ -425,13 +447,13 @@ PremiumOnly = false
 
 local T1 = Window:MakeTab({ --T2
 Name = "Exorcist",
-Icon = "rbxassetid://",
+Icon = image.poltergeist,
 PremiumOnly = false
 })
 
 local T2 = Window:MakeTab({ --T3
 Name = "Possessor",
-Icon = "rbxassetid://",
+Icon = image.extrapossess,
 PremiumOnly = false
 })
 
@@ -443,25 +465,25 @@ PremiumOnly = false
 
 local T4 = Window:MakeTab({ --T6
 Name = "code",
-Icon = "rbxassetid://",
+Icon = image.idk,
 PremiumOnly = false
 })
 
 local T6 = Window:MakeTab({ --T9
 Name = "Reminder",
-Icon = "rbxassetid://",
+Icon = image.idk,
 PremiumOnly = false
 })
 
 local T9 = Window:MakeTab({ --T10
 Name = "Ability",
-Icon = "rbxassetid://",
+Icon = image.swap,
 PremiumOnly = false
 })
 
 local T11 = Window:MakeTab({ --T11
 Name = "Troll",
-Icon = "rbxassetid://",
+Icon = image.paranoid,
 PremiumOnly = false
 })
 
@@ -473,7 +495,7 @@ PremiumOnly = false
 
 local T12 = Window:MakeTab({ --T5
 Name = "Settings",
-Icon = "rbxassetid://",
+Icon = image.imitation,
 PremiumOnly = false
 })
 
@@ -1495,7 +1517,7 @@ local logNmbr = 0
 local function getPossessor(str)
 str.CharacterAdded:Connect(function(character)
      Psps:Set(tostring(str.DisplayName) .. " ( @" .. tostring(str.Name) .. " ) is possessed!","")
-     possessNotify("Possessed",tostring(str.DisplayName) .. " ( @" .. tostring(str.Name) .. " ) is possessed!",_G.notifydur)
+     possessNotify("Possessed",tostring(str.DisplayName) .. " ( @" .. tostring(str.Name) .. " ) is possessed!",_G.notifydur,image.extrapossess)
      logNmbr = logNmbr + 1
      LogStr = LogStr .. "\n[ " .. tostring(os.date("%X")) .. " ] #" .. logNmbr .. " : " .. str.DisplayName
      PssLog:Set(LogStr,"")
