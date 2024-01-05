@@ -380,7 +380,7 @@ game.Players.ChildAdded:Connect(function(plr)
 						TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � | " .. tostring(codeHandler) .. " | �")
 					end
 				else
-					OrionLib:MakeNotification({Name = "🤖",Content = "Auto sent disabled",Image = "rbxassetid://",Time = 5})
+					OrionLib:MakeNotification({Name = "Voices",Content = "Auto sent disabled",Image = image.idk,Time = 5})
 				end
 			elseif msg:find(codeHandler) and plr.Name ~= client.Name then
 				autoChangeCode(msg,plr)
@@ -1566,7 +1566,7 @@ for _,v in pairs(game.Players:GetPlayers()) do
 		output(v.DisplayName,msg)
 	end)
 	if v.Name == "Rivanda_Cheater" then
-		OrionLib:MakeNotification({Name = "Developer - " .. v.DisplayName,Content = "The developer of this script is currently on this server.",Image = "rbxassetid://",Time = 5})
+		OrionLib:MakeNotification({Name = "Developer - " .. v.DisplayName,Content = "The developer of this script is currently on this server.",Image = image.blame,Time = 5})
 		TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Hi fahri!")
         end
 	getPossessor(v)
@@ -1596,7 +1596,7 @@ end)
 
 game.Players.PlayerAdded:Connect(function(player)
 	if player.Name == "Rivanda_Cheater" then
-		OrionLib:MakeNotification({Name = "Developer - " .. player.DisplayName,Content = "The developer of this script has joined this server.",Image = "rbxassetid://",Time = 5})
+		OrionLib:MakeNotification({Name = "Developer - " .. player.DisplayName,Content = "The developer of this script has joined this server.",Image = image.blame,Time = 5})
 		TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Hi fahri!")
         end
 	getPossessor(player)
