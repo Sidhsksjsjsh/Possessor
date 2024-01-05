@@ -447,6 +447,39 @@ for i,v in pairs(game.Workspace:GetDescendants()) do
 end
 end
 
+local servicegame = {
+    "Players",
+    "Workspace",
+    "ReplicatedStorage",
+    "ServerScriptService",
+    "StarterPlayer",
+    "StarterGui",
+    "StarterPack",
+    "StarterCharacter",
+    "Lighting",
+    "SoundService",
+    "TweenService",
+    "UserInputService",
+    "HttpService",
+    "MarketplaceService",
+    "GuiService",
+    "CollectionService",
+    "TeleportService",
+    "DataStoreService",
+    "LocalizationService",
+    "GroupService",
+    "InsertService",
+    "ContentProvider",
+    "Debris",
+    "ContextActionService",
+    "ScriptContext",
+    "Stats",
+    "PhysicsService",
+    "ContextActionService",
+    "VirtualUser",
+    "VRService"
+}
+
 local T7 = Window:MakeTab({ -- T1
 Name = "Update Log",
 Icon = "rbxassetid://",
@@ -586,8 +619,8 @@ local remote1 = T13:AddDropdown({
 
 T13:AddDropdown({
   Name = "Select instance",
-  Default = gameInstance[1],
-  Options = gameInstance,
+  Default = servicegame[1],
+  Options = servicegame,
   Callback = function(Value)
      _G.INTNC = Value
   end    
