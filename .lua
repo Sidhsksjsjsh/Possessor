@@ -263,13 +263,12 @@ local image = {
 	darkness = getImage(ih["DarknessImage"]) or bug,
 	imitation = getImage(ih["ImImage"]) or bug,
 	mindcontrol = getImage(ih["MindControlImage"]) or bug,
-	haunt = getImage(ih["HauntImage"]["ImageLabel"]) or bug,
+	haunt = getImage(ih["HauntImage"]) or bug,
 	paranoid = getImage(ih["ParanoidImage"]) or bug,
 	mute = getImage(ih["MuteImage"]) or bug,
 	poltergeist = getImage(ih["PImage"]) or bug,
 	idk = getImage(ih["ChatImage"]) or bug,
-	swap = getImage(ih["SwapImage"]) or bug,
-	haunt2 = getImage(ih["HauntImage"]) or bug
+	swap = getImage(ih["SwapImage"]) or bug
 }
 
 local function possessNotify(str1,str2,dur,imgstr)
@@ -516,7 +515,7 @@ local function getRoundTimer()
 	return client["PlayerGui"]["MainUi"]["Frame"]["TimeLeft"].Text
 end
 
-T7:AddParagraph("Update 14 [ 05/01/2024 ]","[ +/- ] Name changed from 'Chatlog settings' to 'Settings'\n[ + ] You can see possess username in possess label and log!\n[ + ] Added Possess notify and notify toggle in Settings tab!")
+T7:AddParagraph("Update 14 [ 05/01/2024 ]","[ +/- ] Name changed from 'Chatlog settings' to 'Settings'\n[ + ] You can see possess username in possess label and log!\n[ + ] Added Possess notify and notify toggle in Settings tab!\n[ +/- ] Fixed bug that doesnt show the image and fixed the image")
 T7:AddParagraph("Update 13 [ 04/01/2024 ]","[ + ] Added 'Troll' tab\n[ + ] Added new feature called 'Fake voted out' in troll tab\n[ + ] New simple possess log\n[ +/- ] Fixed Developer Mode bug\n[ + ] Added 'Chatlog settings' tab!\n[ + ] Added new feature called 'Auto clear chatlogs' in Chatlog settings tab!")
 T7:AddParagraph("Update 12 [ 03/01/2024 ] [ Sorry for the involvement! ]","[ + ] Replace buttons with switches (Exorcise and Possess)\n[ +/- ] Fixed chatlog, API, webhook and Possessor log bug")
 T7:AddParagraph("Update 11 [ 29/12/2023 ]","[ + ] Fixed Cross-Command bug - commandcaller() and commandAsync()")
