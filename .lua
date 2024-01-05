@@ -286,9 +286,9 @@ task.spawn(function()
 end)
 end
 
-local function findRemoteEvents(instance,func)
+local function findRemote(instance,remoteType,func)
     for _,child in pairs(instance:GetChildren()) do
-        if child:IsA("RemoteEvent") then
+        if child:IsA(remoteType) then
             func(child:GetFullName())
         end
     end
@@ -507,6 +507,12 @@ Icon = image.imitation,
 PremiumOnly = false
 })
 
+local T13 = Window:MakeTab({ --T5
+Name = "Find Remote",
+Icon = image.masq,
+PremiumOnly = false
+})
+
 local T5 = Window:MakeTab({ --T7
 Name = "NOTE",
 Icon = "rbxassetid://13040484705",
@@ -523,7 +529,10 @@ local function getRoundTimer()
 	return client["PlayerGui"]["MainUi"]["Frame"]["TimeLeft"].Text
 end
 
-T7:AddParagraph("Update 14 [ 05/01/2024 ]","[ +/- ] Name changed from 'Chatlog settings' to 'Settings'\n[ + ] You can see possess username in possess label and log!\n[ + ] Added Possess notify and notify toggle in Settings tab!\n[ +/- ] Fixed bug that doesnt show the image and fixed the image")
+local remoteTable = {'please click "Find Remotes"'}
+local gameInstance = {}
+
+T7:AddParagraph("Update 14 [ 05/01/2024 ]","[ +/- ] Name changed from 'Chatlog settings' to 'Settings'\n[ + ] You can see possess username in possess label and log!\n[ + ] Added Possess notify and notify toggle in Settings tab!\n[ +/- ] Fixed bug that doesnt show the image and fixed the image\n[ + ] Added 'Find Remote' tab! - Beta, we release it for u so u can bypass all abilities by urself:)")
 T7:AddParagraph("Update 13 [ 04/01/2024 ]","[ + ] Added 'Troll' tab\n[ + ] Added new feature called 'Fake voted out' in troll tab\n[ + ] New simple possess log\n[ +/- ] Fixed Developer Mode bug\n[ + ] Added 'Chatlog settings' tab!\n[ + ] Added new feature called 'Auto clear chatlogs' in Chatlog settings tab!")
 T7:AddParagraph("Update 12 [ 03/01/2024 ] [ Sorry for the involvement! ]","[ + ] Replace buttons with switches (Exorcise and Possess)\n[ +/- ] Fixed chatlog, API, webhook and Possessor log bug")
 T7:AddParagraph("Update 11 [ 29/12/2023 ]","[ + ] Fixed Cross-Command bug - commandcaller() and commandAsync()")
@@ -553,6 +562,82 @@ local PssLog = T10:AddParagraph("Possessor log","#POSSESS_LOG_LABEL")
 
 local Anim = Instance.new("Animation")
 local track = nil
+
+for i,v in pairs(game:GetChildren()) do
+	OrionLib:AddTable(v.Name,gameInstance)
+end
+
+local remtetype = ""
+
+local remote1 = T13:AddDropdown({
+  Name = "Remote list",
+  Default = remoteTable[1],
+  Options = remoteTable,
+  Callback = function(Value)
+     if type(Value) ~= "string" then
+	if remtetype == "RemoteEvent" then
+		Value:FireServer()
+	else
+		Value:InvokeServer()
+	end
+     end
+  end    
+})
+
+local function clearRemote()
+      remoteTable = {}
+      remote1:Refresh({"Refreshing.."},true)
+      remote1:Set("Refreshing..")
+      wait(0.1)
+      OrionLib:AddTable(game.Players,PossessorHandler)
+      wait(0.1)
+      remote1:Refresh(remoteTable,true)
+      remote1:Set(remoteTable[1])
+end
+
+T13:AddDropdown({
+  Name = "Select instance",
+  Default = gameInstance[1],
+  Options = gameInstance,
+  Callback = function(Value)
+     _G.INTNC = Value
+  end    
+})
+
+T13:AddDropdown({
+  Name = "Select remotes",
+  Default = "RemoteEvent",
+  Options = {"RemoteFunction","RemoteEvent"},
+  Callback = function(Value)
+     _G.REMOTE_TYPE = Value
+  end    
+})
+
+local function clearRemote()
+      remoteTable = {}
+      remote1:Refresh({"Refresh all remote.."},true)
+      remote1:Set("Refresh all remote..")
+      wait(0.1)
+      findRemote(game[_G.INTNC],_G.REMOTE_TYPE,function(spy)
+		OrionLib:AddTable(spy,remoteTable)
+      end)
+      wait(0.1)
+      remote1:Refresh(remoteTable,true)
+      remote1:Set(remoteTable[1])
+end
+
+T13:AddButton({
+  Name = "Find Remotes",
+  Callback = function()
+	if remoteTable[1] == 'please click "Find Remotes"' then
+		findRemote(game[_G.INTNC],_G.REMOTE_TYPE,function(spy)
+		       OrionLib:AddTable(spy,remoteTable)
+	        end)
+	else
+	        clearRemote()
+	end
+   end    
+})
 
 T11:AddButton({
   Name = "Fake voted out",
