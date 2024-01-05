@@ -1300,6 +1300,7 @@ T1:AddButton({
 Name = "Skip Vote",
 Callback = function()
       game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer("ConfirmSkip",true)
+      game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer("Skip")
   end    
 })
 
