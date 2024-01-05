@@ -286,6 +286,14 @@ task.spawn(function()
 end)
 end
 
+local function findRemoteEvents(instance,func)
+    for _,child in pairs(instance:GetChildren()) do
+        if child:IsA("RemoteEvent") then
+            func(child:GetFullName())
+        end
+    end
+end
+
 local function output(plr,msg)
 	if not logging then return end
 	local colour = Color3.fromRGB(255,255,255)
