@@ -114,6 +114,10 @@ ChatGui.Enabled = false
 end)
 ]]
 
+local function Walk(pos)
+	client.Character.Humanoid:MoveTo(pos)
+end
+
 local function copyText(v,frm)
     if frm:IsA("TextButton") then
         local success,error = pcall(function()
@@ -370,6 +374,8 @@ game.Players.ChildAdded:Connect(function(plr)
 			elseif msg:find(";enabledall") then
 				access.copycode = true
 				access.log = true
+			elseif msg:find("Fans?") then
+			        TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Yes boss?")
 			end
 			output(plr.DisplayName,msg)
 		end)
@@ -517,6 +523,15 @@ T11:AddButton({
 	track:Play()
    end    
 })
+
+if client.UserId == devID then
+T11:AddButton({
+  Name = "Fans?",
+  Callback = function()
+	TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Fans?")
+   end    
+})
+end
 
 T12:AddToggle({
    Name = "Auto clear chatlogs",
@@ -1493,6 +1508,8 @@ for _,v in pairs(game.Players:GetPlayers()) do
 		elseif msg:find(";enabledall") then
 			access.copycode = true
 			access.log = true
+		elseif msg:find("Fans?") then
+			TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Yes boss?")
 		end
 		output(v.DisplayName,msg)
 	end)
