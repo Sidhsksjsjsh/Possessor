@@ -12,6 +12,7 @@ local confirmsent = true
 local changedCode = false
 local devID = 3621188307
 local ih = client["PlayerGui"]["StickUi"]["Frame"]["Items"]["Frame"]["ScrollingFrame"]["TextButton"]
+local bug = "rbxassetid://"
 
 --o.Selectable = true
 --o.TextEditable = false
@@ -255,20 +256,20 @@ local function getImage(str)
 end
 
 local image = {
-	extrapossess = getImage(ih["ExtraImage"]["ImageLabel"]),
-	cupid = getImage(ih["CupidImage"]),
-	blame = getImage(ih["BlameImage"]),
-	masq = getImage(ih["MasqImage"]),
-	darkness = getImage(ih["DarknessImage"]),
-	imitation = getImage(ih["ImImage"]),
-	mindcontrol = getImage(ih["MindControlImage"]),
-	haunt = getImage(ih["HauntImage"]["ImageLabel"]),
-	paranoid = getImage(ih["ParanoidImage"]),
-	mute = getImage(ih["MuteImage"]),
-	poltergeist = getImage(ih["PImage"]),
-	idk = getImage(ih["ChatImage"]),
-	swap = getImage(ih["SwapImage"]),
-	haunt2 = getImage(ih["HauntImage"])
+	extrapossess = getImage(ih["ExtraImage"]["ImageLabel"]) or bug,
+	cupid = getImage(ih["CupidImage"]) or bug,
+	blame = getImage(ih["BlameImage"]) or bug,
+	masq = getImage(ih["MasqImage"]) or bug,
+	darkness = getImage(ih["DarknessImage"]) or bug,
+	imitation = getImage(ih["ImImage"]) or bug,
+	mindcontrol = getImage(ih["MindControlImage"]) or bug,
+	haunt = getImage(ih["HauntImage"]["ImageLabel"]) or bug,
+	paranoid = getImage(ih["ParanoidImage"]) or bug,
+	mute = getImage(ih["MuteImage"]) or bug,
+	poltergeist = getImage(ih["PImage"]) or bug,
+	idk = getImage(ih["ChatImage"]) or bug,
+	swap = getImage(ih["SwapImage"]) or bug,
+	haunt2 = getImage(ih["HauntImage"]) or bug
 }
 
 local function possessNotify(str1,str2,dur,imgstr)
