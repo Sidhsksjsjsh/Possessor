@@ -519,7 +519,7 @@ local track = nil
 T11:AddButton({
   Name = "Fake voted out",
   Callback = function()
-	track = client.Character.Humanoid:LoadAnimation(client["VotedOut"]["Animation"])
+	track = client.Character.Humanoid:LoadAnimation(client:FindFirstChild("VotedOut")["Animation"])
 	track:Play()
    end    
 })
@@ -1465,7 +1465,7 @@ local logNmbr = 0
 
 local function getPossessor(str)
 str.CharacterAdded:Connect(function(character)
-     Psps:Set(tostring(str.DisplayName) .. " is possessed!","")
+     Psps:Set(tostring(str.DisplayName) .. " ( @" .. tostring(str.Name) .. " ) is possessed!","")
      logNmbr = logNmbr + 1
      LogStr = LogStr .. "\n[ " .. tostring(os.date("%X")) .. " ] #" .. logNmbr .. " : " .. str.DisplayName
      PssLog:Set(LogStr,"")
