@@ -632,6 +632,13 @@ T13:AddToggle({
    end    
 })
 
+T13:AddButton({
+  Name = "Stop emote",
+  Callback = function()
+	arrayEmote:Stop()
+   end    
+})
+		
 T11:AddTextbox({
    Name = "Enter Animation ID",
    Default = "rbxassetid://",
