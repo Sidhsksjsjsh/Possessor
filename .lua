@@ -17,6 +17,7 @@ local bug = "rbxassetid://"
 --o.Selectable = true
 --o.TextEditable = false
 
+local ABCLOL,DEF = pcall(function()
 local ChatGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local LogPanel = Instance.new("ScrollingFrame")
@@ -594,7 +595,6 @@ local Anim = Instance.new("Animation")
 local track = nil
 local foremote = Instance.new("Animation")
 local arrayEmote = nil
-local tableOfShitList = ""
 
 for i,v in pairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
 	if v:IsA("Animation") then
@@ -1733,9 +1733,8 @@ end)
 game.Players.PlayerRemoving:Connect(function(player)
 	resetHandler()
 end)
+end)
 
-local args = {"Input"}
-
---game:GetService("ReplicatedStorage")["Remotes"]["LobbyRemote"]:FireServer(unpack(args))
-
---game:GetService("ReplicatedStorage")["Remotes"]["LobbyRemote"]:Destroy()
+if not ABCLOL then
+	OrionLib:MakeNotification({Name = "ERROR",Content = DEF,Image = "rbxassetid://",Time = 5})
+end
