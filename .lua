@@ -598,7 +598,7 @@ local arrayEmote = nil
 
 for anjg,babi in pairs(game.ReplicatedStorage:GetDescendants()) do
 	if babi:IsA("Animation") then
-		OrionLib:AddTable(babi.AnimationId,remoteTable)
+		table.insert(remoteTable,babi.AnimationId)
 	end
 end
 
@@ -703,7 +703,7 @@ T12:AddSlider({
    end    
 })
 
---[[T12:AddToggle({
+T12:AddToggle({
    Name = "Auto clear chatlogs",
    Default = false,
    Callback = function(Value)
@@ -720,7 +720,7 @@ T12:AddSlider({
 				end
 		end
    end    
-}) -- possessNotify(str1,str2,_G.notifydur)]]
+}) -- possessNotify(str1,str2,_G.notifydur)
 
 T12:AddToggle({
    Name = "Notify when someone got possess",
