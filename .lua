@@ -595,6 +595,7 @@ local Psps = T1:AddParagraph("👿 Possessor 👿","No one is possessed!")
 local PssLog = T10:AddParagraph("Possessor log","#POSSESS_LOG_LABEL")
 
 local Anim = Instance.new("Animation")
+Anim.AnimationId = "rbxassetid://15169809563"
 local track = nil
 
 --for i,v in pairs(game:GetChildren()) do
@@ -662,23 +663,20 @@ T13:AddButton({
    end    
 })
 
-T11:AddButton({
-  Name = "Fake voted out",
-  Callback = function()
-	for i,v in pairs(client:GetChildren()) do
-		if v.Name == "VotedOut" then
-			for index,animator in pairs(v:GetChildren()) do
-				if animator.Name == "Animation" and animator:IsA("Animation") then
-					track = client.Character.Humanoid:LoadAnimation(animator)
-					track:Play()
-				end
-			end
-		end
+T11:AddToggle({
+   Name = "Fake Voted out",
+   Default = false,
+   Callback = function(Value)
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+	if Value then
+		track:Play()
+	else
+		track:Stop()
 	end
    end    
 })
 
-local fakeexcrst = T11:AddToggle({
+T11:AddToggle({
    Name = "Fake Exorcist",
    Default = false,
    Callback = function(Value)
