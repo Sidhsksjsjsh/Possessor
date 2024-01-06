@@ -686,7 +686,7 @@ local fakeexcrst = T11:AddToggle({
 		client["Character"]["HumanoidRootPart"]["BillboardGui"]["E"].Visible = Value
 	else
 		OrionLib:MakeNotification({Name = "Cannot become an exorcist",Content = "You must be in the game first before turning on this feature.",Image = image.poltergeist,Time = 5})
-		fakeexcrst:Set(false)
+		--fakeexcrst:Set(false)
 	end
    end    
 })
