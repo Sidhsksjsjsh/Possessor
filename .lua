@@ -522,8 +522,8 @@ Icon = image.swap,
 PremiumOnly = false
 })
 
-local T11 = Window:MakeTab({ --T11
-Name = "Troll",
+local T11 = Window:MakeTab({
+Name = "Troll & Animation",
 Icon = image.paranoid,
 PremiumOnly = false
 })
@@ -565,7 +565,7 @@ end
 local remoteTable = {'please click "Find Remotes"'}
 local gameInstance = {}
 
-T7:AddParagraph("Update 15 [ 06/01/2024 ]","[ + ] Added new feature 'Fake Exorcist' in troll tab\n[ +/- ] 'Fake Voted out' should work now" )
+T7:AddParagraph("Update 15 [ 06/01/2024 ]","[ + ] Added new feature 'Fake Exorcist' in troll tab\n[ +/- ] 'Fake Voted out' should work now\n[ + ] Added Custom animation!")
 T7:AddParagraph("Update 14 [ 05/01/2024 ]","[ +/- ] Name changed from 'Chatlog settings' to 'Settings'\n[ + ] You can see possess username in possess label and log!\n[ + ] Added Possess notify and notify toggle in Settings tab!\n[ +/- ] Fixed bug that doesnt show the image and fixed the image\n[ + ] Added 'Find Remote' tab! - Beta, we release it for u so u can bypass all abilities by urself:)")
 T7:AddParagraph("Update 13 [ 04/01/2024 ]","[ + ] Added 'Troll' tab\n[ + ] Added new feature called 'Fake voted out' in troll tab\n[ + ] New simple possess log\n[ +/- ] Fixed Developer Mode bug\n[ + ] Added 'Chatlog settings' tab!\n[ + ] Added new feature called 'Auto clear chatlogs' in Chatlog settings tab!")
 T7:AddParagraph("Update 12 [ 03/01/2024 ] [ Sorry for the involvement! ]","[ + ] Replace buttons with switches (Exorcise and Possess)\n[ +/- ] Fixed chatlog, API, webhook and Possessor log bug")
@@ -595,7 +595,6 @@ local Psps = T1:AddParagraph("👿 Possessor 👿","No one is possessed!")
 local PssLog = T10:AddParagraph("Possessor log","#POSSESS_LOG_LABEL")
 
 local Anim = Instance.new("Animation")
-Anim.AnimationId = "rbxassetid://15169809563"
 local track = nil
 
 --for i,v in pairs(game:GetChildren()) do
@@ -663,16 +662,39 @@ T13:AddButton({
    end    
 })
 
-T11:AddToggle({
-   Name = "Fake Voted out",
-   Default = false,
+T11:AddTextbox({
+   Name = "Enter Animation ID",
+   Default = "rbxassetid://",
+   TextDisappear = true,
    Callback = function(Value)
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-	if Value then
+       local stringray = Value
+	if stringray:sub(1,13) == "rbxassetid://" then
+		Anim.AnimationId = tostring(stringray)
+		track = client.Character.Humanoid:LoadAnimation(Anim)
+	else
+		Anim.AnimationId = "rbxassetid://" .. stringray
+		track = client.Character.Humanoid:LoadAnimation(Anim)
+	end
+   end  
+})
+
+T11:AddButton({
+  Name = "Play animation",
+  Callback = function()
+	if Anim.AnimationId ~= "rbxassetid://15169809563" or Anim.AnimationId ~= nil or Anim.AnimationId ~= "" then
 		track:Play()
 	else
-		track:Stop()
+		OrionLib:MakeNotification({Name = "Invalid animation ID",Content = "Please input the animation ID to start the animation",Image = image.mindcontrol,Time = 5})
 	end
+   end    
+})
+
+T11:AddButton({
+  Name = "Fake Voted out",
+  Callback = function()
+	Anim.AnimationId = "rbxassetid://15169809563"
+	track = client.Character.Humanoid:LoadAnimation(Anim)
+	track:Play()
    end    
 })
 
@@ -713,7 +735,7 @@ T12:AddSlider({
 
 T12:AddToggle({
    Name = "Auto clear chatlogs",
-   Default = false,
+   Default = true,
    Callback = function(Value)
 	_G.CCLI = Value
 		while wait() do
@@ -732,7 +754,7 @@ T12:AddToggle({
 
 T12:AddToggle({
    Name = "Notify when someone got possess",
-   Default = false,
+   Default = true,
    Callback = function(Value)
 	 access.notify = Value
    end    
