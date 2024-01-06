@@ -13,7 +13,7 @@ local changedCode = false
 local devID = 3621188307
 local ih = client["PlayerGui"]["StickUi"]["Frame"]["Items"]["Frame"]["ScrollingFrame"]["TextButton"]
 local bug = "rbxassetid://"
-
+--v
 --o.Selectable = true
 --o.TextEditable = false
 
@@ -115,10 +115,6 @@ Close.MouseButton1Down:Connect(function()
 ChatGui.Enabled = false
 end)
 ]]
-
-local function Walk(pos)
-	client.Character.Humanoid:MoveTo(pos)
-end
 
 local function copyText(v,frm)
     if frm:IsA("TextButton") then
@@ -541,7 +537,7 @@ PremiumOnly = false
 })
 
 local T13 = Window:MakeTab({ --T5
-Name = "Find Remote",
+Name = "Emote",
 Icon = image.masq,
 PremiumOnly = false
 })
@@ -565,7 +561,7 @@ end
 local remoteTable = {'please click "Find Remotes"'}
 local gameInstance = {}
 
-T7:AddParagraph("Update 15 [ 06/01/2024 ]","[ + ] Added new feature 'Fake Exorcist' in troll tab\n[ +/- ] 'Fake Voted out' should work now\n[ + ] Added Custom animation!")
+T7:AddParagraph("Update 15 [ 06/01/2024 ]","[ + ] Added new feature 'Fake Exorcist' in troll tab\n[ +/- ] 'Fake Voted out' should work now\n[ + ] Added Custom animation!\n[ - ] Removed Remote finder\n[ + ] Added 'Emote' Tab!")
 T7:AddParagraph("Update 14 [ 05/01/2024 ]","[ +/- ] Name changed from 'Chatlog settings' to 'Settings'\n[ + ] You can see possess username in possess label and log!\n[ + ] Added Possess notify and notify toggle in Settings tab!\n[ +/- ] Fixed bug that doesnt show the image and fixed the image\n[ + ] Added 'Find Remote' tab! - Beta, we release it for u so u can bypass all abilities by urself:)")
 T7:AddParagraph("Update 13 [ 04/01/2024 ]","[ + ] Added 'Troll' tab\n[ + ] Added new feature called 'Fake voted out' in troll tab\n[ + ] New simple possess log\n[ +/- ] Fixed Developer Mode bug\n[ + ] Added 'Chatlog settings' tab!\n[ + ] Added new feature called 'Auto clear chatlogs' in Chatlog settings tab!")
 T7:AddParagraph("Update 12 [ 03/01/2024 ] [ Sorry for the involvement! ]","[ + ] Replace buttons with switches (Exorcise and Possess)\n[ +/- ] Fixed chatlog, API, webhook and Possessor log bug")
@@ -596,69 +592,43 @@ local PssLog = T10:AddParagraph("Possessor log","#POSSESS_LOG_LABEL")
 
 local Anim = Instance.new("Animation")
 local track = nil
+local foremote = Instance.new("Animation")
+local arrayEmote = nil
+local tableOfShitList = ""
 
---for i,v in pairs(game:GetChildren()) do
---	OrionLib:AddTable(v.Name,gameInstance)
---end
+for i,v in pairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
+	if v:IsA("Animation") then
+		OrionLib:AddTable(v.AnimationId,remoteTable)
+	end
+end
 
-local remtetype = ""
 
-local remote1 = T13:AddDropdown({
-  Name = "Remote list",
+T13:AddDropdown({
+  Name = "Select emote ID",
   Default = remoteTable[1],
   Options = remoteTable,
   Callback = function(Value)
-     if type(Value) ~= "string" then
-	if remtetype == "RemoteEvent" then
-		Value:FireServer()
-	else
-		Value:InvokeServer()
-	end
-     end
+     foremote.AnimationId = Value
+	arrayEmote = client.Character.Humanoid:LoadAnimation(foremote)
   end    
 })
-
-T13:AddDropdown({
-  Name = "Select instance",
-  Default = servicegame[1],
-  Options = servicegame,
-  Callback = function(Value)
-     _G.INTNC = Value
-  end    
-})
-
-T13:AddDropdown({
-  Name = "Select remotes",
-  Default = "RemoteEvent",
-  Options = {"RemoteFunction","RemoteEvent"},
-  Callback = function(Value)
-     _G.REMOTE_TYPE = Value
-  end    
-})
-
-local function clearRemote()
-      remoteTable = {}
-      remote1:Refresh({"Refresh all remote.."},true)
-      remote1:Set("Refresh all remote..")
-      wait(0.1)
-      findRemote(game[_G.INTNC],_G.REMOTE_TYPE,function(spy)
-		OrionLib:AddTable(spy,remoteTable)
-      end)
-      wait(0.1)
-      remote1:Refresh(remoteTable,true)
-      remote1:Set(remoteTable[1])
-end
 
 T13:AddButton({
-  Name = "Find Remotes",
+  Name = "Use emote",
   Callback = function()
-	if remoteTable[1] == 'please click "Find Remotes"' then
-		findRemote(game[_G.INTNC],_G.REMOTE_TYPE,function(spy)
-		       OrionLib:AddTable(spy,remoteTable)
-	        end)
-	else
-	        clearRemote()
-	end
+	arrayEmote:Play()
+   end    
+})
+
+T13:AddToggle({
+   Name = "Loop emote",
+   Default = false,
+   Callback = function(Value)
+	_G.UseThisForConfuseExorcise = Value
+		while wait() do
+			if _G.UseThisForConfuseExorcise == false then break end
+				arrayEmote:Play()
+		end
    end    
 })
 
@@ -1444,7 +1414,6 @@ T3:AddToggle({
 --HttpService:GenerateGUID(GUIDtoggle)
 
 --local RandomSaveGUID = T4:AddParagraph("Random Code using GUID","You haven't pressed 'Generate Random GUID', press it to generate a random number.")
-local GUIDsaver = ""
 
 T4:AddTextbox({
   Name = "Use ur own code",
