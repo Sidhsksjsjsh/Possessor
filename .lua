@@ -565,6 +565,7 @@ end
 local remoteTable = {'please click "Find Remotes"'}
 local gameInstance = {}
 
+T7:AddParagraph("Update 15 [ 06/01/2024 ]","[ + ] Added new feature 'Fake Exorcist' in troll tab\n[ +/- ] 'Fake Voted out' should work now" )
 T7:AddParagraph("Update 14 [ 05/01/2024 ]","[ +/- ] Name changed from 'Chatlog settings' to 'Settings'\n[ + ] You can see possess username in possess label and log!\n[ + ] Added Possess notify and notify toggle in Settings tab!\n[ +/- ] Fixed bug that doesnt show the image and fixed the image\n[ + ] Added 'Find Remote' tab! - Beta, we release it for u so u can bypass all abilities by urself:)")
 T7:AddParagraph("Update 13 [ 04/01/2024 ]","[ + ] Added 'Troll' tab\n[ + ] Added new feature called 'Fake voted out' in troll tab\n[ + ] New simple possess log\n[ +/- ] Fixed Developer Mode bug\n[ + ] Added 'Chatlog settings' tab!\n[ + ] Added new feature called 'Auto clear chatlogs' in Chatlog settings tab!")
 T7:AddParagraph("Update 12 [ 03/01/2024 ] [ Sorry for the involvement! ]","[ + ] Replace buttons with switches (Exorcise and Possess)\n[ +/- ] Fixed chatlog, API, webhook and Possessor log bug")
@@ -677,7 +678,7 @@ T11:AddButton({
    end    
 })
 
-T11:AddToggle({
+local fakeexcrst = T11:AddToggle({
    Name = "Fake Exorcist",
    Default = false,
    Callback = function(Value)
@@ -685,6 +686,7 @@ T11:AddToggle({
 		client["Character"]["HumanoidRootPart"]["BillboardGui"]["E"].Visible = Value
 	else
 		OrionLib:MakeNotification({Name = "Cannot become an exorcist",Content = "You must be in the game first before turning on this feature.",Image = image.poltergeist,Time = 5})
+		fakeexcrst:Set(false)
 	end
    end    
 })
