@@ -735,7 +735,7 @@ T12:AddSlider({
 
 T12:AddToggle({
    Name = "Auto clear chatlogs",
-   Default = true,
+   Default = false,
    Callback = function(Value)
 	_G.CCLI = Value
 		while wait() do
