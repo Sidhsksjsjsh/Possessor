@@ -664,8 +664,28 @@ T13:AddButton({
 T11:AddButton({
   Name = "Fake voted out",
   Callback = function()
-	track = client.Character.Humanoid:LoadAnimation(client:FindFirstChild("VotedOut")["Animation"])
-	track:Play()
+	for i,v in pairs(client:GetChildren()) do
+		if v.Name == "VotedOut" then
+			for index,animator in pairs(v:GetChildren()) do
+				if animator.Name == "Animation" and animator:IsA("Animation") then
+					track = client.Character.Humanoid:LoadAnimation(animator)
+					track:Play()
+				end
+			end
+		end
+	end
+   end    
+})
+
+T11:AddToggle({
+   Name = "Fake Exorcist",
+   Default = false,
+   Callback = function(Value)
+	if client["Character"]["HumanoidRootPart"]:FindFirstChild("BillboardGui") then
+		client["Character"]["HumanoidRootPart"]["BillboardGui"]["E"].Visible = Value
+	else
+		OrionLib:MakeNotification({Name = "Cannot become an exorcist",Content = "You must be in the game first before turning on this feature.",Image = image.poltergeist,Time = 5})
+	end
    end    
 })
 
@@ -1651,7 +1671,7 @@ for _,v in pairs(game.Players:GetPlayers()) do
 					TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � | " .. tostring(codeHandler) .. " | �")
 				end
 			else
-				OrionLib:MakeNotification({Name = "🤖",Content = "Auto sent disabled",Image = "rbxassetid://",Time = 5})
+				OrionLib:MakeNotification({Name = "Voices",Content = "Auto sent disabled",Image = image.idk,Time = 5})
 			end
 		elseif msg:find(codeHandler) and v.Name ~= client.Name then
 			autoChangeCode(msg,v)
