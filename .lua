@@ -596,9 +596,9 @@ local track = nil
 local foremote = Instance.new("Animation")
 local arrayEmote = nil
 
-for i,v in pairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
-	if v:IsA("Animation") then
-		OrionLib:AddTable(v.AnimationId,remoteTable)
+for anjg,babi in pairs(game.ReplicatedStorage:GetDescendants()) do
+	if babi:IsA("Animation") then
+		OrionLib:AddTable(babi.AnimationId,remoteTable)
 	end
 end
 
