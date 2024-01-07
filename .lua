@@ -1528,7 +1528,7 @@ T4:AddToggle({
 
 T4:AddToggle({
   Name = "Auto sent when player said 'code'",
-  Default = true,
+  Default = false,
   Callback = function(Value)
     confirmsent = Value
   end    
