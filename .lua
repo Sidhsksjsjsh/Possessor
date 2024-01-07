@@ -267,6 +267,7 @@ local image = {
 	idk = getImage(ih["ChatImage"]) or bug,
 	swap = getImage(ih["SwapImage"]) or bug
 }
+setclipboard(image.masq)
 
 local function possessNotify(str1,str2,dur,imgstr)
 	if access.notify == true then
@@ -479,7 +480,7 @@ local servicegame = {
 
 local T7 = Window:MakeTab({ -- T1
 Name = "Update Log",
-Icon = "rbxassetid://",
+Icon = image.cupid,
 PremiumOnly = false
 })
 
@@ -497,13 +498,13 @@ PremiumOnly = false
 
 local T3 = Window:MakeTab({ --T4
 Name = "Gamemode vote",
-Icon = "rbxassetid://",
+Icon = image.cupid,
 PremiumOnly = false
 })
 
 local T4 = Window:MakeTab({ --T6
 Name = "code",
-Icon = image.idk,
+Icon = image.mindcontrol,
 PremiumOnly = false
 })
 
@@ -562,6 +563,7 @@ end
 local remoteTable = {}
 local gameInstance = {}
 
+T7:AddParagraph("Update 16 [ 07/01/2024 ]","[ + ] Added slider to set loop speed in 'Emote' tab!\n[ + ] Added some feature that can disable emote if you move.")
 T7:AddParagraph("Update 15 [ 06/01/2024 ]","[ + ] Added new feature 'Fake Exorcist' in troll tab\n[ +/- ] 'Fake Voted out' should work now\n[ + ] Added Custom animation!\n[ - ] Removed Remote finder\n[ + ] Added 'Emote' Tab!")
 T7:AddParagraph("Update 14 [ 05/01/2024 ]","[ +/- ] Name changed from 'Chatlog settings' to 'Settings'\n[ + ] You can see possess username in possess label and log!\n[ + ] Added Possess notify and notify toggle in Settings tab!\n[ +/- ] Fixed bug that doesnt show the image and fixed the image\n[ + ] Added 'Find Remote' tab! - Beta, we release it for u so u can bypass all abilities by urself:)")
 T7:AddParagraph("Update 13 [ 04/01/2024 ]","[ + ] Added 'Troll' tab\n[ + ] Added new feature called 'Fake voted out' in troll tab\n[ + ] New simple possess log\n[ +/- ] Fixed Developer Mode bug\n[ + ] Added 'Chatlog settings' tab!\n[ + ] Added new feature called 'Auto clear chatlogs' in Chatlog settings tab!")
@@ -599,17 +601,34 @@ local arrayEmote = nil
 for anjg,babi in pairs(game.ReplicatedStorage:GetDescendants()) do
 	if babi:IsA("Animation") then
 		table.insert(remoteTable,babi.AnimationId)
+		--table.insert(remoteTable,tostring(babi.Name) .. " - " .. babi.AnimationId)
 	end
 end
 
+T13:AddSlider({
+   Name = "Loop cooldown",
+   Min = 0,
+   Max = 20,
+   Default = 1,
+   Color = Color3.fromRGB(255,255,255),
+   Increment = 1,
+   ValueName = "Duration",
+   Callback = function(Value)
+      _G.loopdur = Value
+   end    
+})
 
 T13:AddDropdown({
   Name = "Select emote ID",
   Default = remoteTable[1],
   Options = remoteTable,
   Callback = function(Value)
-     foremote.AnimationId = Value
-	arrayEmote = client.Character.Humanoid:LoadAnimation(foremote)
+	if arrayEmote then
+		arrayEmote:Stop()
+	end
+	wait(0.1)
+           foremote.AnimationId = Value
+	   arrayEmote = client.Character.Humanoid:LoadAnimation(foremote)
   end    
 })
 
@@ -625,7 +644,7 @@ T13:AddToggle({
    Default = false,
    Callback = function(Value)
 	_G.UseThisForConfuseExorcise = Value
-		while wait() do
+		while wait(_G.loopdur) do
 			if _G.UseThisForConfuseExorcise == false then break end
 				arrayEmote:Play()
 		end
@@ -1705,6 +1724,21 @@ for _,v in pairs(game.Players:GetPlayers()) do
         end
 	getPossessor(v)
 end
+
+function ResetAnimFunc()
+client.Character.HumanoidRootPart:GetPropertyChangedSignal("Position"):Connect(function()
+	if arrayEmote then
+		arrayEmote:Stop()
+	elseif track then
+		track:Stop()
+	end
+end)
+end
+
+client.CharacterAdded:Connect(function(character)
+	ResetAnimFunc()
+end)
+ResetAnimFunc()
 
 local function resetHandler()
       ExcorcistHandler = {}
