@@ -605,19 +605,6 @@ for anjg,babi in pairs(game.ReplicatedStorage:GetDescendants()) do
 	end
 end
 
-T13:AddSlider({
-   Name = "Loop cooldown",
-   Min = 0,
-   Max = 20,
-   Default = 1,
-   Color = Color3.fromRGB(255,255,255),
-   Increment = 1,
-   ValueName = "Duration",
-   Callback = function(Value)
-      _G.loopdur = Value
-   end    
-})
-
 T13:AddDropdown({
   Name = "Select emote ID",
   Default = remoteTable[1],
@@ -644,7 +631,7 @@ T13:AddToggle({
    Default = false,
    Callback = function(Value)
 	_G.UseThisForConfuseExorcise = Value
-		while wait(_G.loopdur) do
+		while wait(arrayEmote.TimePosition) do
 			if _G.UseThisForConfuseExorcise == false then break end
 				arrayEmote:Play()
 		end
