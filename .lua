@@ -631,7 +631,7 @@ T13:AddToggle({
    Default = false,
    Callback = function(Value)
 	_G.UseThisForConfuseExorcise = Value
-		while wait(arrayEmote.TimePosition) do
+		while wait(arrayEmote.Length) do
 			if _G.UseThisForConfuseExorcise == false then break end
 				arrayEmote:Play()
 		end
