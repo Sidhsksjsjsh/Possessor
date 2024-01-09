@@ -634,7 +634,6 @@ T13:AddDropdown({
 	wait(0.1)
            foremote.AnimationId = Value
 	   arrayEmote = client.Character.Humanoid:LoadAnimation(foremote)
-	   animationInformmation:Set("Emote ID: " .. tostring(foremote.AnimationId) .. "\nIs Playing: " .. tostring(arrayEmote.IsPlaying) .. "\nLength: " .. tostring(arrayEmote.Length) .. "\nLooping: " .. tostring(arrayEmote.Looped) .. "\nPriority: " .. tostring(arrayEmote.Priority) .. "\nEmote speed: " .. tostring(arrayEmote.Speed) .. "\nTime Position: " .. tostring(arrayEmote.TimePosition),"")
   end    
 })
 
