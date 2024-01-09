@@ -13,6 +13,7 @@ local changedCode = false
 local devID = 3621188307
 local ih = client["PlayerGui"]["StickUi"]["Frame"]["Items"]["Frame"]["ScrollingFrame"]["TextButton"]
 local bug = "rbxassetid://"
+local workspace = game:GetService("Workspace")
 --v
 --o.Selectable = true
 --o.TextEditable = false
@@ -517,7 +518,7 @@ PremiumOnly = false
 })
 
 local T9 = Window:MakeTab({ --T10
-Name = "Ability",
+Name = "Character Config",
 Icon = image.swap,
 PremiumOnly = false
 })
@@ -567,6 +568,7 @@ end
 local remoteTable = {}
 local gameInstance = {}
 
+T7:AddParagraph("Update 17 [ 09/01/2024 ]","[ - ] Removed 'Ability' tab\n[ + ] Added 'Character Config' tab!\n[ + ] Added Speedboost and Jumpboost for hunt ability\n[ +/- ] Fixed emote glitch\n[ 08/03/2024 ] Ability bypass?, no cooldown?, Can equip more than 3?, Anti-Possessed? and Auto Body swap while exorcist is near?")
 T7:AddParagraph("Update 16 [ 07/01/2024 ]","[ + ] Added slider to set loop speed in 'Emote' tab!\n[ + ] Added some feature that can disable emote if you move.")
 T7:AddParagraph("Update 15 [ 06/01/2024 ]","[ + ] Added new feature 'Fake Exorcist' in troll tab\n[ +/- ] 'Fake Voted out' should work now\n[ + ] Added Custom animation!\n[ - ] Removed Remote finder\n[ + ] Added 'Emote' Tab!")
 T7:AddParagraph("Update 14 [ 05/01/2024 ]","[ +/- ] Name changed from 'Chatlog settings' to 'Settings'\n[ + ] You can see possess username in possess label and log!\n[ + ] Added Possess notify and notify toggle in Settings tab!\n[ +/- ] Fixed bug that doesnt show the image and fixed the image\n[ + ] Added 'Find Remote' tab! - Beta, we release it for u so u can bypass all abilities by urself:)")
@@ -585,7 +587,7 @@ T7:AddParagraph("Update 2 [ 13/12/2023 ]","[ - ] Removed 'Ritual Mode' Tab")
 T7:AddParagraph("Update 1 [ 11/12/2023 ]","<!----- Exorcist Tab ----->\n[ + ] Vote Exorcist\n[ + ] Skip Vote\n<!----- Possessor Tab ----->\n[ ? ] nil\n<!----- game mode voting ----->\n[ + ] 'Ritual' Auto Voting\n<!----- Part/Item ESP ----->\n[ + ] Candle ESP\n[ + ] Mirror ESP\n[ + ] Key ESP")
 
 T8:AddParagraph("Developer","Fahri -> Toggle System, Trigger function, game system, Code System generator\nAkbar -> Possessor Label\nFirman -> Item ESP in ritual mode & Dropdown reset (sadly i removed 'Ritual Mode')\nRaka -> Ability System & Tab\nRafa -> Reminder Text Idea & Bug Hunter\nFairus -> Chatlog")
-T8:AddParagraph("Our Roblox account","Fahri -> TH_Alyaaa (Rivanda_Cheater)\nAkbar -> YT_akbar123\nFirman -> demon_luc28\nRaka -> secret\nRafa -> secret\nAdinda -> AdindaFood\nZaki -> muhammadFairusZaki")
+T8:AddParagraph("Our Roblox account username","Fahri -> Rivanda_Cheater\nAkbar -> YT_akbar123\nFirman -> demon_luc28\nRaka -> secret\nRafa -> secret\nAdinda -> AdindaFood\nFairus -> muhammadFairusZaki")
 T8:AddParagraph("My tiktok (pls follow)","@capviktor")
 
 T5:AddParagraph("Possessor Label","The labels are not 100% accurate, because this depends on those who have respawned or reset their character.")
@@ -593,6 +595,7 @@ T5:AddParagraph("Reminder Tab","The reminder tab is a tab where they can know wh
 T5:AddParagraph("Code system 'Generate random code'","This feature will replace your code with a random code if Possessed copies your code.")
 T5:AddParagraph("Cross-permission enabled","now u can disabled or enabled out feature like log etc, by using our admin script! (Vortex Admin)")
 T5:AddParagraph("'Auto clear chatlogs' feature","This feature will automatically delete logs from chats when the number reaches more than 144")
+T5:AddParagraph("March 8th? 😱","OMG WE CANT WAIT FOR THAT FEATURE 😱😱")
 
 local Psps = T1:AddParagraph("👿 Possessor 👿","No one is possessed!")
 local PssLog = T10:AddParagraph("Possessor log","#POSSESS_LOG_LABEL")
@@ -708,6 +711,17 @@ T11:AddToggle({
 		--fakeexcrst:Set(false)
 	end
    end    
+})
+
+T11:AddButton({
+Name = "Destroy seatpart",
+Callback = function()
+      for i,v in pairs(workspace:GetDescendants()) do
+	if v.Name:lower() == "seatpart" then
+		v:Destroy();
+	end
+      end
+  end    
 })
 
 if client.UserId == devID then
@@ -1535,7 +1549,7 @@ T4:AddToggle({
   Callback = function(Value)
     confirmsent = Value
   end    
-})
+}) --game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = var
 
 T4:AddToggle({
   Name = "Auto generate random code",
@@ -1610,7 +1624,66 @@ Callback = function()
   end    
 })
 
-local AbilityHandleS = {
+T9:AddLabel("Speedboost + hunt ability 😍👌")
+local forspeedboost = T9:AddSlider({
+   Name = "Speed",
+   Min = 0,
+   Max = 500,
+   Default = 16,
+   Color = Color3.fromRGB(255,255,255),
+   Increment = 1,
+   ValueName = "Boost",
+   Callback = function(Value)
+      _G.sboost = Value
+   end    
+})
+
+local forjumpboost = T9:AddSlider({
+   Name = "Jump",
+   Min = 0,
+   Max = 1000,
+   Default = 50,
+   Color = Color3.fromRGB(255,255,255),
+   Increment = 1,
+   ValueName = "Boost",
+   Callback = function(Value)
+      _G.jboost = Value
+   end    
+})
+
+T9:AddToggle({
+  Name = "Speedboost",
+  Default = false,
+  Callback = function(Value)
+    _G.Sdb = Value
+	while wait() do
+		if _G.Sdb == false then break end
+			client.Character.Humanoid.WalkSpeed = tonumber(_G.sboost)
+	end
+  end
+})
+
+T9:AddToggle({
+  Name = "Jumpboost",
+  Default = false,
+  Callback = function(Value)
+    _G.Jpb = Value
+	while wait() do
+		if _G.Jpb == false then break end
+			client.Character.Humanoid.JumpPower = tonumber(_G.jboost)
+	end
+  end
+})
+
+T9:AddButton({
+Name = "Reset slider",
+Callback = function()
+      forspeedboost:Set(16)
+      forjumpboost:Set(50)
+  end    
+})
+
+--[[local AbilityHandleS = {
 	A = client["PlayerGui"]["StickUi"]["AbilityFrame"]["S1"]["TextLabel"].Text,
 	B = client["PlayerGui"]["StickUi"]["AbilityFrame"]["S2"]["TextLabel"].Text,
 	C = client["PlayerGui"]["StickUi"]["AbilityFrame"]["S3"]["TextLabel"].Text
@@ -1666,7 +1739,8 @@ end)
 client["PlayerGui"]["MainUi"]["Frame"]["State"]:GetPropertyChangedSignal("Text"):Connect(function()
 	print(client["PlayerGui"]["MainUi"]["Frame"]["State"].Text)
 end)
-
+]]
+		
 local LogStr = ""
 local logNmbr = 0
 
@@ -1784,5 +1858,6 @@ end)
 end)
 
 if not ABCLOL then
-	OrionLib:MakeNotification({Name = "ERROR",Content = DEF,Image = "rbxassetid://",Time = 5})
+	OrionLib:MakeNotification({Name = "SCRIPT ERROR",Content = DEF,Image = "rbxassetid://",Time = 15})
+	OrionLib:MakeNotification({Name = "ERROR REPORTED",Content = "The error has been sent to the developer, wait for a response from the developer",Image = "rbxassetid://",Time = 15})
 end
