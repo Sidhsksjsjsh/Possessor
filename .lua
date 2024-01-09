@@ -600,6 +600,7 @@ local PssLog = T10:AddParagraph("Possessor log","#POSSESS_LOG_LABEL")
 local Anim = Instance.new("Animation")
 local track = nil
 local foremote = Instance.new("Animation")
+foremote.AnimationId = remoteTable[1]
 local arrayEmote = client.Character.Humanoid:LoadAnimation(foremote)
 
 for anjg,babi in pairs(game.ReplicatedStorage:GetDescendants()) do
