@@ -597,18 +597,18 @@ T5:AddParagraph("'Auto clear chatlogs' feature","This feature will automatically
 local Psps = T1:AddParagraph("👿 Possessor 👿","No one is possessed!")
 local PssLog = T10:AddParagraph("Possessor log","#POSSESS_LOG_LABEL")
 
-local Anim = Instance.new("Animation")
-local track = nil
-local foremote = Instance.new("Animation")
-foremote.AnimationId = remoteTable[1]
-local arrayEmote = client.Character.Humanoid:LoadAnimation(foremote)
-
 for anjg,babi in pairs(game.ReplicatedStorage:GetDescendants()) do
 	if babi:IsA("Animation") then
 		table.insert(remoteTable,babi.AnimationId)
 		--table.insert(remoteTable,tostring(babi.Name) .. " - " .. babi.AnimationId)
 	end
 end
+
+local Anim = Instance.new("Animation")
+local track = nil
+local foremote = Instance.new("Animation")
+foremote.AnimationId = remoteTable[1]
+local arrayEmote = client.Character.Humanoid:LoadAnimation(foremote)
 
 --[[
 print("Animation Id:", animation.AnimationId)
