@@ -14,6 +14,8 @@ local devID = 3621188307
 local ih = client["PlayerGui"]["StickUi"]["Frame"]["Items"]["Frame"]["ScrollingFrame"]["TextButton"]
 local bug = "rbxassetid://"
 local workspace = game:GetService("Workspace")
+local MarketplaceService = game:GetService("MarketplaceService")
+
 --v
 --o.Selectable = true
 --o.TextEditable = false
@@ -1857,7 +1859,7 @@ end)
 
 task.spawn(function()
 	while wait() do
-		animationInformmation:Set("Emote ID: " .. tostring(foremote.AnimationId) .. "\nIs Playing: " .. tostring(arrayEmote.IsPlaying) .. "\nLength: " .. tostring(arrayEmote.Length) .. "\nLooping: " .. tostring(arrayEmote.Looped) .. "\nPriority: " .. tostring(arrayEmote.Priority) .. "\nEmote speed: " .. tostring(arrayEmote.Speed) .. "\nTime Position: " .. tostring(arrayEmote.TimePosition),"")
+		animationInformmation:Set("Emote ID: " .. tostring(foremote.AnimationId) .. "\nEmote name: " .. tostring(MarketplaceService:GetProductInfo(foremote.AnimationId).Name) .. "\nIs Playing: " .. tostring(arrayEmote.IsPlaying) .. "\nLength: " .. tostring(arrayEmote.Length) .. "\nLooping: " .. tostring(arrayEmote.Looped) .. "\nPriority: " .. tostring(arrayEmote.Priority) .. "\nEmote speed: " .. tostring(arrayEmote.Speed) .. "\nTime Position: " .. tostring(arrayEmote.TimePosition),"")
 	end
 end)
 end)
