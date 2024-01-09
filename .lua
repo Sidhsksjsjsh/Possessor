@@ -1855,6 +1855,12 @@ end)
 game.Players.PlayerRemoving:Connect(function(player)
 	resetHandler()
 end)
+
+task.spawn(function()
+	while wait() do
+		animationInformmation:Set("Emote ID: " .. tostring(foremote.AnimationId) .. "\nIs Playing: " .. tostring(arrayEmote.IsPlaying) .. "\nLength: " .. tostring(arrayEmote.Length) .. "\nLooping: " .. tostring(arrayEmote.Looped) .. "\nPriority: " .. tostring(arrayEmote.Priority) .. "\nEmote speed: " .. tostring(arrayEmote.Speed) .. "\nTime Position: " .. tostring(arrayEmote.TimePosition),"")
+	end
+end)
 end)
 
 if not ABCLOL then
