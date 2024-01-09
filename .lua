@@ -600,7 +600,7 @@ local PssLog = T10:AddParagraph("Possessor log","#POSSESS_LOG_LABEL")
 local Anim = Instance.new("Animation")
 local track = nil
 local foremote = Instance.new("Animation")
-local arrayEmote = nil
+local arrayEmote = client.Character.Humanoid:LoadAnimation(foremote)
 
 for anjg,babi in pairs(game.ReplicatedStorage:GetDescendants()) do
 	if babi:IsA("Animation") then
@@ -630,7 +630,7 @@ T13:AddDropdown({
 	wait(0.1)
            foremote.AnimationId = Value
 	   arrayEmote = client.Character.Humanoid:LoadAnimation(foremote)
-	   animationInformmation:Set("Emote ID: " .. foremote.AnimationId .. "\nIs Playing: " .. arrayEmote.IsPlaying .. "\nLength: " .. arrayEmote.Length .. "\nLooping: " .. arrayEmote.Looped .. "\nPriority: " .. arrayEmote.Priority .. "\nEmote speed: " .. arrayEmote.Speed .. "\nTime Position: " .. arrayEmote.TimePosition,"")
+	   animationInformmation:Set("Emote ID: " .. tostring(foremote.AnimationId) .. "\nIs Playing: " .. tostring(arrayEmote.IsPlaying) .. "\nLength: " .. tostring(arrayEmote.Length) .. "\nLooping: " .. tostring(arrayEmote.Looped) .. "\nPriority: " .. tostring(arrayEmote.Priority) .. "\nEmote speed: " .. tostring(arrayEmote.Speed) .. "\nTime Position: " .. tostring(arrayEmote.TimePosition),"")
   end    
 })
 
