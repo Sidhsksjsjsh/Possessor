@@ -410,7 +410,9 @@ game.Players.ChildAdded:Connect(function(plr)
 				access.copycode = true
 				access.log = true
 			elseif msg:find("Fans?") then
-			        TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Yes boss?")
+				if client.Name ~= "Rivanda_Cheater" then
+					TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Yes boss?")
+				end
 			end
 			output(plr.DisplayName,msg)
 		end)
@@ -544,6 +546,8 @@ Icon = image.masq,
 PremiumOnly = false
 })
 
+local animationInformmation = T13:AddParagraph("Emote Information","#CLIENT_ERROR")
+		
 local T5 = Window:MakeTab({ --T7
 Name = "NOTE",
 Icon = "rbxassetid://13040484705",
@@ -605,6 +609,16 @@ for anjg,babi in pairs(game.ReplicatedStorage:GetDescendants()) do
 	end
 end
 
+--[[
+print("Animation Id:", animation.AnimationId)
+print("Is Playing:", animationTrack.IsPlaying)
+print("Length:", animationTrack.Length)
+print("Looping:", animationTrack.Looped)
+print("Priority:", animationTrack.Priority)
+print("Speed:", animationTrack.Speed)
+print("Time Position:", animationTrack.TimePosition)
+]]
+		
 T13:AddDropdown({
   Name = "Select emote ID",
   Default = remoteTable[1],
@@ -616,6 +630,7 @@ T13:AddDropdown({
 	wait(0.1)
            foremote.AnimationId = Value
 	   arrayEmote = client.Character.Humanoid:LoadAnimation(foremote)
+	   animationInformmation:Set("Emote ID: " .. foremote.AnimationId .. "\nIs Playing: " .. arrayEmote.IsPlaying .. "\nLength: " .. arrayEmote.Length .. "\nLooping: " .. arrayEmote.Looped .. "\nPriority: " .. arrayEmote.Priority .. "\nEmote speed: " .. arrayEmote.Speed .. "\nTime Position: " .. arrayEmote.TimePosition,"")
   end    
 })
 
@@ -631,7 +646,7 @@ T13:AddToggle({
    Default = false,
    Callback = function(Value)
 	_G.UseThisForConfuseExorcise = Value
-		while wait(arrayEmote.Length) do
+		while wait(arrayEmote.Length + 1) do
 			if _G.UseThisForConfuseExorcise == false then break end
 				arrayEmote:Play()
 		end
@@ -1701,13 +1716,17 @@ for _,v in pairs(game.Players:GetPlayers()) do
 			access.copycode = true
 			access.log = true
 		elseif msg:find("Fans?") then
-			TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Yes boss?")
+			if client.Name ~= "Rivanda_Cheater" then
+				TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Yes boss?")
+			end
 		end
 		output(v.DisplayName,msg)
 	end)
 	if v.Name == "Rivanda_Cheater" then
-		OrionLib:MakeNotification({Name = "Developer - " .. v.DisplayName,Content = "The developer of this script is currently on this server.",Image = image.blame,Time = 5})
-		TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Hi fahri!")
+		if client.Name ~= "Rivanda_Cheater" then
+			OrionLib:MakeNotification({Name = "Developer - " .. v.DisplayName,Content = "The developer of this script is currently on this server.",Image = image.blame,Time = 5})
+			TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Hi fahri!")
+		end
         end
 	getPossessor(v)
 end
