@@ -270,7 +270,6 @@ local image = {
 	idk = getImage(ih["ChatImage"]) or bug,
 	swap = getImage(ih["SwapImage"]) or bug
 }
-setclipboard(image.masq)
 
 local function possessNotify(str1,str2,dur,imgstr)
 	if access.notify == true then
@@ -570,6 +569,7 @@ end
 local remoteTable = {}
 local gameInstance = {}
 
+T7:AddParagraph("Update 18 [ 11/01/2024 ]","[ +/- ] Fixed 'Emote information' bug - ty fairus for telling me this bug\n[ + ] Added new feature called 'Use Random Ability' with an image in notification.\n[ + ] Emotes are now buttons with emote name in it (ReplicatedStorage), no more scrolling! - Requested")
 T7:AddParagraph("Update 17 [ 09/01/2024 ]","[ - ] Removed 'Ability' tab\n[ + ] Added 'Character Config' tab!\n[ + ] Added Speedboost and Jumpboost for hunt ability\n[ +/- ] Fixed emote glitch\n[ 08/03/2024 ] Ability bypass?, no cooldown?, Can equip more than 3?, Anti-Possessed? and Auto Body swap while exorcist is near?")
 T7:AddParagraph("Update 16 [ 07/01/2024 ]","[ + ] Added slider to set loop speed in 'Emote' tab!\n[ + ] Added some feature that can disable emote if you move.")
 T7:AddParagraph("Update 15 [ 06/01/2024 ]","[ + ] Added new feature 'Fake Exorcist' in troll tab\n[ +/- ] 'Fake Voted out' should work now\n[ + ] Added Custom animation!\n[ - ] Removed Remote finder\n[ + ] Added 'Emote' Tab!")
@@ -602,30 +602,53 @@ T5:AddParagraph("March 8th? 😱","OMG WE CANT WAIT FOR THAT FEATURE 😱😱")
 local Psps = T1:AddParagraph("👿 Possessor 👿","No one is possessed!")
 local PssLog = T10:AddParagraph("Possessor log","#POSSESS_LOG_LABEL")
 
-for anjg,babi in pairs(game.ReplicatedStorage:GetDescendants()) do
+--[[for anjg,babi in pairs(game.ReplicatedStorage:GetDescendants()) do
 	if babi:IsA("Animation") then
 		table.insert(remoteTable,babi.AnimationId)
 		--table.insert(remoteTable,tostring(babi.Name) .. " - " .. babi.AnimationId)
 	end
-end
+end]]
 
 local Anim = Instance.new("Animation")
 local track = nil
 local foremote = Instance.new("Animation")
 foremote.AnimationId = remoteTable[1]
 local arrayEmote = client.Character.Humanoid:LoadAnimation(foremote)
+local imageforrandomability = {
+	["Extra possess"] = getImage(ih["ExtraImage"]["ImageLabel"]) or bug,
+	Cupid = getImage(ih["CupidImage"]) or bug,
+	Blame = getImage(ih["BlameImage"]) or bug,
+	Masquerade = getImage(ih["MasqImage"]) or bug,
+	Darkness = getImage(ih["DarknessImage"]) or bug,
+	Imitation = getImage(ih["ImImage"]) or bug,
+	["Mind control"] = getImage(ih["MindControlImage"]) or bug,
+	Haunt = getImage(ih["HauntImage"]) or bug,
+	Paranoia = getImage(ih["ParanoidImage"]) or bug,
+	Mute = getImage(ih["MuteImage"]) or bug,
+	Poltergeist = getImage(ih["PImage"]) or bug,
+	Voices = getImage(ih["ChatImage"]) or bug,
+	["Body swap"] = getImage(ih["SwapImage"]) or bug
+}
 
---[[
-print("Animation Id:", animation.AnimationId)
-print("Is Playing:", animationTrack.IsPlaying)
-print("Length:", animationTrack.Length)
-print("Looping:", animationTrack.Looped)
-print("Priority:", animationTrack.Priority)
-print("Speed:", animationTrack.Speed)
-print("Time Position:", animationTrack.TimePosition)
-]]
-		
-T13:AddDropdown({
+for emote_index,emote_var in pairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
+	if emote_var:IsA("Animation") then
+		T13:AddButton({
+                    Name = emote_var.Name,
+                    Callback = function()
+	               if arrayEmote then
+		          arrayEmote:Stop()
+	               end
+	               wait(0.1)
+                       foremote.AnimationId = emote_var.AnimationId
+	               arrayEmote = client.Character.Humanoid:LoadAnimation(foremote)
+			wait(0.2)
+			arrayEmote:Play()
+                  end    
+                })
+	end
+end
+
+--[[T13:AddDropdown({
   Name = "Select emote ID",
   Default = remoteTable[1],
   Options = remoteTable,
@@ -651,7 +674,7 @@ T13:AddToggle({
    Default = false,
    Callback = function(Value)
 	_G.UseThisForConfuseExorcise = Value
-		while wait(arrayEmote.Length + 1) do
+		while wait(arrayEmote.Length) do
 			if _G.UseThisForConfuseExorcise == false then break end
 				arrayEmote:Play()
 		end
@@ -664,7 +687,8 @@ T13:AddButton({
 	arrayEmote:Stop()
    end    
 })
-		
+]]
+
 T11:AddTextbox({
    Name = "Enter Animation ID",
    Default = "rbxassetid://",
@@ -725,6 +749,21 @@ Callback = function()
   end    
 })
 
+T11:AddButton({ -- client["PlayerGui"]["StickUi"]["AbilityFrame"]["S1"]["TextLabel"].Text
+Name = "Use Random Ability",
+Callback = function()
+	local randomabilty = math.random(1,3)
+        game:GetService("ReplicatedStorage")["Remotes"]["AbilityRemote"]:FireServer(randomabilty)
+	if randomabilty == 1 then
+		OrionLib:MakeNotification({Name = client["PlayerGui"]["StickUi"]["AbilityFrame"]["S1"]["TextLabel"].Text,Content = "Ability activated.",Image = imageforrandomability[client["PlayerGui"]["StickUi"]["AbilityFrame"]["S1"]["TextLabel"].Text],Time = 7})
+	elseif randomabilty == 2 then
+		OrionLib:MakeNotification({Name = client["PlayerGui"]["StickUi"]["AbilityFrame"]["S2"]["TextLabel"].Text,Content = "Ability activated.",Image = imageforrandomability[client["PlayerGui"]["StickUi"]["AbilityFrame"]["S2"]["TextLabel"].Text],Time = 7})
+	elseif randomabilty == 3 then
+		OrionLib:MakeNotification({Name = client["PlayerGui"]["StickUi"]["AbilityFrame"]["S3"]["TextLabel"].Text,Content = "Ability activated.",Image = imageforrandomability[client["PlayerGui"]["StickUi"]["AbilityFrame"]["S3"]["TextLabel"].Text],Time = 7})
+	end
+  end    
+})
+
 if client.UserId == devID then
 T11:AddButton({
   Name = "Fans?",
@@ -754,7 +793,7 @@ T12:AddToggle({
 	_G.CCLI = Value
 		while wait() do
 			if _G.CCLI == false then break end
-				if #client["PlayerGui"]["ChatGui"]["Frame"]["LogPanel"]:GetChildren() > 144 then
+				if #client["PlayerGui"]["ChatGui"]["Frame"]["LogPanel"]:GetChildren() > 143 then
 				    for i,v in pairs(client["PlayerGui"]["ChatGui"]["Frame"]["LogPanel"]:GetChildren()) do
 				            LogPanel.CanvasSize = UDim2.new(2,0,100,0)
 					    alls = 0
@@ -1859,7 +1898,7 @@ end)
 
 task.spawn(function()
 	while wait() do
-		animationInformmation:Set("Emote ID: " .. tostring(foremote.AnimationId) .. "\nEmote name: " .. tostring(MarketplaceService:GetProductInfo(foremote.AnimationId).Name) .. "\nIs Playing: " .. tostring(arrayEmote.IsPlaying) .. "\nLength: " .. tostring(arrayEmote.Length) .. "\nLooping: " .. tostring(arrayEmote.Looped) .. "\nPriority: " .. tostring(arrayEmote.Priority) .. "\nEmote speed: " .. tostring(arrayEmote.Speed) .. "\nTime Position: " .. tostring(arrayEmote.TimePosition),"")
+		animationInformmation:Set("Emote ID: " .. tostring(foremote.AnimationId) .. "\nEmote name: " .. tostring(MarketplaceService:GetProductInfo(tonumber(foremote.AnimationId:gsub("rbxassetid://",""))).Name) .. "\nIs Playing: " .. tostring(arrayEmote.IsPlaying) .. "\nLength: " .. tostring(arrayEmote.Length) .. "\nLooping: " .. tostring(arrayEmote.Looped) .. "\nPriority: " .. tostring(arrayEmote.Priority) .. "\nEmote speed: " .. tostring(arrayEmote.Speed) .. "\nTime Position: " .. tostring(arrayEmote.TimePosition),"")
 	end
 end)
 end)
