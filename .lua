@@ -449,15 +449,17 @@ for i,v in pairs(game:GetService("Players"):GetPlayers()) do
         TextLabel.BackgroundColor3 = Color3.new(1,1,1)
         TextLabel.BackgroundTransparency = 1
         TextLabel.Size = UDim2.new(1, 0, 1, 0)
-        TextLabel.Text = v.DisplayName .. " ( @" .. v.Name .. " )"
+        TextLabel.Text = v.DisplayName .. "\n@" .. v.Name
         TextLabel.TextColor3 = Color3.new(1, 0, 0)
         TextLabel.TextScaled = false
-
+        TextLabel.Name = "UI 1"
+	
 	img.Parent = TextLabel
         img.BackgroundColor3 = Color3.new(1,1,1)
         img.BackgroundTransparency = 1
         img.Size = UDim2.new(0,18,0,18)
         img.Image = image.masq
+	img.Name = "UI 2"
 end
 end
 
@@ -1815,6 +1817,7 @@ str.CharacterAdded:Connect(function(character)
      logNmbr = logNmbr + 1
      LogStr = LogStr .. "\n[ " .. tostring(os.date("%X")) .. " ] #" .. logNmbr .. " : " .. str.DisplayName
      PssLog:Set(LogStr,"")
+	character["Head"]["For ESP"]["UI 1"]["UI 2"].Image = image.extrapossess
      PlayerESP()
 end)
 end
