@@ -631,7 +631,7 @@ local imageforrandomability = {
 }
 
 for a,o in pairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
-	if emote_var:IsA("Animation") then
+	if o:IsA("Animation") then
 		T13:AddButton({
                     Name = o.Name,
                     Callback = function()
