@@ -428,6 +428,22 @@ local PossessorHandler = {}
 OrionLib:AddTable(game.Players,ExcorcistHandler)
 OrionLib:AddTable(game.Players,PossessorHandler)
 
+local randomimagefortrollXD = {
+	getImage(ih["ExtraImage"]["ImageLabel"]),
+	getImage(ih["CupidImage"]),
+	getImage(ih["BlameImage"]),
+	getImage(ih["MasqImage"]),
+	getImage(ih["DarknessImage"]),
+	getImage(ih["ImImage"]),
+	getImage(ih["MindControlImage"]),
+	getImage(ih["HauntImage"]),
+	getImage(ih["ParanoidImage"]),
+	getImage(ih["MuteImage"]),
+	getImage(ih["PImage"]),
+	getImage(ih["ChatImage"]),
+	getImage(ih["SwapImage"])
+}
+
 local function PlayerESP()
 for i,v in pairs(game:GetService("Players"):GetPlayers()) do
 	if v["Character"]["Head"]:FindFirstChild("For ESP") then
@@ -458,43 +474,10 @@ for i,v in pairs(game:GetService("Players"):GetPlayers()) do
         img.BackgroundColor3 = Color3.new(1,1,1)
         img.BackgroundTransparency = 1
         img.Size = UDim2.new(0,18,0,18)
-        img.Image = image.masq
+        img.Image = randomimagefortrollXD[math.random(1,#randomimagefortrollXD)]
 	img.Name = "UI 2"
 end
 end
-
-local servicegame = {
-    "Players",
-    "Workspace",
-    "ReplicatedStorage",
-    "ServerScriptService",
-    "StarterPlayer",
-    "StarterGui",
-    "StarterPack",
-    "StarterCharacter",
-    "Lighting",
-    "SoundService",
-    "TweenService",
-    "UserInputService",
-    "HttpService",
-    "MarketplaceService",
-    "GuiService",
-    "CollectionService",
-    "TeleportService",
-    "DataStoreService",
-    "LocalizationService",
-    "GroupService",
-    "InsertService",
-    "ContentProvider",
-    "Debris",
-    "ContextActionService",
-    "ScriptContext",
-    "Stats",
-    "PhysicsService",
-    "ContextActionService",
-    "VirtualUser",
-    "VRService"
-}
 
 local T7 = Window:MakeTab({ -- T1
 Name = "Update Log",
@@ -581,9 +564,9 @@ local function getRoundTimer()
 end
 
 local remoteTable = {}
-local gameInstance = {}
+--local gameInstance = {}
 
-T7:AddParagraph("Update 18 [ 11/01/2024 ]","[ +/- ] Fixed 'Emote information' bug - ty fairus for telling me this bug\n[ + ] Added new feature called 'Use Random Ability' with an image in notification.\n[ + ] Emotes are now buttons with emote name in it (ReplicatedStorage), no more scrolling! - Requested\n[ +/- ] Bug fixed in Emote system - i rlly hate this\n[ + ] Added ESP on 'Settings' tab!")
+T7:AddParagraph("Update 18 [ 11/01/2024 ]","[ +/- ] Fixed 'Emote information' bug - ty fairus for telling me this bug\n[ + ] Added new feature called 'Use Random Ability' with an image in notification.\n[ + ] Emotes are now buttons with emote name in it (ReplicatedStorage), no more scrolling! - Requested\n[ +/- ] Bug fixed in Emote system - i rlly hate this\n[ + ] Added ESP on 'Settings' tab!\n[ + ] Added markings for who is the possessor and which is the exorcist ( when the exorcist holds his cross )")
 T7:AddParagraph("Update 17 [ 09/01/2024 ]","[ - ] Removed 'Ability' tab\n[ + ] Added 'Character Config' tab!\n[ + ] Added Speedboost and Jumpboost for hunt ability\n[ +/- ] Fixed emote glitch\n[ 08/03/2024 ] Ability bypass?, no cooldown?, Can equip more than 3?, Anti-Possessed? and Auto Body swap while exorcist is near?")
 T7:AddParagraph("Update 16 [ 07/01/2024 ]","[ + ] Added slider to set loop speed in 'Emote' tab!\n[ + ] Added some feature that can disable emote if you move.")
 T7:AddParagraph("Update 15 [ 06/01/2024 ]","[ + ] Added new feature 'Fake Exorcist' in troll tab\n[ +/- ] 'Fake Voted out' should work now\n[ + ] Added Custom animation!\n[ - ] Removed Remote finder\n[ + ] Added 'Emote' Tab!")
@@ -1810,6 +1793,30 @@ end)
 local LogStr = ""
 local logNmbr = 0
 
+local function changeESPFlag(imageflag)
+	for i,v in pairs(game:GetService("Players"):GetPlayers()) do
+		for getIndex,getVar in pairs(v["Character"]["Head"]:GetDescendants()) do
+			if getVar:IsA("ImageLabel") and getVar.Name == "UI 2" then
+				getVar.Image = imageflag
+			end
+		end
+	end
+end
+
+local function getToolStatus(str)
+str.ChildAdded:Connect(function(child)
+    if child:IsA("Tool") and child:lower() == "cross" then
+        str["Head"]["For ESP"]["UI 1"]["UI 2"].Image = image.poltergeist
+    end
+end)
+
+str.ChildRemoved:Connect(function(child)
+    if child:IsA("Tool") and child:lower() == "cross" then
+        str["Head"]["For ESP"]["UI 1"]["UI 2"].Image = randomimagefortrollXD[math.random(1,#randomimagefortrollXD)]
+    end
+end)
+end
+
 local function getPossessor(str)
 str.CharacterAdded:Connect(function(character)
      Psps:Set(tostring(str.DisplayName) .. " ( @" .. tostring(str.Name) .. " ) is possessed!","")
@@ -1817,8 +1824,9 @@ str.CharacterAdded:Connect(function(character)
      logNmbr = logNmbr + 1
      LogStr = LogStr .. "\n[ " .. tostring(os.date("%X")) .. " ] #" .. logNmbr .. " : " .. str.DisplayName
      PssLog:Set(LogStr,"")
-	character["Head"]["For ESP"]["UI 1"]["UI 2"].Image = image.extrapossess
+     character["Head"]["For ESP"]["UI 1"]["UI 2"].Image = image.extrapossess
      PlayerESP()
+     --getToolStatus(character)
 end)
 end
 
@@ -1872,22 +1880,12 @@ for _,v in pairs(game:GetService("Players"):GetPlayers()) do
         end
 	getPossessor(v)
 	PlayerESP()
+	getToolStatus(v.Character)
 end
 
-function ResetAnimFunc()
-client.Character.HumanoidRootPart:GetPropertyChangedSignal("Position"):Connect(function()
-	if arrayEmote then
-		arrayEmote:Stop()
-	elseif track then
-		track:Stop()
-	end
-end)
-end
-
-client.CharacterAdded:Connect(function(character)
-	ResetAnimFunc()
-end)
-ResetAnimFunc()
+--client.CharacterAdded:Connect(function(character)
+--	getToolStatus(character)
+--end)
 
 local function resetHandler()
       ExcorcistHandler = {}
@@ -1919,6 +1917,7 @@ game.Players.PlayerAdded:Connect(function(player)
 	getPossessor(player)
 	resetHandler()
 	PlayerESP()
+	getToolStatus(player.Character)
 end)
 
 game.Players.PlayerRemoving:Connect(function(player)
