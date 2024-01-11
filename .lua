@@ -429,7 +429,11 @@ OrionLib:AddTable(game.Players,PossessorHandler)
 
 local function PlayerESP()
 for i,v in pairs(game:GetService("Players"):GetPlayers()) do
-    local BillboardGui = Instance.new('BillboardGui')
+	if v["Character"]["Head"]:FindFirstChild("For ESP") then
+	   v["Character"]["Head"]["For ESP"]:Destroy()
+	end
+	
+        local BillboardGui = Instance.new('BillboardGui')
         local TextLabel = Instance.new('TextLabel')
 	local img = Instance.new('ImageLabel')
         
@@ -437,7 +441,9 @@ for i,v in pairs(game:GetService("Players"):GetPlayers()) do
         BillboardGui.AlwaysOnTop = true
         BillboardGui.Size = UDim2.new(0, 50, 0, 50)
         BillboardGui.StudsOffset = Vector3.new(0,2,0)
-        
+        BillboardGui.Enabled = false
+	BillboardGui.Name = "For ESP"
+	
         TextLabel.Parent = BillboardGui
         TextLabel.BackgroundColor3 = Color3.new(1,1,1)
         TextLabel.BackgroundTransparency = 1
@@ -818,6 +824,17 @@ T12:AddToggle({
    end    
 })
 
+T12:AddToggle({
+   Name = "ESP",
+   Default = false,
+   Callback = function(Value)
+	if v["Character"]["Head"]:FindFirstChild("For ESP") then
+	   v["Character"]["Head"]["For ESP"].Enabled = Value
+	else
+	   OrionLib:MakeNotification({Name = "Cannot find ESP instance",Content = "Error",Image = image.mindcontrol,Time = 5})
+	end
+   end    
+})
 --[[
 T11:AddToggle({
    Name = "Floating Head",
@@ -1445,13 +1462,6 @@ local CLBCC = T1:AddToggle({
   end    
 })
 
-T1:AddButton({
-  Name = "ESP",
-  Callback = function()
-	PlayerESP()
-   end    
-})
-
 local posHandler = T2:AddDropdown({
   Name = "Select player to Possessor",
   Default = ExcorcistHandler[1],
@@ -1807,7 +1817,7 @@ str.CharacterAdded:Connect(function(character)
 end)
 end
 
-for _,v in pairs(game.Players:GetPlayers()) do
+for _,v in pairs(game:GetService("Players"):GetPlayers()) do
 	v.Chatted:Connect(function(msg)
 		if msg:find("Code") or msg:find("cod") or msg:find("Cod") or msg:find("code") or msg:find("CODE") and v.Name ~= client.Name then
 			if confirmsent == true then
@@ -1856,6 +1866,7 @@ for _,v in pairs(game.Players:GetPlayers()) do
 		end
         end
 	getPossessor(v)
+	PlayerESP()
 end
 
 function ResetAnimFunc()
@@ -1902,6 +1913,7 @@ game.Players.PlayerAdded:Connect(function(player)
         end
 	getPossessor(player)
 	resetHandler()
+	PlayerESP()
 end)
 
 game.Players.PlayerRemoving:Connect(function(player)
