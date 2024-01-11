@@ -569,7 +569,7 @@ end
 local remoteTable = {}
 local gameInstance = {}
 
-T7:AddParagraph("Update 18 [ 11/01/2024 ]","[ +/- ] Fixed 'Emote information' bug - ty fairus for telling me this bug\n[ + ] Added new feature called 'Use Random Ability' with an image in notification.\n[ + ] Emotes are now buttons with emote name in it (ReplicatedStorage), no more scrolling! - Requested")
+T7:AddParagraph("Update 18 [ 11/01/2024 ]","[ +/- ] Fixed 'Emote information' bug - ty fairus for telling me this bug\n[ + ] Added new feature called 'Use Random Ability' with an image in notification.\n[ + ] Emotes are now buttons with emote name in it (ReplicatedStorage), no more scrolling! - Requested\n[ +/- ] Bug fixed in Emote system - i rlly hate this")
 T7:AddParagraph("Update 17 [ 09/01/2024 ]","[ - ] Removed 'Ability' tab\n[ + ] Added 'Character Config' tab!\n[ + ] Added Speedboost and Jumpboost for hunt ability\n[ +/- ] Fixed emote glitch\n[ 08/03/2024 ] Ability bypass?, no cooldown?, Can equip more than 3?, Anti-Possessed? and Auto Body swap while exorcist is near?")
 T7:AddParagraph("Update 16 [ 07/01/2024 ]","[ + ] Added slider to set loop speed in 'Emote' tab!\n[ + ] Added some feature that can disable emote if you move.")
 T7:AddParagraph("Update 15 [ 06/01/2024 ]","[ + ] Added new feature 'Fake Exorcist' in troll tab\n[ +/- ] 'Fake Voted out' should work now\n[ + ] Added Custom animation!\n[ - ] Removed Remote finder\n[ + ] Added 'Emote' Tab!")
@@ -612,7 +612,7 @@ end]]
 local Anim = Instance.new("Animation")
 local track = nil
 local foremote = Instance.new("Animation")
-foremote.AnimationId = remoteTable[1]
+foremote.AnimationId = "rbxassetid://091989329"
 local arrayEmote = client.Character.Humanoid:LoadAnimation(foremote)
 local imageforrandomability = {
 	["Extra possess"] = getImage(ih["ExtraImage"]["ImageLabel"]) or bug,
@@ -630,16 +630,16 @@ local imageforrandomability = {
 	["Body swap"] = getImage(ih["SwapImage"]) or bug
 }
 
-for emote_index,emote_var in pairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
+for a,o in pairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
 	if emote_var:IsA("Animation") then
 		T13:AddButton({
-                    Name = emote_var.Name,
+                    Name = o.Name,
                     Callback = function()
 	               if arrayEmote then
 		          arrayEmote:Stop()
 	               end
 	               wait(0.1)
-                       foremote.AnimationId = emote_var.AnimationId
+                       foremote.AnimationId = o.AnimationId
 	               arrayEmote = client.Character.Humanoid:LoadAnimation(foremote)
 			wait(0.2)
 			arrayEmote:Play()
