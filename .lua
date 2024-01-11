@@ -248,7 +248,8 @@ local access = {
 	copycode = true,
 	log = true,
 	gonelog = false,
-	notify = false
+	notify = false,
+	esp = false
 }
 
 local function getImage(str)
@@ -441,7 +442,7 @@ for i,v in pairs(game:GetService("Players"):GetPlayers()) do
         BillboardGui.AlwaysOnTop = true
         BillboardGui.Size = UDim2.new(0, 50, 0, 50)
         BillboardGui.StudsOffset = Vector3.new(0,2,0)
-        BillboardGui.Enabled = false
+        BillboardGui.Enabled = access.esp
 	BillboardGui.Name = "For ESP"
 	
         TextLabel.Parent = BillboardGui
@@ -580,7 +581,7 @@ end
 local remoteTable = {}
 local gameInstance = {}
 
-T7:AddParagraph("Update 18 [ 11/01/2024 ]","[ +/- ] Fixed 'Emote information' bug - ty fairus for telling me this bug\n[ + ] Added new feature called 'Use Random Ability' with an image in notification.\n[ + ] Emotes are now buttons with emote name in it (ReplicatedStorage), no more scrolling! - Requested\n[ +/- ] Bug fixed in Emote system - i rlly hate this")
+T7:AddParagraph("Update 18 [ 11/01/2024 ]","[ +/- ] Fixed 'Emote information' bug - ty fairus for telling me this bug\n[ + ] Added new feature called 'Use Random Ability' with an image in notification.\n[ + ] Emotes are now buttons with emote name in it (ReplicatedStorage), no more scrolling! - Requested\n[ +/- ] Bug fixed in Emote system - i rlly hate this\n[ + ] Added ESP on 'Settings' tab!")
 T7:AddParagraph("Update 17 [ 09/01/2024 ]","[ - ] Removed 'Ability' tab\n[ + ] Added 'Character Config' tab!\n[ + ] Added Speedboost and Jumpboost for hunt ability\n[ +/- ] Fixed emote glitch\n[ 08/03/2024 ] Ability bypass?, no cooldown?, Can equip more than 3?, Anti-Possessed? and Auto Body swap while exorcist is near?")
 T7:AddParagraph("Update 16 [ 07/01/2024 ]","[ + ] Added slider to set loop speed in 'Emote' tab!\n[ + ] Added some feature that can disable emote if you move.")
 T7:AddParagraph("Update 15 [ 06/01/2024 ]","[ + ] Added new feature 'Fake Exorcist' in troll tab\n[ +/- ] 'Fake Voted out' should work now\n[ + ] Added Custom animation!\n[ - ] Removed Remote finder\n[ + ] Added 'Emote' Tab!")
@@ -831,6 +832,7 @@ T12:AddToggle({
 	for i,v in pairs(game:GetService("Players"):GetPlayers()) do
 		if v["Character"]["Head"]:FindFirstChild("For ESP") then
 			v["Character"]["Head"]["For ESP"].Enabled = Value
+			access.esp = Value
 		end
 	end
    end    
@@ -1813,7 +1815,7 @@ str.CharacterAdded:Connect(function(character)
      logNmbr = logNmbr + 1
      LogStr = LogStr .. "\n[ " .. tostring(os.date("%X")) .. " ] #" .. logNmbr .. " : " .. str.DisplayName
      PssLog:Set(LogStr,"")
-     --T10:AddParagraph("Possessor log [ " .. tostring(os.date("%X")) .. " ]",tostring(str.DisplayName) .. " is possessed!")
+     PlayerESP()
 end)
 end
 
