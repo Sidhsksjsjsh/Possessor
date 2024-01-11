@@ -427,13 +427,12 @@ local PossessorHandler = {}
 OrionLib:AddTable(game.Players,ExcorcistHandler)
 OrionLib:AddTable(game.Players,PossessorHandler)
 
-local function addPARTESP(path,name)
-for i,v in pairs(game.Workspace:GetDescendants()) do
-    if v.Name:lower() == path and v:IsA("BasePart") then
-        local BillboardGui = Instance.new('BillboardGui')
+local function PlayerESP()
+for i,v in pairs(game:GetService("Players"):GetPlayers()) do
+    local BillboardGui = Instance.new('BillboardGui')
         local TextLabel = Instance.new('TextLabel')
         
-        BillboardGui.Parent = v.Parent
+        BillboardGui.Parent = v["Character"]["Head"]
         BillboardGui.AlwaysOnTop = true
         BillboardGui.Size = UDim2.new(0, 50, 0, 50)
         BillboardGui.StudsOffset = Vector3.new(0,2,0)
@@ -442,10 +441,9 @@ for i,v in pairs(game.Workspace:GetDescendants()) do
         TextLabel.BackgroundColor3 = Color3.new(1,1,1)
         TextLabel.BackgroundTransparency = 1
         TextLabel.Size = UDim2.new(1, 0, 1, 0)
-        TextLabel.Text = name
+        TextLabel.Text = v.DisplayName .. " ( @" .. v.Name .. " )"
         TextLabel.TextColor3 = Color3.new(1, 0, 0)
         TextLabel.TextScaled = false
-    end
 end
 end
 
