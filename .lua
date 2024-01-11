@@ -430,7 +430,7 @@ OrionLib:AddTable(game.Players,PossessorHandler)
 local function PlayerESP()
 for i,v in pairs(game:GetService("Players"):GetPlayers()) do
 	if v["Character"]["Head"]:FindFirstChild("For ESP") then
-	   v["Character"]["Head"]:Destroy()
+	   v["Character"]["Head"]["For ESP"]:Destroy()
 	end
 	
         local BillboardGui = Instance.new('BillboardGui')
@@ -830,9 +830,7 @@ T12:AddToggle({
    Callback = function(Value)
 	for i,v in pairs(game:GetService("Players"):GetPlayers()) do
 		if v["Character"]["Head"]:FindFirstChild("For ESP") then
-			v["Character"]["Head"].Enabled = Value
-		else
-			OrionLib:MakeNotification({Name = "Cannot find ESP instance",Content = "Error",Image = image.mindcontrol,Time = 5})
+			v["Character"]["Head"]["For ESP"].Enabled = Value
 		end
 	end
    end    
