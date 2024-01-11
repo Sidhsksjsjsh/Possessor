@@ -429,15 +429,15 @@ OrionLib:AddTable(game.Players,PossessorHandler)
 
 local function PlayerESP()
 for i,v in pairs(game:GetService("Players"):GetPlayers()) do
-	if v:FindFirstChild("For ESP") then
-	   v:Destroy()
+	if v["Character"]["Head"]:FindFirstChild("For ESP") then
+	   v["Character"]["Head"]:Destroy()
 	end
 	
         local BillboardGui = Instance.new('BillboardGui')
         local TextLabel = Instance.new('TextLabel')
 	local img = Instance.new('ImageLabel')
         
-        BillboardGui.Parent = v
+        BillboardGui.Parent = v["Character"]["Head"]
         BillboardGui.AlwaysOnTop = true
         BillboardGui.Size = UDim2.new(0, 50, 0, 50)
         BillboardGui.StudsOffset = Vector3.new(0,2,0)
@@ -828,10 +828,12 @@ T12:AddToggle({
    Name = "ESP",
    Default = false,
    Callback = function(Value)
-	if v:FindFirstChild("For ESP") then
-	   v.Enabled = Value
-	else
-	   OrionLib:MakeNotification({Name = "Cannot find ESP instance",Content = "Error",Image = image.mindcontrol,Time = 5})
+	for i,v in pairs(game:GetService("Players"):GetPlayers()) do
+		if v["Character"]["Head"]:FindFirstChild("For ESP") then
+			v["Character"]["Head"].Enabled = Value
+		else
+			OrionLib:MakeNotification({Name = "Cannot find ESP instance",Content = "Error",Image = image.mindcontrol,Time = 5})
+		end
 	end
    end    
 })
