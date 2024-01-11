@@ -431,6 +431,7 @@ local function PlayerESP()
 for i,v in pairs(game:GetService("Players"):GetPlayers()) do
     local BillboardGui = Instance.new('BillboardGui')
         local TextLabel = Instance.new('TextLabel')
+	local img = Instance.new('ImageLabel')
         
         BillboardGui.Parent = v["Character"]["Head"]
         BillboardGui.AlwaysOnTop = true
@@ -444,6 +445,12 @@ for i,v in pairs(game:GetService("Players"):GetPlayers()) do
         TextLabel.Text = v.DisplayName .. " ( @" .. v.Name .. " )"
         TextLabel.TextColor3 = Color3.new(1, 0, 0)
         TextLabel.TextScaled = false
+
+	img.Parent = TextLabel
+        img.BackgroundColor3 = Color3.new(1,1,1)
+        img.BackgroundTransparency = 1
+        img.Size = UDim2.new(0,18,0,18)
+        img.Image = image.masq
 end
 end
 
@@ -1436,6 +1443,13 @@ local CLBCC = T1:AddToggle({
   Callback = function(Value)
     ChatGui.Enabled = Value
   end    
+})
+
+T1:AddButton({
+  Name = "ESP",
+  Callback = function()
+	PlayerESP()
+   end    
 })
 
 local posHandler = T2:AddDropdown({
