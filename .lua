@@ -450,7 +450,7 @@ game.Players.ChildAdded:Connect(function(plr)
 						TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � | " .. tostring(codeHandler) .. " | �")
 					end
 				else
-					OrionLib:MakeNotification({Name = "Voices",Content = "Auto sent disabled",Image = image.idk,Time = 5})
+					OrionLib:MakeNotification({Name = "Voices",Content = "Auto sent " .. color("disabled",HTMLcolors["Tomato"]),Image = image.idk,Time = 5})
 				end
 			elseif msg:find(codeHandler) and plr.Name ~= client.Name then
 				autoChangeCode(msg,plr)
@@ -659,8 +659,8 @@ T5:AddParagraph("Cross-permission enabled","now u can disabled or enabled out fe
 T5:AddParagraph("'Auto clear chatlogs' feature","This feature will automatically delete logs from chats when the number reaches more than 144")
 T5:AddParagraph("March 8th? 😱","OMG WE CANT WAIT FOR THAT FEATURE 😱😱")
 
-local Psps = T1:AddParagraph("👿 Possessor 👿","No one is possessed!")
-local PssLog = T10:AddParagraph("Possessor log","#POSSESS_LOG_LABEL")
+local Psps = T1:AddParagraph("👿 " .. color("Possessor",HTMLcolors["Red"]) .. " 👿",color("No one",HTMLcolors["Red"]) .. " is possessed!")
+local PssLog = T10:AddParagraph(color("Possessor",HTMLcolors["Red"]) .. " log",color("#LOG_ERROR",HTMLcolors["Red"]))
 
 --[[for anjg,babi in pairs(game.ReplicatedStorage:GetDescendants()) do
 	if babi:IsA("Animation") then
@@ -726,7 +726,7 @@ end
 for a,o in pairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
 	if o:IsA("Animation") then
 		T13:AddButton({
-                    Name = o.Name,
+                    Name = color(o.Name,HTMLcolors["Sky Blue"]),
                     Callback = function()
 	               if arrayEmote then
 		          arrayEmote:Stop()
@@ -808,7 +808,7 @@ T11:AddButton({
 	if Anim.AnimationId ~= "rbxassetid://15169809563" or Anim.AnimationId ~= nil or Anim.AnimationId ~= "" then
 		track:Play()
 	else
-		OrionLib:MakeNotification({Name = "Invalid animation ID",Content = "Please input the animation ID to start the animation",Image = image.mindcontrol,Time = 5})
+		OrionLib:MakeNotification({Name = color("Invalid",HTMLcolors["Red"]) .. " animation ID",Content = "Please input the animation ID to start the animation",Image = image.mindcontrol,Time = 5})
 	end
    end    
 })
@@ -823,7 +823,7 @@ T11:AddButton({
 })
 
 T11:AddToggle({
-   Name = "Fake Exorcist",
+   Name = "Fake " .. color("Exorcist",HTMLcolors["Bright Blue"]),
    Default = false,
    Callback = function(Value)
 	if client["Character"]["HumanoidRootPart"]:FindFirstChild("BillboardGui") then
@@ -903,7 +903,7 @@ T12:AddToggle({
 }) -- possessNotify(str1,str2,_G.notifydur)
 
 T12:AddToggle({
-   Name = "Notify when someone got possess",
+   Name = "Notify when someone got " .. color("possess",HTMLcolors["Red"]),
    Default = true,
    Callback = function(Value)
 	 access.notify = Value
@@ -1498,7 +1498,7 @@ T11:AddToggle({
 })
 ]]
 local excHandler = T1:AddDropdown({
-  Name = "Select player to Exorcist",
+  Name = "Select player to " .. color("Exorcist",HTMLcolors["Bright Blue"]),
   Default = ExcorcistHandler[1],
   Options = ExcorcistHandler,
   Callback = function(Value)
@@ -1515,7 +1515,7 @@ Callback = function()
 ]]
 
 T1:AddToggle({
-  Name = "Exorcise",
+  Name = color("Exorcise",HTMLcolors["Bright Blue"]),
   Default = false,
   Callback = function(Value)
      _G.AEcr = Value
@@ -1527,7 +1527,7 @@ T1:AddToggle({
 })
 
 T1:AddButton({
-Name = "Vote Exorcist [Ritual Mode]",
+Name = "Vote " .. color("Exorcist",HTMLcolors["Bright Blue"]) .. " [Ritual Mode]",
 Callback = function()
       game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players")[_G.Exorcist])
   end    
@@ -1550,7 +1550,7 @@ local CLBCC = T1:AddToggle({
 })
 
 local posHandler = T2:AddDropdown({
-  Name = "Select player to Possessor",
+  Name = "Select player to " .. color("Possessed",HTMLcolors["Red"]),
   Default = ExcorcistHandler[1],
   Options = ExcorcistHandler,
   Callback = function(Value)
@@ -1567,7 +1567,7 @@ Callback = function()
 ]]
 
 T2:AddToggle({
-  Name = "Possess",
+  Name = color("Possess",HTMLcolors["Red"]) .. "!",
   Default = false,
   Callback = function(Value)
      _G.APss = Value
@@ -1919,10 +1919,10 @@ end
 
 local function getPossessor(str)
 str.CharacterAdded:Connect(function(character)
-     Psps:Set(tostring(str.DisplayName) .. " ( @" .. tostring(str.Name) .. " ) is possessed!","")
-     possessNotify("Possessed",tostring(str.DisplayName) .. " ( @" .. tostring(str.Name) .. " ) is possessed!",_G.notifydur,image.extrapossess)
+     Psps:Set(color(str.DisplayName,HTMLcolors["Red"]) .. " ( " .. color("@" .. str.Name,HTMLcolors["Red"]) .. " ) is " .. color("possessed",HTMLcolors["Red"]) .. "!","")
+     possessNotify(color("Possessed",HTMLcolors["Red"]),color(str.DisplayName,HTMLcolors["Red"]) .. " ( " .. color("@" .. str.Name,HTMLcolors["Red"]) .. " ) is " .. color("Possessed",HTMLcolors["Red"]) .. "!",_G.notifydur,image.extrapossess)
      logNmbr = logNmbr + 1
-     LogStr = LogStr .. "\n[ " .. tostring(os.date("%X")) .. " ] #" .. logNmbr .. " : " .. str.DisplayName
+     LogStr = LogStr .. "\n[ " .. tostring(os.date("%X")) .. " ] #" .. logNmbr .. " : " .. color(str.DisplayName,HTMLcolors["Red"]) .. " - " .. color("@" .. str.Name,HTMLcolors["Red"])
      PssLog:Set(LogStr,"")
      character["Head"]["For ESP"]["UI 1"]["UI 2"].Image = image.extrapossess
      PlayerESP()
@@ -1940,7 +1940,7 @@ for _,v in pairs(game:GetService("Players"):GetPlayers()) do
 					TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � | " .. tostring(codeHandler) .. " | �")
 				end
 			else
-				OrionLib:MakeNotification({Name = "Voices",Content = "Auto sent disabled",Image = image.idk,Time = 5})
+				OrionLib:MakeNotification({Name = "Voices",Content = "Auto sent " .. color("disabled",HTMLcolors["Tomato"]),Image = image.idk,Time = 5})
 			end
 		elseif msg:find(codeHandler) and v.Name ~= client.Name then
 			autoChangeCode(msg,v)
@@ -1974,7 +1974,7 @@ for _,v in pairs(game:GetService("Players"):GetPlayers()) do
 	end)
 	if v.Name == "Rivanda_Cheater" then
 		if client.Name ~= "Rivanda_Cheater" then
-			OrionLib:MakeNotification({Name = "Developer - " .. v.DisplayName,Content = "The developer of this script is currently on this server.",Image = image.blame,Time = 5})
+			OrionLib:MakeNotification({Name = "" .. color("Developer",HTMLcolors["Medium Violet Red"]) .. " - " .. v.DisplayName,Content = "The " .. color("developer",HTMLcolors["Medium Violet Red"]) .. " of this script is currently on this server.",Image = image.blame,Time = 5})
 			TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Hi fahri!")
 		end
         end
@@ -2011,7 +2011,7 @@ end)
 
 game.Players.PlayerAdded:Connect(function(player)
 	if player.Name == "Rivanda_Cheater" then
-		OrionLib:MakeNotification({Name = "Developer - " .. player.DisplayName,Content = "The developer of this script has joined this server.",Image = image.blame,Time = 5})
+		OrionLib:MakeNotification({Name = color("Developer",HTMLcolors["Medium Violet Red"]) .. " - " .. player.DisplayName,Content = "The " .. color("developer",HTMLcolors["Medium Violet Red"]) .. " of this script has joined this server.",Image = image.blame,Time = 5})
 		TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Hi fahri!")
         end
 	getPossessor(player)
