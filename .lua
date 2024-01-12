@@ -251,7 +251,12 @@ local function Convert(str)
 end
 
 local function color(str,color)
+local colordebug,errordebug = pcall(function()
 	return "<font color='" .. color .. "'>" .. str .. "</font>"
+end)
+	if not colordebug then
+		OrionLib:MakeNotification({Name = "HTML Format error",Content = errordebug,Image = "rbxassetid://",Time = 5})
+end
 end
 
 local selfForCode = {
@@ -628,7 +633,7 @@ end
 local remoteTable = {}
 --" .. color("",HTMLcolors[""]) .. "
 
-T7:AddParagraph("Update " .. color("20",HTMLcolors["Bright Sky"]) .. " [ " .. color("COLOR UPDATE",HTMLcolors["Medium Violet Red"]) .. " ]","[ ☠️ ] " .. color("C",HTMLcolors["Red"]) .. color("O",HTMLcolors["Yellow"]) .. color("L",HTMLcolors["Orange"]) .. color("O",HTMLcolors["Pink"]) .. color("R",HTMLcolors["Light Green"]) .. color("F",HTMLcolors["Sky Blue"]) .. color("U",HTMLcolors["Dark Red"]) .. color("L",HTMLcolors["Dark Green"]))
+T7:AddParagraph("Update " .. color("20",HTMLcolors["Bright Sky"]) .. " [ " .. color("COLOR UPDATE",HTMLcolors["Medium Violet Red"]) .. " ]","[ ☠️ ] " .. color("C",HTMLcolors["Red"]) .. "" .. color("O",HTMLcolors["Yellow"]) .. "" .. color("L",HTMLcolors["Orange"]) .. "" .. color("O",HTMLcolors["Pink"]) .. "" .. color("R",HTMLcolors["Light Green"]) .. "" .. color("F",HTMLcolors["Sky Blue"]) .. "" .. color("U",HTMLcolors["Dark Red"]) .. "" .. color("L",HTMLcolors["Dark Green"]))
 T7:AddParagraph("Update 19 [ 12/01/2024 ]","[ +/- ] Fixed HTML format on the <font color='rgb(255,0,0)'>player's ESP</font>.")
 T7:AddParagraph("Update 18 [ 11/01/2024 ]","[ +/- ] Fixed '" .. color("Emote Information",HTMLcolors["Yellow"]) .. "' bug - ty fairus for telling me this bug\n[ + ] Added new feature called '" .. color("Use Random Ability",HTMLcolors["Yellow"]) .. "' with an image in notification.\n[ + ] Emotes are now buttons with emote name in it (ReplicatedStorage), no more scrolling! - Requested\n[ +/- ] Bug fixed in Emote system - i rlly hate this\n[ + ] Added ESP on '" .. color("Settings",HTMLcolors["Sky Blue"]) .. "' tab!\n[ + ] Added markings for who is the " .. color("possessor",HTMLcolors["Red"]) .. " and which is the " .. color("exorcist",HTMLcolors["Bright Blue"]) .. " ( when the " .. color("exorcist",HTMLcolors["Bright Blue"]) .. " holds his cross )")
 T7:AddParagraph("Update 17 [ 09/01/2024 ]","[ - ] Removed '" .. color("Ability",HTMLcolors["Sky Blue"]) .. "' tab\n[ + ] Added '" .. color("Character Config",HTMLcolors["Sky Blue"]) .. "' tab!\n[ + ] Added Speedboost and Jumpboost for hunt ability\n[ +/- ] Fixed emote glitch\n[ 08/03/2024 ] Ability bypass?, no cooldown?, Can equip more than 3?, Anti-Possessed? and Auto Body swap while exorcist is near?")
@@ -1920,8 +1925,8 @@ end
 
 local function getPossessor(str)
 str.CharacterAdded:Connect(function(character)
-     Psps:Set(color(str.DisplayName,HTMLcolors["Red"]) .. " ( " .. color("@" .. str.Name,HTMLcolors["Red"]) .. " ) is " .. color("possessed",HTMLcolors["Red"]) .. "!","")
-     possessNotify(color("Possessed",HTMLcolors["Red"]),color(str.DisplayName,HTMLcolors["Red"]) .. " ( " .. color("@" .. str.Name,HTMLcolors["Red"]) .. " ) is " .. color("Possessed",HTMLcolors["Red"]) .. "!",_G.notifydur,image.extrapossess)
+     Psps:Set(color(str.DisplayName,HTMLcolors["Red"]) .. " ( " .. color("@" .. tostring(str.Name),HTMLcolors["Red"]) .. " ) is " .. color("possessed",HTMLcolors["Red"]) .. "!","")
+     possessNotify(color("Possessed",HTMLcolors["Red"]),color(str.DisplayName,HTMLcolors["Red"]) .. " ( " .. color("@" .. tostring(str.Name),HTMLcolors["Red"]) .. " ) is " .. color("Possessed",HTMLcolors["Red"]) .. "!",_G.notifydur,image.extrapossess)
      logNmbr = logNmbr + 1
      LogStr = LogStr .. "\n[ " .. tostring(os.date("%X")) .. " ] #" .. logNmbr .. " : " .. color(str.DisplayName,HTMLcolors["Red"]) .. " - " .. color("@" .. str.Name,HTMLcolors["Red"])
      PssLog:Set(LogStr,"")
@@ -1975,7 +1980,7 @@ for _,v in pairs(game:GetService("Players"):GetPlayers()) do
 	end)
 	if v.Name == "Rivanda_Cheater" then
 		if client.Name ~= "Rivanda_Cheater" then
-			OrionLib:MakeNotification({Name = "" .. color("Developer",HTMLcolors["Medium Violet Red"]) .. " - " .. v.DisplayName,Content = "The " .. color("developer",HTMLcolors["Medium Violet Red"]) .. " of this script is currently on this server.",Image = image.blame,Time = 5})
+			OrionLib:MakeNotification({Name = color("Developer",HTMLcolors["Medium Violet Red"]) .. " - " .. v.DisplayName,Content = "The " .. color("developer",HTMLcolors["Medium Violet Red"]) .. " of this script is currently on this server.",Image = image.blame,Time = 5})
 			TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Hi fahri!")
 		end
         end
