@@ -15,6 +15,7 @@ local ih = client["PlayerGui"]["StickUi"]["Frame"]["Items"]["Frame"]["ScrollingF
 local bug = "rbxassetid://"
 local workspace = game:GetService("Workspace")
 local MarketplaceService = game:GetService("MarketplaceService")
+local RunService = game:GetService("RunService")
 
 --v
 --o.Selectable = true
@@ -287,13 +288,14 @@ task.spawn(function()
 end)
 end
 
-local function findRemote(instance,remoteType,func)
+--[[local function findRemote(instance,remoteType,func)
     for _,child in pairs(instance:GetChildren()) do
         if child:IsA(remoteType) then
             func(child:GetFullName())
         end
     end
 end
+]]
 
 local function output(plr,msg)
 	if not logging then return end
@@ -627,6 +629,39 @@ local imageforrandomability = {
 	["Body swap"] = getImage(ih["SwapImage"]) or bug
 }
 
+local nclip = nil
+local function NoclipLoop()
+	if client.Character ~= nil then
+		for _, child in pairs(client.Character:GetDescendants()) do
+			if child:IsA("BasePart") and child.CanCollide == true and arrayEmote.Looped == false then
+				child.CanCollide = false
+			end
+		end
+	end
+end
+
+local function startnclip()
+	nclip = RunService.Stepped:Connect(NoclipLoop)
+end
+
+local function stopnclip()
+if nclip then
+	nclip:Disconnect()
+	for _, child in pairs(client.Character:GetDescendants()) do
+                if child:IsA("BasePart") and child.CanCollide == false and arrayEmote.Looped == false then
+			child.CanCollide = true
+		end
+	end
+end
+end
+
+local function freezetime(times,func)
+task.spawn(function()
+	wait(times)
+	func()
+end)
+end
+
 for a,o in pairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
 	if o:IsA("Animation") then
 		T13:AddButton({
@@ -640,6 +675,10 @@ for a,o in pairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
 	               arrayEmote = client.Character.Humanoid:LoadAnimation(foremote)
 			wait(0.2)
 			arrayEmote:Play()
+			startnclip()
+			freezetime(arrayEmote.Length + 0.5,function()
+				stopnclip()
+			end)
                   end    
                 })
 	end
@@ -1926,7 +1965,7 @@ end)
 
 task.spawn(function()
 	while wait() do
-		animationInformmation:Set("Emote ID: " .. tostring(foremote.AnimationId) .. "\nEmote name: " .. tostring(MarketplaceService:GetProductInfo(tonumber(foremote.AnimationId:gsub("rbxassetid://",""))).Name) .. "\nIs Playing: " .. tostring(arrayEmote.IsPlaying) .. "\nLength: " .. tostring(arrayEmote.Length) .. "\nLooping: " .. tostring(arrayEmote.Looped) .. "\nPriority: " .. tostring(arrayEmote.Priority) .. "\nEmote speed: " .. tostring(arrayEmote.Speed) .. "\nTime Position: " .. tostring(arrayEmote.TimePosition),"")
+		animationInformmation:Set("Emote ID: " .. tostring(foremote.AnimationId) .. "\nEmote name: " .. tostring(MarketplaceService:GetProductInfo(foremote.AnimationId:gsub("rbxassetid://","")).Name) .. "\nIs Playing: " .. tostring(arrayEmote.IsPlaying) .. "\nLength: " .. tostring(arrayEmote.Length) .. "\nLooping: " .. tostring(arrayEmote.Looped) .. "\nPriority: " .. tostring(arrayEmote.Priority) .. "\nEmote speed: " .. tostring(arrayEmote.Speed) .. "\nTime Position: " .. tostring(arrayEmote.TimePosition),"")
 	end
 end)
 end)
