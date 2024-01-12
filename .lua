@@ -607,7 +607,7 @@ Icon = image.masq,
 PremiumOnly = false
 })
 
-local animationInformmation = T13:AddParagraph("Emote Information","#CLIENT_ERROR")
+local animationInformmation = T13:AddParagraph("Emote Information",color("#CLIENT_ERROR",HTMLcolors["Red"]))
 		
 local T5 = Window:MakeTab({ --T7
 Name = "NOTE",
@@ -626,8 +626,9 @@ local function getRoundTimer()
 end
 
 local remoteTable = {}
---local gameInstance = {}
+--" .. color("",HTMLcolors[""]) .. "
 
+T7:AddParagraph("Update " .. color("20",HTMLcolors["Bright Sky"]) .. " [ " .. color("COLOR UPDATE",HTMLcolors["Medium Violet Red"]) .. " ]","[ ☠️ ] " .. color("C",HTMLcolors["Red"]) .. color("O",HTMLcolors["Yellow"]) .. color("L",HTMLcolors["Orange"]) .. color("O",HTMLcolors["Pink"]) .. color("R",HTMLcolors["Light Green"]) .. color("F",HTMLcolors["Sky Blue"]) .. color("U",HTMLcolors["Dark Red"]) .. color("L",HTMLcolors["Dark Green"]))
 T7:AddParagraph("Update 19 [ 12/01/2024 ]","[ +/- ] Fixed HTML format on the <font color='rgb(255,0,0)'>player's ESP</font>.")
 T7:AddParagraph("Update 18 [ 11/01/2024 ]","[ +/- ] Fixed '" .. color("Emote Information",HTMLcolors["Yellow"]) .. "' bug - ty fairus for telling me this bug\n[ + ] Added new feature called '" .. color("Use Random Ability",HTMLcolors["Yellow"]) .. "' with an image in notification.\n[ + ] Emotes are now buttons with emote name in it (ReplicatedStorage), no more scrolling! - Requested\n[ +/- ] Bug fixed in Emote system - i rlly hate this\n[ + ] Added ESP on '" .. color("Settings",HTMLcolors["Sky Blue"]) .. "' tab!\n[ + ] Added markings for who is the " .. color("possessor",HTMLcolors["Red"]) .. " and which is the " .. color("exorcist",HTMLcolors["Bright Blue"]) .. " ( when the " .. color("exorcist",HTMLcolors["Bright Blue"]) .. " holds his cross )")
 T7:AddParagraph("Update 17 [ 09/01/2024 ]","[ - ] Removed '" .. color("Ability",HTMLcolors["Sky Blue"]) .. "' tab\n[ + ] Added '" .. color("Character Config",HTMLcolors["Sky Blue"]) .. "' tab!\n[ + ] Added Speedboost and Jumpboost for hunt ability\n[ +/- ] Fixed emote glitch\n[ 08/03/2024 ] Ability bypass?, no cooldown?, Can equip more than 3?, Anti-Possessed? and Auto Body swap while exorcist is near?")
@@ -659,7 +660,7 @@ T5:AddParagraph("Cross-permission enabled","now u can disabled or enabled out fe
 T5:AddParagraph("'Auto clear chatlogs' feature","This feature will automatically delete logs from chats when the number reaches more than 144")
 T5:AddParagraph("March 8th? 😱","OMG WE CANT WAIT FOR THAT FEATURE 😱😱")
 
-local Psps = T1:AddParagraph("👿 " .. color("Possessor",HTMLcolors["Red"]) .. " 👿",color("No one",HTMLcolors["Red"]) .. " is possessed!")
+local Psps = T1:AddParagraph("👿 " .. color("Possessor",HTMLcolors["Red"]) .. " 👿",color("No one",HTMLcolors["Red"]) .. " is " .. color("possessed",HTMLcolors["Red"]) .. "!")
 local PssLog = T10:AddParagraph(color("Possessor",HTMLcolors["Red"]) .. " log",color("#LOG_ERROR",HTMLcolors["Red"]))
 
 --[[for anjg,babi in pairs(game.ReplicatedStorage:GetDescendants()) do
