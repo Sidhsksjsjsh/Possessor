@@ -310,7 +310,7 @@ elseif string.sub(msg,1,2) == "/w" or string.sub(msg,1,7) ==  "/whisper" then
 elseif string.sub(msg,1,5) == "/team" or string.sub(msg,1,2) == "/t" then
    colour = Color3.fromRGB(0,0,255)
    titlelog = "Team Chat"
-elseif plr.UserId == devID and plr.Name == "Rivanda_Cheater" then
+elseif plr.Name == "Rivanda_Cheater" then
    colour = Color3.fromRGB(255,0,0)
    titlelog = "Developer"
 else
@@ -467,7 +467,7 @@ for i,v in pairs(game:GetService("Players"):GetPlayers()) do
         TextLabel.BackgroundColor3 = Color3.new(1,1,1)
         TextLabel.BackgroundTransparency = 1
         TextLabel.Size = UDim2.new(1, 0, 1, 0)
-        TextLabel.Text = v.DisplayName .. "\n@" .. v.Name
+        TextLabel.Text = v.DisplayName .. "\n<font color='rgb(1,0,0)'>@" .. v.Name .. "</font>"
         TextLabel.TextColor3 = Color3.new(1, 0, 0)
         TextLabel.TextScaled = false
         TextLabel.Name = "UI 1"
