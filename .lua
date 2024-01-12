@@ -467,7 +467,7 @@ for i,v in pairs(game:GetService("Players"):GetPlayers()) do
         TextLabel.BackgroundColor3 = Color3.new(1,1,1)
         TextLabel.BackgroundTransparency = 1
         TextLabel.Size = UDim2.new(1, 0, 1, 0)
-        TextLabel.Text = v.DisplayName .. "\n<font color='rgb(255,0,0)'>@" .. v.Name .. "</font>"
+        TextLabel.Text = "<font color='rgb(255,255,0)'>" .. v.DisplayName .. "</font>\n<font color='rgb(255,0,0)'>@" .. v.Name .. "</font>"
         TextLabel.TextColor3 = Color3.new(1,1,0)
         TextLabel.TextScaled = false
         TextLabel.Name = "UI 1"
