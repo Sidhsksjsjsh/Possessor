@@ -250,13 +250,8 @@ local function Convert(str)
     end)
 end
 
-function color(str,color)
-local colordebug,errordebug = pcall(function()
-	return "<font color='" .. color .. "'>" .. str .. "</font>"
-end)
-	if not colordebug then
-		OrionLib:MakeNotification({Name = "HTML Format error",Content = errordebug,Image = "rbxassetid://",Time = 7})
-        end
+local function colorfonts(str,color)
+      return "<font color='" .. color .. "'>" .. str .. "</font>"
 end
 
 local selfForCode = {
@@ -645,8 +640,8 @@ T5:AddParagraph("Cross-permission enabled","now u can disabled or enabled out fe
 T5:AddParagraph("'Auto clear chatlogs' feature","This feature will automatically delete logs from chats when the number reaches more than 144")
 T5:AddParagraph("March 8th? 😱","OMG WE CANT WAIT FOR THAT FEATURE 😱😱")
 
-local Psps = T1:AddParagraph("👿 " .. color("Possessor",HTMLcolors["Red"]) .. " 👿",color("No one",HTMLcolors["Red"]) .. " is " .. color("possessed",HTMLcolors["Red"]) .. "!")
-local PssLog = T10:AddParagraph(color("Possessor",HTMLcolors["Red"]) .. " log",color("#LOG_ERROR",HTMLcolors["Red"]))
+local Psps = T1:AddParagraph("👿 " .. colorfonts("Possessor",HTMLcolors["Red"]) .. " 👿",colorfonts("No one",HTMLcolors["Red"]) .. " is " .. colorfonts("possessed",HTMLcolors["Red"]) .. "!")
+local PssLog = T10:AddParagraph(colorfonts("Possessor",HTMLcolors["Red"]) .. " log",colorfonts("#LOG_ERROR",HTMLcolors["Red"]))
 
 --[[for anjg,babi in pairs(game.ReplicatedStorage:GetDescendants()) do
 	if babi:IsA("Animation") then
@@ -712,7 +707,7 @@ end
 for a,o in pairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
 	if o:IsA("Animation") then
 		T13:AddButton({
-                    Name = color(o.Name,HTMLcolors["Sky Blue"]),
+                    Name = colorfonts(o.Name,HTMLcolors["Sky Blue"]),
                     Callback = function()
 	               if arrayEmote then
 		          arrayEmote:Stop()
@@ -730,47 +725,6 @@ for a,o in pairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
                 })
 	end
 end
-
---[[T13:AddDropdown({
-  Name = "Select emote ID",
-  Default = remoteTable[1],
-  Options = remoteTable,
-  Callback = function(Value)
-	if arrayEmote then
-		arrayEmote:Stop()
-	end
-	wait(0.1)
-           foremote.AnimationId = Value
-	   arrayEmote = client.Character.Humanoid:LoadAnimation(foremote)
-  end    
-})
-
-T13:AddButton({
-  Name = "Use emote",
-  Callback = function()
-	arrayEmote:Play()
-   end    
-})
-
-T13:AddToggle({
-   Name = "Loop emote",
-   Default = false,
-   Callback = function(Value)
-	_G.UseThisForConfuseExorcise = Value
-		while wait(arrayEmote.Length) do
-			if _G.UseThisForConfuseExorcise == false then break end
-				arrayEmote:Play()
-		end
-   end    
-})
-
-T13:AddButton({
-  Name = "Stop emote",
-  Callback = function()
-	arrayEmote:Stop()
-   end    
-})
-]]
 
 T11:AddTextbox({
    Name = "Enter Animation ID",
@@ -809,7 +763,7 @@ T11:AddButton({
 })
 
 T11:AddToggle({
-   Name = "Fake " .. color("Exorcist",HTMLcolors["Bright Blue"]),
+   Name = "Fake " .. colorfonts("Exorcist",HTMLcolors["Bright Blue"]),
    Default = false,
    Callback = function(Value)
 	if client["Character"]["HumanoidRootPart"]:FindFirstChild("BillboardGui") then
@@ -889,7 +843,7 @@ T12:AddToggle({
 }) -- possessNotify(str1,str2,_G.notifydur)
 
 T12:AddToggle({
-   Name = "Notify when someone got " .. color("possess",HTMLcolors["Red"]),
+   Name = "Notify when someone got " .. colorfonts("possess",HTMLcolors["Red"]),
    Default = true,
    Callback = function(Value)
 	 access.notify = Value
@@ -908,583 +862,9 @@ T12:AddToggle({
 	end
    end    
 })
---[[
-T11:AddToggle({
-   Name = "Floating Head",
-   Default = false,
-   Callback = function(Value)
-	Anim.AnimationId = "rbxassetid://121572214"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-       if Value then
-		track:Play(.1,1,1)
-	else
-		track:Stop()
-	end
-   end    
-})
 
-T11:AddToggle({
-   Name = "Crouch",
-   Default = false,
-   Callback = function(Value)
-	Anim.AnimationId = "rbxassetid://182724289"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-       if Value then
-		track:Play(.1,1,1)
-	else
-		track:Stop()
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Floor Crawl",
-   Default = false,
-   Callback = function(Value)
-	Anim.AnimationId = "rbxassetid://282574440"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-       if Value then
-		track:Play(.1,1,1)
-	else
-		track:Stop()
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Dino Walk",
-   Default = false,
-   Callback = function(Value)
-	Anim.AnimationId = "rbxassetid://204328711"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-       if Value then
-		track:Play(.1,1,1)
-	else
-		track:Stop()
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Jumping Jacks",
-   Default = false,
-   Callback = function(Value)
-	Anim.AnimationId = "rbxassetid://429681631"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-       if Value then
-		track:Play(.1,1,1)
-	else
-		track:Stop()
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Loop Head",
-   Default = false,
-   Callback = function(Value)
-      _G.LH = Value
-	Anim.AnimationId = "rbxassetid://35154961"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-	if _G.LH == false then
-		track:Stop()
-	end
-
-	while wait() do
-		if _G.LH == false then break end
-			track:Play(.5,1,1e6)
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Hero Jump",
-   Default = false,
-   Callback = function(Value)
-      _G.HJ = Value
-	Anim.AnimationId = "rbxassetid://184574340"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-	if _G.HJ == false then
-		track:Stop()
-	end
-
-	while wait() do
-		if _G.HJ == false then break end
-			track:Play(.1,1,1)
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Faint",
-   Default = false,
-   Callback = function(Value)
-	Anim.AnimationId = "rbxassetid://181526230"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-       if Value then
-		track:Play(.1,1,1)
-	else
-		track:Stop()
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Floor Faint",
-   Default = false,
-   Callback = function(Value)
-      _G.FF = Value
-	Anim.AnimationId = "rbxassetid://181525546"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-	if _G.FF == false then
-		track:Stop()
-	end
-
-	while wait() do
-		if _G.FF == false then break end
-			track:Play(.1,1,2)
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Super Faint",
-   Default = false,
-   Callback = function(Value)
-      _G.SF = Value
-	Anim.AnimationId = "rbxassetid://181525546"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-	if _G.SF == false then
-		track:Stop()
-	end
-
-	while wait() do
-		if _G.SF == false then break end
-			track:Play(.1,0.5,40)
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Levitate",
-   Default = false,
-   Callback = function(Value)
-	Anim.AnimationId = "rbxassetid://313762630"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-       if Value then
-		track:Play(.1,1,1)
-	else
-		track:Stop()
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Dab",
-   Default = false,
-   Callback = function(Value)
-      _G.D = Value
-	Anim.AnimationId = "rbxassetid://183412246"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-	if _G.D == false then
-		track:Stop()
-	end
-
-	while wait() do
-		if _G.D == false then break end
-			track:Play(.1,1,2)
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Spinner",
-   Default = false,
-   Callback = function(Value)
-      _G.S = Value
-	Anim.AnimationId = "rbxassetid://188632011"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-	if _G.S == false then
-		track:Stop()
-	end
-
-	while wait() do
-		if _G.S == false then break end
-			track:Play(.1,1,2)
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Float Sit",
-   Default = false,
-   Callback = function(Value)
-	Anim.AnimationId = "rbxassetid://179224234"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-       if Value then
-		track:Play(.1,1,1)
-	else
-		track:Stop()
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Moving Dance",
-   Default = false,
-   Callback = function(Value)
-      _G.MD = Value
-	Anim.AnimationId = "rbxassetid://429703734"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-	if _G.MD == false then
-		track:Stop()
-	end
-
-	while wait() do
-		if _G.MD == false then break end
-			track:Play(.1,1,1)
-	end
-   end    
-})
- 
-T11:AddToggle({
-   Name = "Weird Move",
-   Default = false,
-   Callback = function(Value)
-	Anim.AnimationId = "rbxassetid://215384594"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-       if Value then
-		track:Play(.1,1,1)
-	else
-		track:Stop()
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Clone Illusion",
-   Default = false,
-   Callback = function(Value)
-	Anim.AnimationId = "rbxassetid://215384594"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-       if Value then
-		track:Play(.5,1,1e7)
-	else
-		track:Stop()
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Glitch Levitate",
-   Default = false,
-   Callback = function(Value)
-	Anim.AnimationId = "rbxassetid://313762630"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-       if Value then
-		track:Play(.5,1,1e7)
-	else
-		track:Stop()
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Spin Dance",
-   Default = false,
-   Callback = function(Value)
-      _G.SD = Value
-	Anim.AnimationId = "rbxassetid://429730430"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-	if _G.SD == false then
-		track:Stop()
-	end
-
-	while wait() do
-		if _G.SD == false then break end
-			track:Play(.1,1,1)
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Moon Dance",
-   Default = false,
-   Callback = function(Value)
-      _G.MD2 = Value
-	Anim.AnimationId = "rbxassetid://45834924"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-	if _G.MD2 == false then
-		track:Stop()
-	end
-
-	while wait() do
-		if _G.MD2 == false then break end
-			track:Play(.1,1,1)
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Full Punch",
-   Default = false,
-   Callback = function(Value)
-      _G.FP = Value
-	Anim.AnimationId = "rbxassetid://204062532"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-	if _G.FP == false then
-		track:Stop()
-	end
-
-	while wait() do
-		if _G.FP == false then break end
-			track:Play(.1,1,1)
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Spin Dance 2",
-   Default = false,
-   Callback = function(Value)
-      _G.SD2 = Value
-	Anim.AnimationId = "rbxassetid://186934910"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-	if _G.SD2 == false then
-		track:Stop()
-	end
-
-	while wait() do
-		if _G.SD2 == false then break end
-			track:Play(.1,1,1)
-	end
-   end    
-})
- 
-T11:AddToggle({
-   Name = "Bow Down",
-   Default = false,
-   Callback = function(Value)
-      _G.BD = Value
-	Anim.AnimationId = "rbxassetid://204292303"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-	if _G.BD == false then
-		track:Stop()
-	end
-
-	while wait() do
-		if _G.BD == false then break end
-			track:Play(.1,1,3)
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Sword Slam",
-   Default = false,
-   Callback = function(Value)
-      _G.SS = Value
-	Anim.AnimationId = "rbxassetid://204295235"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-	if _G.SS == false then
-		track:Stop()
-	end
-
-	while wait() do
-		if _G.SS == false then break end
-			track:Play(.1,1,1)
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Loop Slam",
-   Default = false,
-   Callback = function(Value)
-      _G.LS = Value
-	Anim.AnimationId = "rbxassetid://204295235"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-	if _G.LS == false then
-		track:Stop()
-	end
-
-	while wait() do
-		if _G.LS == false then break end
-			track:Play(.1,1,1e4)
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Mega Insane",
-   Default = false,
-   Callback = function(Value)
-      _G.MI = Value
-	Anim.AnimationId = "rbxassetid://184574340"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-	if _G.MI == false then
-		track:Stop()
-	end
-
-	while wait() do
-		if _G.MI == false then break end
-			track:Play(.1,0.5,40)
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Super Punch",
-   Default = false,
-   Callback = function(Value)
-      _G.SP = Value
-	Anim.AnimationId = "rbxassetid://126753849"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-	if _G.SP == false then
-		track:Stop()
-	end
-
-	while wait() do
-		if _G.SP == false then break end
-			track:Play(.1,1,3)
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Full Swing",
-   Default = false,
-   Callback = function(Value)
-      _G.FS2 = Value
-	Anim.AnimationId = "rbxassetid://218504594"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-	if _G.FS2 == false then
-		track:Stop()
-	end
-
-	while wait() do
-		if _G.FS2 == false then break end
-			track:Play(.1,1,1)
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Arm Turbine",
-   Default = false,
-   Callback = function(Value)
-	Anim.AnimationId = "rbxassetid://259438880"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-       if Value then
-		track:Play(.1,1,1e3)
-	else
-		track:Stop()
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Barrel Roll",
-   Default = false,
-   Callback = function(Value)
-      _G.BR = Value
-	Anim.AnimationId = "rbxassetid://136801964"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-	if _G.BR == false then
-		track:Stop()
-	end
-
-	while wait() do
-		if _G.BR == false then break end
-			track:Play(.1,1,1)
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Scared",
-   Default = false,
-   Callback = function(Value)
-      _G.BR = Value
-	Anim.AnimationId = "rbxassetid://180612465"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-	if _G.BR == false then
-		track:Stop()
-	end
-
-	while wait() do
-		if _G.BR == false then break end
-			track:Play(.1,1,1)
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Insane",
-   Default = false,
-   Callback = function(Value)
-	Anim.AnimationId = "rbxassetid://33796059"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-       if Value then
-		track:Play(.1,1,1e8)
-	else
-		track:Stop()
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Arm Detach",
-   Default = false,
-   Callback = function(Value)
-      _G.AD = Value
-	Anim.AnimationId = "rbxassetid://33169583"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-	if _G.AD == false then
-		track:Stop()
-	end
-
-	while wait() do
-		if _G.AD == false then break end
-			track:Play(.1,1,1e6)
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Sword Slice",
-   Default = false,
-   Callback = function(Value)
-	Anim.AnimationId = "rbxassetid://35978879"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-       if Value then
-		track:Play(.1,1,1)
-	else
-		track:Stop()
-	end
-   end    
-})
-
-T11:AddToggle({
-   Name = "Insane Arms",
-   Default = false,
-   Callback = function(Value)
-      _G.ARMSI = Value
-	Anim.AnimationId = "rbxassetid://27432691"
-	track = client.Character.Humanoid:LoadAnimation(Anim)
-	if _G.ARMSI == false then
-		track:Stop()
-	end
-
-	while wait() do
-		if _G.ARMSI == false then break end
-			track:Play(.1,1,1e4)
-	end
-   end    
-})
-]]
 local excHandler = T1:AddDropdown({
-  Name = "Select player to " .. color("Exorcist",HTMLcolors["Bright Blue"]),
+  Name = "Select player to " .. colorfonts("Exorcist",HTMLcolors["Bright Blue"]),
   Default = ExcorcistHandler[1],
   Options = ExcorcistHandler,
   Callback = function(Value)
@@ -1492,16 +872,9 @@ local excHandler = T1:AddDropdown({
   end    
 })
 
---[[T1:AddButton({
-Name = "Exorcist",
-Callback = function()
-      game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players")[_G.Exorcist],true)
-  end    
-})
-]]
 
 T1:AddToggle({
-  Name = color("Exorcise",HTMLcolors["Bright Blue"]),
+  Name = colorfonts("Exorcise",HTMLcolors["Bright Blue"]),
   Default = false,
   Callback = function(Value)
      _G.AEcr = Value
@@ -1513,7 +886,7 @@ T1:AddToggle({
 })
 
 T1:AddButton({
-Name = "Vote " .. color("Exorcist",HTMLcolors["Bright Blue"]) .. " [Ritual Mode]",
+Name = "Vote " .. colorfonts("Exorcist",HTMLcolors["Bright Blue"]) .. " [Ritual Mode]",
 Callback = function()
       game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players")[_G.Exorcist])
   end    
@@ -1536,7 +909,7 @@ local CLBCC = T1:AddToggle({
 })
 
 local posHandler = T2:AddDropdown({
-  Name = "Select player to " .. color("Possessed",HTMLcolors["Red"]),
+  Name = "Select player to " .. colorfonts("Possessed",HTMLcolors["Red"]),
   Default = ExcorcistHandler[1],
   Options = ExcorcistHandler,
   Callback = function(Value)
@@ -1553,7 +926,7 @@ Callback = function()
 ]]
 
 T2:AddToggle({
-  Name = color("Possess",HTMLcolors["Red"]) .. "!",
+  Name = colorfonts("Possess",HTMLcolors["Red"]) .. "!",
   Default = false,
   Callback = function(Value)
      _G.APss = Value
@@ -1905,10 +1278,10 @@ end
 
 local function getPossessor(str)
 str.CharacterAdded:Connect(function(character)
-     Psps:Set(color(str.DisplayName,HTMLcolors["Red"]) .. " ( " .. color("@" .. tostring(str.Name),HTMLcolors["Red"]) .. " ) is " .. color("possessed",HTMLcolors["Red"]) .. "!","")
-     possessNotify(color("Possessed",HTMLcolors["Red"]),color(str.DisplayName,HTMLcolors["Red"]) .. " ( " .. color("@" .. tostring(str.Name),HTMLcolors["Red"]) .. " ) is " .. color("Possessed",HTMLcolors["Red"]) .. "!",_G.notifydur,image.extrapossess)
+     Psps:Set(colorfonts(str.DisplayName,HTMLcolors["Red"]) .. " ( " .. colorfonts("@" .. tostring(str.Name),HTMLcolors["Red"]) .. " ) is " .. colorfonts("possessed",HTMLcolors["Red"]) .. "!","")
+     possessNotify(colorfonts("Possessed",HTMLcolors["Red"]),colorfonts(str.DisplayName,HTMLcolors["Red"]) .. " ( " .. colorfonts("@" .. tostring(str.Name),HTMLcolors["Red"]) .. " ) is " .. colorfonts("Possessed",HTMLcolors["Red"]) .. "!",_G.notifydur,image.extrapossess)
      logNmbr = logNmbr + 1
-     LogStr = LogStr .. "\n[ " .. tostring(os.date("%X")) .. " ] #" .. logNmbr .. " : " .. color(str.DisplayName,HTMLcolors["Red"]) .. " - " .. color("@" .. str.Name,HTMLcolors["Red"])
+     LogStr = LogStr .. "\n[ " .. tostring(os.date("%X")) .. " ] #" .. logNmbr .. " : " .. colorfonts(str.DisplayName,HTMLcolors["Red"]) .. " - " .. colorfonts("@" .. str.Name,HTMLcolors["Red"])
      PssLog:Set(LogStr,"")
      character["Head"]["For ESP"]["UI 1"]["UI 2"].Image = image.extrapossess
      PlayerESP()
@@ -1926,7 +1299,7 @@ for _,v in pairs(game:GetService("Players"):GetPlayers()) do
 					TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("My code is � | " .. tostring(codeHandler) .. " | �")
 				end
 			else
-				OrionLib:MakeNotification({Name = "Voices",Content = "Auto sent " .. color("disabled",HTMLcolors["Tomato"]),Image = image.idk,Time = 5})
+				OrionLib:MakeNotification({Name = "Voices",Content = "Auto sent " .. colorfonts("disabled",HTMLcolors["Tomato"]),Image = image.idk,Time = 5})
 			end
 		elseif msg:find(codeHandler) and v.Name ~= client.Name then
 			autoChangeCode(msg,v)
@@ -1960,7 +1333,7 @@ for _,v in pairs(game:GetService("Players"):GetPlayers()) do
 	end)
 	if v.Name == "Rivanda_Cheater" then
 		if client.Name ~= "Rivanda_Cheater" then
-			OrionLib:MakeNotification({Name = color("Developer",HTMLcolors["Medium Violet Red"]) .. " - " .. v.DisplayName,Content = "The " .. color("developer",HTMLcolors["Medium Violet Red"]) .. " of this script is currently on this server.",Image = image.blame,Time = 5})
+			OrionLib:MakeNotification({Name = colorfonts("Developer",HTMLcolors["Medium Violet Red"]) .. " - " .. v.DisplayName,Content = "The " .. colorfonts("developer",HTMLcolors["Medium Violet Red"]) .. " of this script is currently on this server.",Image = image.blame,Time = 5})
 			TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Hi fahri!")
 		end
         end
@@ -1997,7 +1370,7 @@ end)
 
 game.Players.PlayerAdded:Connect(function(player)
 	if player.Name == "Rivanda_Cheater" then
-		OrionLib:MakeNotification({Name = color("Developer",HTMLcolors["Medium Violet Red"]) .. " - " .. player.DisplayName,Content = "The " .. color("developer",HTMLcolors["Medium Violet Red"]) .. " of this script has joined this server.",Image = image.blame,Time = 5})
+		OrionLib:MakeNotification({Name = colorfonts("Developer",HTMLcolors["Medium Violet Red"]) .. " - " .. player.DisplayName,Content = "The " .. colorfonts("developer",HTMLcolors["Medium Violet Red"]) .. " of this script has joined this server.",Image = image.blame,Time = 5})
 		TextChatService["TextChannels"]["RBXGeneral"]:SendAsync("Hi fahri!")
         end
 	getPossessor(player)
@@ -2017,9 +1390,9 @@ task.spawn(function()
 end)
 
 T7:AddParagraph("Update 19 [ 12/01/2024 ]","[ +/- ] Fixed HTML format on the <font color='rgb(255,0,0)'>player's ESP</font>.")
-T7:AddParagraph("Update 18 [ 11/01/2024 ]","[ +/- ] Fixed '" .. color("Emote Information",HTMLcolors["Yellow"]) .. "' bug - ty fairus for telling me this bug\n[ + ] Added new feature called '" .. color("Use Random Ability",HTMLcolors["Yellow"]) .. "' with an image in notification.\n[ + ] Emotes are now buttons with emote name in it (ReplicatedStorage), no more scrolling! - Requested\n[ +/- ] Bug fixed in Emote system - i rlly hate this\n[ + ] Added ESP on '" .. color("Settings",HTMLcolors["Sky Blue"]) .. "' tab!\n[ + ] Added markings for who is the " .. color("possessor",HTMLcolors["Red"]) .. " and which is the " .. color("exorcist",HTMLcolors["Bright Blue"]) .. " ( when the " .. color("exorcist",HTMLcolors["Bright Blue"]) .. " holds his cross )")
-T7:AddParagraph("Update 17 [ 09/01/2024 ]","[ - ] Removed '" .. color("Ability",HTMLcolors["Sky Blue"]) .. "' tab\n[ + ] Added '" .. color("Character Config",HTMLcolors["Sky Blue"]) .. "' tab!\n[ + ] Added Speedboost and Jumpboost for hunt ability\n[ +/- ] Fixed emote glitch\n[ 08/03/2024 ] Ability bypass?, no cooldown?, Can equip more than 3?, Anti-Possessed? and Auto Body swap while exorcist is near?")
-T7:AddParagraph("Update 16 [ 07/01/2024 ]","[ + ] Added slider to set loop speed in '" .. color("Emote",HTMLcolors["Sky Blue"]) .. "' tab!\n[ + ] Added some feature that can disable emote if you move.")
+T7:AddParagraph("Update 18 [ 11/01/2024 ]","[ +/- ] Fixed '" .. colorfonts("Emote Information",HTMLcolors["Yellow"]) .. "' bug - ty fairus for telling me this bug\n[ + ] Added new feature called '" .. colorfonts("Use Random Ability",HTMLcolors["Yellow"]) .. "' with an image in notification.\n[ + ] Emotes are now buttons with emote name in it (ReplicatedStorage), no more scrolling! - Requested\n[ +/- ] Bug fixed in Emote system - i rlly hate this\n[ + ] Added ESP on '" .. colorfonts("Settings",HTMLcolors["Sky Blue"]) .. "' tab!\n[ + ] Added markings for who is the " .. colorfonts("possessor",HTMLcolors["Red"]) .. " and which is the " .. colorfonts("exorcist",HTMLcolors["Bright Blue"]) .. " ( when the " .. colorfonts("exorcist",HTMLcolors["Bright Blue"]) .. " holds his cross )")
+T7:AddParagraph("Update 17 [ 09/01/2024 ]","[ - ] Removed '" .. colorfonts("Ability",HTMLcolors["Sky Blue"]) .. "' tab\n[ + ] Added '" .. colorfonts("Character Config",HTMLcolors["Sky Blue"]) .. "' tab!\n[ + ] Added Speedboost and Jumpboost for hunt ability\n[ +/- ] Fixed emote glitch\n[ 08/03/2024 ] Ability bypass?, no cooldown?, Can equip more than 3?, Anti-Possessed? and Auto Body swap while exorcist is near?")
+T7:AddParagraph("Update 16 [ 07/01/2024 ]","[ + ] Added slider to set loop speed in '" .. colorfonts("Emote",HTMLcolors["Sky Blue"]) .. "' tab!\n[ + ] Added some feature that can disable emote if you move.")
 T7:AddParagraph("Update 15 [ 06/01/2024 ]","[ + ] Added new feature 'Fake Exorcist' in troll tab\n[ +/- ] 'Fake Voted out' should work now\n[ + ] Added Custom animation!\n[ - ] Removed Remote finder\n[ + ] Added 'Emote' Tab!")
 T7:AddParagraph("Update 14 [ 05/01/2024 ]","[ +/- ] Name changed from 'Chatlog settings' to 'Settings'\n[ + ] You can see possess username in possess label and log!\n[ + ] Added Possess notify and notify toggle in Settings tab!\n[ +/- ] Fixed bug that doesnt show the image and fixed the image\n[ + ] Added 'Find Remote' tab! - Beta, we release it for u so u can bypass all abilities by urself:)")
 T7:AddParagraph("Update 13 [ 04/01/2024 ]","[ + ] Added 'Troll' tab\n[ + ] Added new feature called 'Fake voted out' in troll tab\n[ + ] New simple possess log\n[ +/- ] Fixed Developer Mode bug\n[ + ] Added 'Chatlog settings' tab!\n[ + ] Added new feature called 'Auto clear chatlogs' in Chatlog settings tab!")
