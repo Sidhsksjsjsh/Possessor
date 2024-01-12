@@ -470,6 +470,7 @@ for i,v in pairs(game:GetService("Players"):GetPlayers()) do
         TextLabel.Text = "<font color='rgb(255,255,0)'>" .. v.DisplayName .. "</font>\n<font color='rgb(255,0,0)'>@" .. v.Name .. "</font>"
         TextLabel.TextColor3 = Color3.new(1,1,0)
         TextLabel.TextScaled = false
+	TextLabel.RichText = true
         TextLabel.Name = "UI 1"
 	
 	img.Parent = TextLabel
@@ -568,6 +569,7 @@ end
 local remoteTable = {}
 --local gameInstance = {}
 
+T7:AddParagraph("Update 19 [ 12/01/2024 ]","[ +/- ] Fixed HTML format on the <font color='rgb(255,0,0)'>player's ESP</font>.")
 T7:AddParagraph("Update 18 [ 11/01/2024 ]","[ +/- ] Fixed 'Emote information' bug - ty fairus for telling me this bug\n[ + ] Added new feature called 'Use Random Ability' with an image in notification.\n[ + ] Emotes are now buttons with emote name in it (ReplicatedStorage), no more scrolling! - Requested\n[ +/- ] Bug fixed in Emote system - i rlly hate this\n[ + ] Added ESP on 'Settings' tab!\n[ + ] Added markings for who is the possessor and which is the exorcist ( when the exorcist holds his cross )")
 T7:AddParagraph("Update 17 [ 09/01/2024 ]","[ - ] Removed 'Ability' tab\n[ + ] Added 'Character Config' tab!\n[ + ] Added Speedboost and Jumpboost for hunt ability\n[ +/- ] Fixed emote glitch\n[ 08/03/2024 ] Ability bypass?, no cooldown?, Can equip more than 3?, Anti-Possessed? and Auto Body swap while exorcist is near?")
 T7:AddParagraph("Update 16 [ 07/01/2024 ]","[ + ] Added slider to set loop speed in 'Emote' tab!\n[ + ] Added some feature that can disable emote if you move.")
