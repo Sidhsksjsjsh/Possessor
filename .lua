@@ -484,8 +484,8 @@ game.Players.ChildAdded:Connect(function(plr)
 	end
 end)
 
-local ExcorcistHandler = {}
-local PossessorHandler = {}
+local ExcorcistHandler = {"Random"}
+local PossessorHandler = {"Random"}
 
 OrionLib:AddTable(game.Players,ExcorcistHandler)
 OrionLib:AddTable(game.Players,PossessorHandler)
@@ -608,6 +608,12 @@ Icon = image.masq,
 PremiumOnly = false
 })
 
+local T14 = Window:MakeTab({ --T5
+Name = "Ritual Mode",
+Icon = image.masq,
+PremiumOnly = false
+})
+
 local animationInformmation = T13:AddParagraph("Emote Information",colorfonts("#CLIENT_ERROR",HTMLcolors["Red"]))
 		
 local T5 = Window:MakeTab({ --T7
@@ -628,7 +634,7 @@ end
 
 local remoteTable = {}
 
-T7:AddParagraph("Update 20 [ 13/01/2024 ]","[ +/- ] Fixed a " .. colorfonts("fatal error",HTMLcolors["Red"]) .. " caused by HTML formatting - Thank you my team for improving this script.")
+T7:AddParagraph("Update 20 [ 13/01/2024 ]","[ +/- ] Fixed a " .. colorfonts("fatal error",HTMLcolors["Red"]) .. " caused by HTML formatting - Thank you my team for improving this script.\n[ + ] " .. colorfonts("Ritual Mode",HTMLcolors["Sky Blue"]) .. " is back with different feature in it!\n[ + ] Added " .. colorfonts("Ranged Kill",HTMLcolors["Yellow"]) .. " in " .. colorfonts("Possessor",HTMLcolors["Red"]) .. " tab!")
 T7:AddParagraph("Update 19 [ 12/01/2024 ]","[ +/- ] Fixed HTML format on the <font color='rgb(255,0,0)'>player's ESP</font>.")
 T7:AddParagraph("Update 18 [ 11/01/2024 ]","[ +/- ] Fixed '" .. colorfonts("Emote Information",HTMLcolors["Yellow"]) .. "' bug - ty fairus for telling me this bug\n[ + ] Added new feature called '" .. colorfonts("Use Random Ability",HTMLcolors["Yellow"]) .. "' with an image in notification.\n[ + ] Emotes are now buttons with emote name in it (ReplicatedStorage), no more scrolling! - Requested\n[ +/- ] Bug fixed in Emote system - i rlly hate this\n[ + ] Added ESP on '" .. colorfonts("Settings",HTMLcolors["Sky Blue"]) .. "' tab!\n[ + ] Added markings for who is the " .. colorfonts("possessor",HTMLcolors["Red"]) .. " and which is the " .. colorfonts("exorcist",HTMLcolors["Bright Blue"]) .. " ( when the " .. colorfonts("exorcist",HTMLcolors["Bright Blue"]) .. " holds his cross )")
 T7:AddParagraph("Update 17 [ 09/01/2024 ]","[ - ] Removed '" .. colorfonts("Ability",HTMLcolors["Sky Blue"]) .. "' tab\n[ + ] Added '" .. colorfonts("Character Config",HTMLcolors["Sky Blue"]) .. "' tab!\n[ + ] Added Speedboost and Jumpboost for hunt ability\n[ +/- ] Fixed emote glitch\n[ 08/03/2024 ] Ability bypass?, no cooldown?, Can equip more than 3?, Anti-Possessed? and Auto Body swap while exorcist is near?")
@@ -745,6 +751,22 @@ for a,o in pairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
                 })
 	end
 end
+
+T11:AddToggle({
+   Name = "Trigger ProximityPrompt",
+   Default = false,
+   Callback = function(Value)
+	_G.AuthTriggerPP = Value
+		while wait() do
+			if _G.AuthTriggerPP == false then break end
+				for i,v in pairs(workspace:GetDescendants()) do
+					if v:IsA("ProximityPrompt") then
+						fireproximityprompt(v)
+					end
+				end
+		end
+   end    
+})
 
 T11:AddTextbox({
    Name = "Enter Animation ID",
@@ -952,7 +974,27 @@ T2:AddToggle({
      _G.APss = Value
 	while wait() do
 		if _G.APss == false then break end
-			game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players")[_G.Possessed])
+			if _G.Possessed == "Random" then
+				game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players")[game:GetService("Players"):GetPlayers()[math.random(1,#game:GetService("Players"):GetPlayers())]])
+			else
+				game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players")[_G.Possessed])
+			end
+	end
+  end    
+})
+
+T2:AddToggle({
+  Name = "Ranged " .. colorfonts("Kill",HTMLcolors["Red"]),
+  Default = false,
+  Callback = function(Value)
+     _G.killrange = Value
+	while wait() do
+		if _G.killrange == false then break end
+			if _G.Possessed == "Random" then
+				game:GetService("ReplicatedStorage")["Remotes"]["Knife"]:FireServer(game:GetService("Players")[game:GetService("Players")[game:GetService("Players"):GetPlayers()[math.random(1,#game:GetService("Players"):GetPlayers())]])
+			else
+				game:GetService("ReplicatedStorage")["Remotes"]["Knife"]:FireServer(game:GetService("Players")[_G.Possessed])
+			end
 	end
   end    
 })
@@ -1367,8 +1409,8 @@ end
 --end)
 
 local function resetHandler()
-      ExcorcistHandler = {}
-      PossessorHandler = {}
+      ExcorcistHandler = {"Random"}
+      PossessorHandler = {"Random"}
       excHandler:Refresh({"Refreshing.."},true)
       posHandler:Refresh({"Refreshing.."},true)
       --excHandler:Set("Refreshing..")
