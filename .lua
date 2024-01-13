@@ -1076,7 +1076,7 @@ T2:AddToggle({
 	while wait() do
 		if _G.killrange == false then break end
 			if _G.Possessed == "Random" then
-				game:GetService("ReplicatedStorage")["Remotes"]["Knife"]:FireServer(game:GetService("Players")[game:GetService("Players")[game:GetService("Players"):GetPlayers()[math.random(1,#game:GetService("Players"):GetPlayers())]])
+				game:GetService("ReplicatedStorage")["Remotes"]["Knife"]:FireServer(game:GetService("Players")[game:GetService("Players")[game:GetService("Players"):GetPlayers()[math.random(1,#game:GetService("Players"):GetPlayers())]]])
 			else
 				game:GetService("ReplicatedStorage")["Remotes"]["Knife"]:FireServer(game:GetService("Players")[_G.Possessed])
 			end
