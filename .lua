@@ -827,7 +827,7 @@ T14:AddButton({
 			v.HoldDuration = 0
 			v.ObjectText = "Fahri said:"
 			v.ActionText = "Hold time has been removed"
-			v.Image = image.extrapossess
+			--v.Image = image.extrapossess
 		end
 	end
    end    
@@ -988,7 +988,7 @@ T1:AddToggle({
 	while wait() do
 		if _G.AEcr == false then break end
 			if _G.Exorcist == "Random" then
-				game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players")[game:GetService("Players"):GetPlayers()[math.random(1,#game:GetService("Players"):GetPlayers())]],true)
+				game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players")[ExcorcistHandler[math.random(1,#ExcorcistHandler)]],true)
 			else
 				game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players")[_G.Exorcist],true)
 			end
@@ -1000,7 +1000,7 @@ T1:AddButton({
 Name = "Vote " .. colorfonts("Exorcist",HTMLcolors["Bright Blue"]) .. " [Ritual Mode]",
 Callback = function()
 	if _G.Exorcist == "Random" then
-		game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players")[game:GetService("Players"):GetPlayers()[math.random(1,#game:GetService("Players"):GetPlayers())]])
+		game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players")[ExcorcistHandler[math.random(1,#ExcorcistHandler)]])
 	else
 		game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players")[_G.Exorcist])
 	end
@@ -1025,8 +1025,8 @@ local CLBCC = T1:AddToggle({
 
 local posHandler = T2:AddDropdown({
   Name = "Select player to " .. colorfonts("Possessed",HTMLcolors["Red"]),
-  Default = ExcorcistHandler[1],
-  Options = ExcorcistHandler,
+  Default = PossessorHandler[1],
+  Options = PossessorHandler,
   Callback = function(Value)
      _G.Possessed = Value
   end    
@@ -1048,7 +1048,7 @@ T2:AddToggle({
 	while wait() do
 		if _G.APss == false then break end
 			if _G.Possessed == "Random" then
-				game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players")[game:GetService("Players"):GetPlayers()[math.random(1,#game:GetService("Players"):GetPlayers())]])
+				game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players")[PossessorHandler[math.random(1,#PossessorHandler)]])
 			else
 				game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players")[_G.Possessed])
 			end
@@ -1057,14 +1057,14 @@ T2:AddToggle({
 })
 
 T2:AddToggle({
-  Name = "Ranged " .. colorfonts("Kill",HTMLcolors["Red"]),
+  Name = "Ranged " .. colorfonts("Kill",HTMLcolors["Red"]) .. " [ Ritual Mode ]",
   Default = false,
   Callback = function(Value)
      _G.killrange = Value
 	while wait() do
 		if _G.killrange == false then break end
 			if _G.Possessed == "Random" then
-				game:GetService("ReplicatedStorage")["Remotes"]["Knife"]:FireServer(game:GetService("Players")[game:GetService("Players")[game:GetService("Players"):GetPlayers()[math.random(1,#game:GetService("Players"):GetPlayers())]]])
+				game:GetService("ReplicatedStorage")["Remotes"]["Knife"]:FireServer(game:GetService("Players")[PossessorHandler[math.random(1,#PossessorHandler)]])
 			else
 				game:GetService("ReplicatedStorage")["Remotes"]["Knife"]:FireServer(game:GetService("Players")[_G.Possessed])
 			end
