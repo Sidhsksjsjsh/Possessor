@@ -1389,7 +1389,7 @@ task.spawn(function()
 	end
 end)
 
-T7:AddParagraph("Update 20 [ 13/01/2024 ] [ Fatal Error fixed ]","[ +/- ] Fixed a " .. colorfonts("fatal error",HTMLcolors["Red"]) .. " caused by HTML formatting")
+T7:AddParagraph("Update 20 [ 13/01/2024 ] [ Fatal Error fixed ]","[ +/- ] Fixed a " .. colorfonts("fatal error",HTMLcolors["Red"]) .. " caused by HTML formatting - Thank you my team for improving this script.")
 T7:AddParagraph("Update 19 [ 12/01/2024 ]","[ +/- ] Fixed HTML format on the <font color='rgb(255,0,0)'>player's ESP</font>.")
 T7:AddParagraph("Update 18 [ 11/01/2024 ]","[ +/- ] Fixed '" .. colorfonts("Emote Information",HTMLcolors["Yellow"]) .. "' bug - ty fairus for telling me this bug\n[ + ] Added new feature called '" .. colorfonts("Use Random Ability",HTMLcolors["Yellow"]) .. "' with an image in notification.\n[ + ] Emotes are now buttons with emote name in it (ReplicatedStorage), no more scrolling! - Requested\n[ +/- ] Bug fixed in Emote system - i rlly hate this\n[ + ] Added ESP on '" .. colorfonts("Settings",HTMLcolors["Sky Blue"]) .. "' tab!\n[ + ] Added markings for who is the " .. colorfonts("possessor",HTMLcolors["Red"]) .. " and which is the " .. colorfonts("exorcist",HTMLcolors["Bright Blue"]) .. " ( when the " .. colorfonts("exorcist",HTMLcolors["Bright Blue"]) .. " holds his cross )")
 T7:AddParagraph("Update 17 [ 09/01/2024 ]","[ - ] Removed '" .. colorfonts("Ability",HTMLcolors["Sky Blue"]) .. "' tab\n[ + ] Added '" .. colorfonts("Character Config",HTMLcolors["Sky Blue"]) .. "' tab!\n[ + ] Added Speedboost and Jumpboost for hunt ability\n[ +/- ] Fixed emote glitch\n[ 08/03/2024 ] Ability bypass?, no cooldown?, Can equip more than 3?, Anti-Possessed? and Auto Body swap while exorcist is near?")
