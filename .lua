@@ -819,18 +819,6 @@ T14:AddButton({
    end    
 })
 
-T14:AddToggle({
-   Name = "Prompt Hidden?",
-   Default = false,
-   Callback = function(Value)
-	for i,v in pairs(workspace:GetDescendants()) do
-		if v:IsA("ProximityPrompt") then
-			v.Hidden = Value
-		end
-	end
-   end    
-})
-
 T14:AddButton({
   Name = "Remove duration",
   Callback = function()
