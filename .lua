@@ -634,7 +634,7 @@ end
 
 local remoteTable = {}
 
-T7:AddParagraph("Update 20 [ 13/01/2024 ]","[ +/- ] Fixed a " .. colorfonts("fatal error",HTMLcolors["Red"]) .. " caused by HTML formatting - Thank you my team for improving this script.\n[ + ] " .. colorfonts("Ritual Mode",HTMLcolors["Sky Blue"]) .. " is back with different feature in it!\n[ + ] Added " .. colorfonts("Ranged Kill",HTMLcolors["Yellow"]) .. " in " .. colorfonts("Possessor",HTMLcolors["Red"]) .. " tab!")
+T7:AddParagraph("Update 20 [ 13/01/2024 ]","[ +/- ] Fixed a " .. colorfonts("fatal error",HTMLcolors["Red"]) .. " caused by HTML formatting - Thank you my team for improving this script.\n[ + ] " .. colorfonts("Ritual Mode",HTMLcolors["Sky Blue"]) .. " is back with different feature in it!\n[ + ] Added " .. colorfonts("Ranged Kill",HTMLcolors["Yellow"]) .. " in " .. colorfonts("Possessor",HTMLcolors["Red"]) .. " tab!\n[ + ] Fixed Bug!\n[ + ] We've added several features to the " .. colorfonts("Ritual Mode",HTMLcolors["Sky Blue"]) .. " tab!")
 T7:AddParagraph("Update 19 [ 12/01/2024 ]","[ +/- ] Fixed HTML format on the <font color='rgb(255,0,0)'>player's ESP</font>.")
 T7:AddParagraph("Update 18 [ 11/01/2024 ]","[ +/- ] Fixed '" .. colorfonts("Emote Information",HTMLcolors["Yellow"]) .. "' bug - ty fairus for telling me this bug\n[ + ] Added new feature called '" .. colorfonts("Use Random Ability",HTMLcolors["Yellow"]) .. "' with an image in notification.\n[ + ] Emotes are now buttons with emote name in it (ReplicatedStorage), no more scrolling! - Requested\n[ +/- ] Bug fixed in Emote system - i rlly hate this\n[ + ] Added ESP on '" .. colorfonts("Settings",HTMLcolors["Sky Blue"]) .. "' tab!\n[ + ] Added markings for who is the " .. colorfonts("possessor",HTMLcolors["Red"]) .. " and which is the " .. colorfonts("exorcist",HTMLcolors["Bright Blue"]) .. " ( when the " .. colorfonts("exorcist",HTMLcolors["Bright Blue"]) .. " holds his cross )")
 T7:AddParagraph("Update 17 [ 09/01/2024 ]","[ - ] Removed '" .. colorfonts("Ability",HTMLcolors["Sky Blue"]) .. "' tab\n[ + ] Added '" .. colorfonts("Character Config",HTMLcolors["Sky Blue"]) .. "' tab!\n[ + ] Added Speedboost and Jumpboost for hunt ability\n[ +/- ] Fixed emote glitch\n[ 08/03/2024 ] Ability bypass?, no cooldown?, Can equip more than 3?, Anti-Possessed? and Auto Body swap while exorcist is near?")
@@ -752,7 +752,47 @@ for a,o in pairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
 	end
 end
 
-T11:AddToggle({
+--[[
+proximityPrompt.ActionText = "Tekan untuk berinteraksi"
+proximityPrompt.ActionTextScaled = true
+proximityPrompt.ActionTextWrapped = true
+proximityPrompt.AutoLocalize = true
+proximityPrompt.Font = Enum.Font.SourceSans
+proximityPrompt.FontSize = Enum.FontSize.Size24
+proximityPrompt.KeyCode = Enum.KeyCode.F
+proximityPrompt.Image = "rbxassetid://123456789"
+proximityPrompt.HoldDuration = 2
+proximityPrompt.Hidden = true
+proximityPrompt.ObjectText = "Objek Interaktif"
+proximityPrompt.ObjectTextScaled = true
+proximityPrompt.ObjectTextWrapped = true
+proximityPrompt.ResetOnExpand = true
+proximityPrompt.Style = Enum.ProximityPromptStyle.Default
+proximityPrompt.TextButtonImage = "rbxassetid://987654321"
+proximityPrompt.Texture = "rbxassetid://987654321"
+proximityPrompt.TWEEN_TIME_IN = 0.2
+proximityPrompt.TWEEN_TIME_OUT = 0.2
+proximityPrompt.DistanceScale = 2
+proximityPrompt.EasingDirection = Enum.EasingDirection.Out
+proximityPrompt.EasingStyle = Enum.EasingStyle.Linear
+proximityPrompt.GamepadKeyCode = Enum.KeyCode.ButtonA
+proximityPrompt.MaxActivationDistance = 10
+]]
+
+T14:AddSlider({
+   Name = "Prompt Range",
+   Min = 0,
+   Max = 99999,
+   Default = 10,
+   Color = Color3.fromRGB(255,255,255),
+   Increment = 1,
+   ValueName = "Range",
+   Callback = function(Value)
+      _G.pprange = Value
+   end    
+})
+
+T14:AddToggle({
    Name = "Trigger ProximityPrompt",
    Default = false,
    Callback = function(Value)
@@ -765,6 +805,43 @@ T11:AddToggle({
 					end
 				end
 		end
+   end    
+})
+
+T14:AddButton({
+  Name = "Set Prompt range",
+  Callback = function()
+	for i,v in pairs(workspace:GetDescendants()) do
+		if v:IsA("ProximityPrompt") then
+			v.MaxActivationDistance = _G.pprange
+		end
+	end
+   end    
+})
+
+T14:AddToggle({
+   Name = "Prompt Hidden?",
+   Default = false,
+   Callback = function(Value)
+	for i,v in pairs(workspace:GetDescendants()) do
+		if v:IsA("ProximityPrompt") then
+			v.Hidden = Value
+		end
+	end
+   end    
+})
+
+T14:AddButton({
+  Name = "Remove duration",
+  Callback = function()
+	for i,v in pairs(workspace:GetDescendants()) do
+		if v:IsA("ProximityPrompt") then
+			v.HoldDuration = 0
+			v.ObjectText = "Fahri said:"
+			v.ActionText = "Hold time has been removed"
+			v.Image = image.extrapossess
+		end
+	end
    end    
 })
 
@@ -922,7 +999,11 @@ T1:AddToggle({
      _G.AEcr = Value
 	while wait() do
 		if _G.AEcr == false then break end
-			game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players")[_G.Exorcist],true)
+			if _G.Exorcist == "Random" then
+				game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players")[game:GetService("Players"):GetPlayers()[math.random(1,#game:GetService("Players"):GetPlayers())]],true)
+			else
+				game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players")[_G.Exorcist],true)
+			end
 	end
   end    
 })
@@ -930,7 +1011,11 @@ T1:AddToggle({
 T1:AddButton({
 Name = "Vote " .. colorfonts("Exorcist",HTMLcolors["Bright Blue"]) .. " [Ritual Mode]",
 Callback = function()
-      game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players")[_G.Exorcist])
+	if _G.Exorcist == "Random" then
+		game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players")[game:GetService("Players"):GetPlayers()[math.random(1,#game:GetService("Players"):GetPlayers())]])
+	else
+		game:GetService("ReplicatedStorage")["Remotes"]["GameRemote"]:FireServer(game:GetService("Players")[_G.Exorcist])
+	end
   end    
 })
 
