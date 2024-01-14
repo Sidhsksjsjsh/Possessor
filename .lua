@@ -542,6 +542,26 @@ for i,v in pairs(game:GetService("Players"):GetPlayers()) do
 end
 end
 
+local xraysettings = {
+	fill = Color3.new(0,1,0),
+	outline = Color3.new(1,1,1),
+	filltrans = 1,
+	outtrans = 1
+}
+
+local function HighlightPlayer()
+	for i,v in pairs(game:GetService("Players"):GetPlayers()) do
+             local esp = Instance.new("Highlight")
+             esp.Name = "TURTLE-XRAY"
+             esp.FillColor = xraysettings.fill
+             esp.OutlineColor = xraysettings.outline
+             esp.FillTransparency = xraysettings.filltrans
+             esp.OutlineTransparency = xraysettings.outtrans
+             esp.Adornee = v.Character
+             esp.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+	end
+end
+
 local T7 = Window:MakeTab({ -- T1
 Name = "Update Log",
 Icon = image.cupid,
@@ -602,6 +622,14 @@ Icon = image.imitation,
 PremiumOnly = false
 })
 
+local foresp = T12:AddSection({
+       Name = "For ESP"
+})
+
+local formisc = T12:AddSection({
+       Name = "Misc"
+})
+
 local T13 = Window:MakeTab({ --T5
 Name = "Emote",
 Icon = image.masq,
@@ -634,6 +662,7 @@ end
 
 local remoteTable = {}
 
+T7:AddParagraph("Update 21 [ 14/01/2024 ]","[ + ] " .. colorfonts("ESP",HTMLcolors["Red"]) .. " and " .. colorfonts("Highlight",HTMLcolors["Red"]) .. " " .. colorfonts("settings",HTMLcolors["Sky Blue"]) .. " are now separate from other feature " .. colorfonts("settings",HTMLcolors["Sky Blue"]) .. "\n[ + ] Added " .. colorfonts("Fill color",HTMLcolors["Yellow"]) .. ", " .. colorfonts("Outline color",HTMLcolors["Yellow"]) .. " & " .. colorfonts("Highlight Character",HTMLcolors["Yellow"]) .. " ( " .. colorfonts("Fill color",HTMLcolors["Yellow"]) .. " & " .. colorfonts("Outline color",HTMLcolors["Yellow"]) .. " for " .. colorfonts("Highlight Character",HTMLcolors["Yellow"]) .. " )")
 T7:AddParagraph("Update 20 [ 13/01/2024 ]","[ +/- ] Fixed a " .. colorfonts("fatal error",HTMLcolors["Red"]) .. " caused by HTML formatting - Thank you my team for improving this script.\n[ + ] " .. colorfonts("Ritual Mode",HTMLcolors["Sky Blue"]) .. " is back with different feature in it!\n[ + ] Added " .. colorfonts("Ranged Kill",HTMLcolors["Yellow"]) .. " in " .. colorfonts("Possessor",HTMLcolors["Red"]) .. " tab!\n[ + ] Fixed Bug!\n[ + ] We've added several features to the " .. colorfonts("Ritual Mode",HTMLcolors["Sky Blue"]) .. " tab!")
 T7:AddParagraph("Update 19 [ 12/01/2024 ]","[ +/- ] Fixed HTML format on the <font color='rgb(255,0,0)'>player's ESP</font>.")
 T7:AddParagraph("Update 18 [ 11/01/2024 ]","[ +/- ] Fixed '" .. colorfonts("Emote Information",HTMLcolors["Yellow"]) .. "' bug - ty fairus for telling me this bug\n[ + ] Added new feature called '" .. colorfonts("Use Random Ability",HTMLcolors["Yellow"]) .. "' with an image in notification.\n[ + ] Emotes are now buttons with emote name in it (ReplicatedStorage), no more scrolling! - Requested\n[ +/- ] Bug fixed in Emote system - i rlly hate this\n[ + ] Added ESP on '" .. colorfonts("Settings",HTMLcolors["Sky Blue"]) .. "' tab!\n[ + ] Added markings for who is the " .. colorfonts("possessor",HTMLcolors["Red"]) .. " and which is the " .. colorfonts("exorcist",HTMLcolors["Bright Blue"]) .. " ( when the " .. colorfonts("exorcist",HTMLcolors["Bright Blue"]) .. " holds his cross )")
@@ -917,7 +946,7 @@ T11:AddButton({
 })
 end
 
-T12:AddSlider({
+formisc:AddSlider({
    Name = "Notify duration",
    Min = 0,
    Max = 20,
@@ -930,7 +959,7 @@ T12:AddSlider({
    end    
 })
 
-T12:AddToggle({
+formisc:AddToggle({
    Name = "Auto clear chatlogs",
    Default = false,
    Callback = function(Value)
@@ -949,7 +978,7 @@ T12:AddToggle({
    end    
 }) -- possessNotify(str1,str2,_G.notifydur)
 
-T12:AddToggle({
+formisc:AddToggle({
    Name = "Notify when someone got " .. colorfonts("possess",HTMLcolors["Red"]),
    Default = true,
    Callback = function(Value)
@@ -957,8 +986,72 @@ T12:AddToggle({
    end    
 })
 
-T12:AddToggle({
-   Name = "ESP",
+--[[
+local function HighlightPlayer()
+	for i,v in pairs(game:GetService("Players"):GetPlayers()) do
+             local esp = Instance.new("Highlight")
+             esp.Name = "TURTLE-XRAY"
+             esp.FillColor = xraysettings.fill
+             esp.OutlineColor = xraysettings.outline
+             esp.FillTransparency = xraysettings.filltrans
+             esp.OutlineTransparency = xraysettings.outtrans
+             esp.Adornee = v.Character
+             esp.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+	end
+end
+]]
+
+--[[
+local xraysettings = {
+	fill = Color3.new(0,1,0),
+	outline = Color3.new(1,1,1),
+	filltrans = 1,
+	outtrans = 1
+}
+]]
+
+foresp:AddColorpicker({
+   Name = "Fill color",
+   Default = xraysettings.fill,
+   Callback = function(Value)
+      _G.fillcol = Value
+      xraysettings.fill = Value
+   end  
+})
+
+foresp:AddColorpicker({
+   Name = "Outline color",
+   Default = xraysettings.outline,
+   Callback = function(Value)
+      _G.outcol = Value
+      xraysettings.outline = Value
+   end  
+})
+
+foresp:AddToggle({
+   Name = "Highlight Character",
+   Default = false,
+   Callback = function(Value)
+	for i,v in pairs(game:GetService("Players"):GetPlayers()) do
+		if v["Character"]:FindFirstChild("TURTLE-XRAY") then
+			if Value then
+				v["Character"]["TURTLE-XRAY"].FillTransparency = 0
+			        v["Character"]["TURTLE-XRAY"].OutlineTransparency = 0
+			        xraysettings.filltrans = 0
+			        xraysettings.outtrans = 0
+			else
+				v["Character"]["TURTLE-XRAY"].FillTransparency = 1
+			        v["Character"]["TURTLE-XRAY"].OutlineTransparency = 1
+			        xraysettings.filltrans = 1
+			        xraysettings.outtrans = 1
+			end
+		end
+	end
+   end    
+})
+
+foresp:AddToggle({
+   Name = "ESP name",
    Default = false,
    Callback = function(Value)
 	for i,v in pairs(game:GetService("Players"):GetPlayers()) do
@@ -1418,8 +1511,9 @@ str.CharacterAdded:Connect(function(character)
      logNmbr = logNmbr + 1
      LogStr = LogStr .. "\n[ " .. tostring(os.date("%X")) .. " ] #" .. logNmbr .. " : " .. colorfonts(str.DisplayName,HTMLcolors["Red"]) .. " - " .. colorfonts("@" .. str.Name,HTMLcolors["Red"])
      PssLog:Set(LogStr,"")
-     character["Head"]["For ESP"]["UI 1"]["UI 2"].Image = image.extrapossess
+     --character["Head"]["For ESP"]["UI 1"]["UI 2"].Image = image.extrapossess
      PlayerESP()
+     HighlightPlayer()
      --getToolStatus(character)
 end)
 end
@@ -1474,7 +1568,7 @@ for _,v in pairs(game:GetService("Players"):GetPlayers()) do
         end
 	getPossessor(v)
 	PlayerESP()
-	getToolStatus(v.Character)
+	HighlightPlayer()
 end
 
 --client.CharacterAdded:Connect(function(character)
@@ -1511,7 +1605,7 @@ game.Players.PlayerAdded:Connect(function(player)
 	getPossessor(player)
 	resetHandler()
 	PlayerESP()
-	getToolStatus(player.Character)
+	HighlightPlayer()
 end)
 
 game.Players.PlayerRemoving:Connect(function(player)
