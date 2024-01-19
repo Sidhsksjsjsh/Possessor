@@ -255,7 +255,7 @@ local function colorfonts(str,color)
       return "<font color='" .. color .. "'>" .. str .. "</font>"
 end
 
-title.Text = "Chatlogs by " .. colorfonts("Imitation",HTMLcolors["Pale Violet Red"]) .. " Ability"
+title.Text = "Chatlogs by " .. colorfonts("Imitation",HTMLcolors["Pale Violet Red"])
 local selfForCode = {
 	"A",
 	"B",
@@ -662,6 +662,7 @@ end
 
 local remoteTable = {}
 
+T7:AddParagraph("Update 22 [ 19/01/2024 ]","[ +/- ] Fixed " .. colorfonts("Highlight",HTMLcolors["Red"]) .. " bug when player join/got possess | TY akbar!")
 T7:AddParagraph("Update 21 [ 14/01/2024 ]","[ + ] " .. colorfonts("ESP",HTMLcolors["Red"]) .. " and " .. colorfonts("Highlight",HTMLcolors["Red"]) .. " " .. colorfonts("settings",HTMLcolors["Sky Blue"]) .. " are now separate from other feature " .. colorfonts("settings",HTMLcolors["Sky Blue"]) .. "\n[ + ] Added " .. colorfonts("Fill color",HTMLcolors["Yellow"]) .. ", " .. colorfonts("Outline color",HTMLcolors["Yellow"]) .. " & " .. colorfonts("Highlight Character",HTMLcolors["Yellow"]) .. " ( " .. colorfonts("Fill color",HTMLcolors["Yellow"]) .. " & " .. colorfonts("Outline color",HTMLcolors["Yellow"]) .. " for " .. colorfonts("Highlight Character",HTMLcolors["Yellow"]) .. " )")
 T7:AddParagraph("Update 20 [ 13/01/2024 ]","[ +/- ] Fixed a " .. colorfonts("fatal error",HTMLcolors["Red"]) .. " caused by HTML formatting - Thank you my team for improving this script.\n[ + ] " .. colorfonts("Ritual Mode",HTMLcolors["Sky Blue"]) .. " is back with different feature in it!\n[ + ] Added " .. colorfonts("Ranged Kill",HTMLcolors["Yellow"]) .. " in " .. colorfonts("Possessor",HTMLcolors["Red"]) .. " tab!\n[ + ] Fixed Bug!\n[ + ] We've added several features to the " .. colorfonts("Ritual Mode",HTMLcolors["Sky Blue"]) .. " tab!")
 T7:AddParagraph("Update 19 [ 12/01/2024 ]","[ +/- ] Fixed HTML format on the <font color='rgb(255,0,0)'>player's ESP</font>.")
@@ -1032,6 +1033,7 @@ foresp:AddToggle({
    Name = "Highlight Character",
    Default = false,
    Callback = function(Value)
+	HighlightPlayer()
 	for i,v in pairs(game:GetService("Players"):GetPlayers()) do
 		if v["Character"]:FindFirstChild("TURTLE-XRAY") then
 			if Value then
