@@ -545,8 +545,8 @@ end
 local xraysettings = {
 	fill = Color3.new(0,1,0),
 	outline = Color3.new(1,1,1),
-	filltrans = 1,
-	outtrans = 1
+	filltrans = 0,
+	outtrans = 0
 }
 
 local function HighlightPlayer()
@@ -662,7 +662,7 @@ end
 
 local remoteTable = {}
 
-T7:AddParagraph("Update 22 [ 19/01/2024 ]","[ +/- ] Fixed " .. colorfonts("Highlight",HTMLcolors["Red"]) .. " bug when player join/got possess | TY akbar!")
+T7:AddParagraph("Update 22 [ 19/01/2024 ]","[ +/- ] Fixed " .. colorfonts("Highlight",HTMLcolors["Red"]) .. " bug when player join/got possess | TY akbar!\n[ +/- ] [ 1X ] Fixed " .. colorfonts("Highlight",HTMLcolors["Red"]) .. " bug again.")
 T7:AddParagraph("Update 21 [ 14/01/2024 ]","[ + ] " .. colorfonts("ESP",HTMLcolors["Red"]) .. " and " .. colorfonts("Highlight",HTMLcolors["Red"]) .. " " .. colorfonts("settings",HTMLcolors["Sky Blue"]) .. " are now separate from other feature " .. colorfonts("settings",HTMLcolors["Sky Blue"]) .. "\n[ + ] Added " .. colorfonts("Fill color",HTMLcolors["Yellow"]) .. ", " .. colorfonts("Outline color",HTMLcolors["Yellow"]) .. " & " .. colorfonts("Highlight Character",HTMLcolors["Yellow"]) .. " ( " .. colorfonts("Fill color",HTMLcolors["Yellow"]) .. " & " .. colorfonts("Outline color",HTMLcolors["Yellow"]) .. " for " .. colorfonts("Highlight Character",HTMLcolors["Yellow"]) .. " )")
 T7:AddParagraph("Update 20 [ 13/01/2024 ]","[ +/- ] Fixed a " .. colorfonts("fatal error",HTMLcolors["Red"]) .. " caused by HTML formatting - Thank you my team for improving this script.\n[ + ] " .. colorfonts("Ritual Mode",HTMLcolors["Sky Blue"]) .. " is back with different feature in it!\n[ + ] Added " .. colorfonts("Ranged Kill",HTMLcolors["Yellow"]) .. " in " .. colorfonts("Possessor",HTMLcolors["Red"]) .. " tab!\n[ + ] Fixed Bug!\n[ + ] We've added several features to the " .. colorfonts("Ritual Mode",HTMLcolors["Sky Blue"]) .. " tab!")
 T7:AddParagraph("Update 19 [ 12/01/2024 ]","[ +/- ] Fixed HTML format on the <font color='rgb(255,0,0)'>player's ESP</font>.")
@@ -728,10 +728,11 @@ local imageforrandomability = {
 }
 
 local nclip = nil
+local emotestring = ""
 local function NoclipLoop()
 	if client.Character ~= nil then
 		for _, child in pairs(client.Character:GetDescendants()) do
-			if child:IsA("BasePart") and child.CanCollide == true and arrayEmote.Looped == false then
+			if child:IsA("BasePart") and child.CanCollide == true and arrayEmote.Looped == false and emotestring == "Tornado" or emotestring == "Wormhole" or emotestring == "Blackhole" then
 				child.CanCollide = false
 			end
 		end
@@ -773,6 +774,7 @@ for a,o in pairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
 	               arrayEmote = client.Character.Humanoid:LoadAnimation(foremote)
 			wait(0.2)
 			arrayEmote:Play()
+			emotestring = o.Name
 			startnclip()
 			freezetime(arrayEmote.Length + 0.5,function()
 				stopnclip()
@@ -1029,26 +1031,10 @@ foresp:AddColorpicker({
    end  
 })
 
-foresp:AddToggle({
-   Name = "Highlight Character",
-   Default = false,
-   Callback = function(Value)
+foresp:AddButton({
+    Name = "Visual X-RAY [ Character ]",
+    Callback = function()
 	HighlightPlayer()
-	for i,v in pairs(game:GetService("Players"):GetPlayers()) do
-		if v["Character"]:FindFirstChild("TURTLE-XRAY") then
-			if Value then
-				v["Character"]["TURTLE-XRAY"].FillTransparency = 0
-			        v["Character"]["TURTLE-XRAY"].OutlineTransparency = 0
-			        xraysettings.filltrans = 0
-			        xraysettings.outtrans = 0
-			else
-				v["Character"]["TURTLE-XRAY"].FillTransparency = 1
-			        v["Character"]["TURTLE-XRAY"].OutlineTransparency = 1
-			        xraysettings.filltrans = 1
-			        xraysettings.outtrans = 1
-			end
-		end
-	end
    end    
 })
 
