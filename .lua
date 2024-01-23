@@ -551,6 +551,10 @@ local xraysettings = {
 
 local function HighlightPlayer()
 	for i,v in pairs(game:GetService("Players"):GetPlayers()) do
+	     if v.Character:FindFirstChild("TURTLE-XRAY") then
+			v.Character["TURTLE-XRAY"]:Destroy()
+	     end
+
              local esp = Instance.new("Highlight")
              esp.Name = "TURTLE-XRAY"
              esp.FillColor = xraysettings.fill
@@ -558,6 +562,7 @@ local function HighlightPlayer()
              esp.FillTransparency = xraysettings.filltrans
              esp.OutlineTransparency = xraysettings.outtrans
              esp.Adornee = v.Character
+	     esp.Parent = v.Character
              esp.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
 	end
 end
