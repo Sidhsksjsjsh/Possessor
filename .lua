@@ -650,6 +650,12 @@ Icon = image.masq,
 PremiumOnly = false
 })
 
+local T15 = Window:MakeTab({ --T5
+Name = "Items",
+Icon = image.masq,
+PremiumOnly = false
+})
+
 local animationInformmation = T13:AddParagraph("Emote Information",colorfonts("#CLIENT_ERROR",HTMLcolors["Red"]))
 		
 local T5 = Window:MakeTab({ --T7
@@ -1120,6 +1126,39 @@ local posHandler = T2:AddDropdown({
   Options = PossessorHandler,
   Callback = function(Value)
      _G.Possessed = Value
+  end    
+})
+
+T15:AddDropdown({
+  Name = "Select items",
+  Default = "Immunity",
+  Options = {"Immunity","Board"},
+  Callback = function(Value)
+     _G.ItemPoss = Value
+  end    
+})
+
+T15:AddToggle({
+  Name = "Auto buy",
+  Default = false,
+  Callback = function(Value)
+    _G.BuySelectedItems = Value
+      while wait() do
+        if _G.BuySelectedItems == false then break end
+        game:GetService("ReplicatedStorage")["Remotes"]["InventoryRemote"]:FireServer("Purchase","Items",_G.ItemPoss)
+      end
+  end    
+})
+
+T15:AddToggle({
+  Name = "Auto use equipped items",
+  Default = false,
+  Callback = function(Value)
+    _G.UseHoldItems = Value
+      while wait() do
+        if _G.UseHoldItems == false then break end
+        game:GetService("ReplicatedStorage")["Remotes"]["ToolRemote"]:FireServer()
+      end
   end    
 })
 
