@@ -549,21 +549,24 @@ local xraysettings = {
 	outtrans = 0
 }
 
+local bgsh = false
 local function HighlightPlayer()
 	for i,v in pairs(game:GetService("Players"):GetPlayers()) do
 	     if v.Character:FindFirstChild("TURTLE-XRAY") then
 			v.Character["TURTLE-XRAY"]:Destroy()
 	     end
 
-             local esp = Instance.new("Highlight")
-             esp.Name = "TURTLE-XRAY"
-             esp.FillColor = xraysettings.fill
-             esp.OutlineColor = xraysettings.outline
-             esp.FillTransparency = xraysettings.filltrans
-             esp.OutlineTransparency = xraysettings.outtrans
-             esp.Adornee = v.Character
-	     esp.Parent = v.Character
-             esp.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+	     if bgsh == true then
+                local esp = Instance.new("Highlight")
+                esp.Name = "TURTLE-XRAY"
+                esp.FillColor = xraysettings.fill
+                esp.OutlineColor = xraysettings.outline
+                esp.FillTransparency = xraysettings.filltrans
+                esp.OutlineTransparency = xraysettings.outtrans
+                esp.Adornee = v.Character
+	        esp.Parent = v.Character
+                esp.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+	     end
 	end
 end
 
@@ -1036,9 +1039,11 @@ foresp:AddColorpicker({
    end  
 })
 
-foresp:AddButton({
-    Name = "Visual X-RAY [ Character ]",
-    Callback = function()
+foresp:AddToggle({
+   Name = "XRAY",
+   Default = false,
+   Callback = function(Value)
+	bgsh = Value
 	HighlightPlayer()
    end    
 })
